@@ -1,0 +1,20 @@
+@font-face {
+  font-family: 'Suedtirol';
+  src: url('./Suedtirol-Regular.ttf') format('truetype');
+  font-style: normal;
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'Suedtirol';
+  src: url('./Suedtirol-Medium.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'Suedtirol';
+  src: url('./Suedtirol-Title.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 600;
+}

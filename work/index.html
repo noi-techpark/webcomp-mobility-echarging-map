@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Map</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://unpkg.com/normalize.css@8.0.1/normalize.css" />
+    <script src="https://unpkg.com/@webcomponents/webcomponentsjs@2.1.3/webcomponents-bundle.js"></script>
+    <link rel="stylesheet" href="./fonts/fonts.css" />
+    <style>
+      .widget-container {
+        width: 90vw;
+        margin: 0 auto;
+        position: relative;
+      }
+      .code_snippet {
+        background-color: #f3f3f3;
+        display: inline-block;
+        padding: 8px 16px;
+        margin-top: 1vh;
+        margin-bottom: 4vh;
+        border-radius: 8px;
+        overflow: scroll;
+        width: calc(100% - 32px);
+        position: relative;
+      }
+      @media only screen and (min-width: 678px) {
+        .widget-container {
+          width: 80vw;
+          margin: 0 auto;
+        }
+      }
+      @media only screen and (min-width: 1400px) {
+        .widget-container {
+          width: 70vw;
+          margin: 0 auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="widget-container">
+      <h2>Snippet</h2>
+      <div class="code_snippet">
+        <xmp><e-mobility-map-widget logo="https://www.greenmobility.bz.it/typo3conf/ext/interho/Resources/Public/Img/logo.png"></e-mobility-map-widget>
+
+<script src="./scripts/map_widget.js"></script>
+</xmp>
+      </div>
+    </div>
+
+    <div class="widget-container">
+      <e-mobility-map-widget
+        logo="https://www.greenmobility.bz.it/typo3conf/ext/interho/Resources/Public/Img/logo.png"
+      ></e-mobility-map-widget>
+    </div>
+
+    <div class="widget-container">
+      <div>
+        <br />
+        <h1>Lorem ipsum dolor</h1>
+        <p>
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptate, quos ab debitis aliquid necessitatibus
+          sed iusto saepe aspernatur deserunt quas sequi? Distinctio voluptas ab iste provident sequi reiciendis earum
+          doloremque!
+        </p>
+        <p>
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptate, quos ab debitis aliquid necessitatibus
+          sed iusto saepe aspernatur deserunt quas sequi? Distinctio voluptas ab iste provident sequi reiciendis earum
+          doloremque!
+        </p>
+        <p>
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptate, quos ab debitis aliquid necessitatibus
+          sed iusto saepe aspernatur deserunt quas sequi? Distinctio voluptas ab iste provident sequi reiciendis earum
+          doloremque!
+        </p>
+        <p>
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptate, quos ab debitis aliquid necessitatibus
+          sed iusto saepe aspernatur deserunt quas sequi? Distinctio voluptas ab iste provident sequi reiciendis earum
+          doloremque!
+        </p>
+      </div>
+    </div>
+
+    <script src="./scripts/map_widget.js"></script>
+  </body>
+</html>

@@ -103,7 +103,7 @@ TODO
 
 ## Contributing
 
-TODO
+See ![CONTRIBUTING.md](CONTRIBUTING.md)
 
 ## Screenshots
 

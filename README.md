@@ -111,7 +111,7 @@ TODO
 
 ## Authors
 
-- **Luca Fedrizzi** ([luca.fedrizzi@belkadigital.com](luca.fedrizzi@belkadigital.com)) - _Initial work_ - [fedriz](https://github.com/fedriz)
+See ![CONTRIBUTORS.rst](CONTRIBUTORS.rst)
 
 ## License
 

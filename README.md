@@ -115,4 +115,4 @@ TODO
 
 ## License
 
-TODO
+See ![LICENSE.md](LICENSE.md)

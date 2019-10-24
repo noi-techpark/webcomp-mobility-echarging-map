@@ -39,7 +39,7 @@ yarn
 ### Developement
 
 ```
-yarn wc
+yarn start
 ```
 
 This will watch the files in every package configured in the right way to create a Webpack bundle.
@@ -49,24 +49,16 @@ This will watch the files in every package configured in the right way to create
 Build all widgets using Webpack's `production` config:
 
 ```
-yarn bc
+yarn build
 ```
 
 The destination for the resulting code will be the `dist` folder, located at the root of the project.
-
-## Development results
-
-To see the components in action while working on, go to the `work` folder and run:
-
-```
-sh serve.sh
-```
 
 This will serve the "work in progress" website at [http://0.0.0.0:8000/](http://0.0.0.0:8000/).
 
 ## Deployment
 
-To deploy the webcomponents, take the production bundle created with the `yarn bc` command and use it as a normal javascrip script.
+To deploy the webcomponents, take the production bundle created with the `yarn build` command and use it as a normal javascrip script.
 
 We suggest deploying them on a CDN, rather than hardcoding them inside a project, so that future fixes and enhancements of the webcomponents are more easily distributed.
 

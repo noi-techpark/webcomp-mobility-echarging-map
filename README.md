@@ -11,15 +11,6 @@ The data source for the components is the [Open Data Hub](https://opendatahub.bz
 
 To create more structured and mantainable webcomponents we used [Polymer](https://www.polymer-project.org/), more specifically the [lit-element](https://lit-element.polymer-project.org/) implementation.
 
-Using [lerna](https://github.com/lerna/lerna) we can manage all the components from a single repository, while still being able to publish single packages
-
-So the project can benefit of:
-
-- a better project structure
-- a better dependencies management
-- a better way to pack up components
-- and every component is isolated with its own dependencies
-
 CSS styles are transpiled using [Sass](https://sass-lang.com/).
 
 We are usign [Webpack](https://webpack.js.org/) to create the bundles.
@@ -32,7 +23,6 @@ To work on the project, you'll need global installations of:
 
 - Node (v11.9.0)
 - Yarn (v1.15.2)
-- Lerna (v3.6)
 
 Later versions of the same tools should also work.
 
@@ -46,16 +36,7 @@ Install yarn project's dependencies
 yarn
 ```
 
-To install all the dependencies of all the packages through Lerna, run:
-
-```
-lerna bootstrap
-```
-
-
 ### Developement
-
-Start the Lerna pipeline with:
 
 ```
 yarn wc

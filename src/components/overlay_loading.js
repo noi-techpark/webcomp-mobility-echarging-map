@@ -1,6 +1,6 @@
 import { html } from 'lit-element';
 
-let style = html`
+const style = html`
   <style>
     .loading_overlay {
       position: absolute;

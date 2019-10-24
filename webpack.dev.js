@@ -35,6 +35,7 @@ module.exports = {
   devServer: {
     contentBase: path.join(__dirname, 'work'),
     compress: true,
+    writeToDisk: true,
     port: 8000
   }
 };

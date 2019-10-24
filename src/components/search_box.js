@@ -10,6 +10,8 @@ import { t } from '../translations';
 import icon__close from '../icons/close@2x.png';
 
 export function render__search_box() {
+  const debounced_request = debounce(500, this.request__get_coordinates_from_search);
+
   const handle_onchange = e => {
     this.query_nominatim = e.target.value;
     if (e.target.value) {
@@ -21,12 +23,8 @@ export function render__search_box() {
     }
   };
 
-  const debounced_request = debounce(500, this.request__get_coordinates_from_search);
-
   const manage_map = (lat, lng) => {
-    lat = parseFloat(lat);
-    lng = parseFloat(lng);
-    this.current_location = { lat, lng };
+    this.current_location = { lat: parseFloat(lat), lng: parseFloat(lng) };
     this.current_station = {};
     this.searched_places = [];
     this.showFilters = false;
@@ -38,14 +36,24 @@ export function render__search_box() {
   };
 
   const handle__move_to_current_position = () => {
-    this.is_loading = true;
-    navigator.geolocation.getCurrentPosition(
-      pos => {
-        const { latitude, longitude } = pos.coords;
-        manage_map(latitude, longitude);
-      },
-      () => {}
-    );
+    try {
+      navigator.permissions.query({ name: 'geolocation' }).then(result => {
+        if (result.state === 'granted') {
+          this.is_loading = true;
+          navigator.geolocation.getCurrentPosition(
+            pos => {
+              const { latitude, longitude } = pos.coords;
+              manage_map(latitude, longitude);
+            },
+            () => {}
+          );
+        } else {
+          this.is_loading = false;
+        }
+      });
+    } catch (error) {
+      this.is_loading = false;
+    }
   };
 
   const handle__move_to_place = (lat, lng) => {

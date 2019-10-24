@@ -36,14 +36,24 @@ export function render__search_box() {
   };
 
   const handle__move_to_current_position = () => {
-    this.is_loading = true;
-    navigator.geolocation.getCurrentPosition(
-      pos => {
-        const { latitude, longitude } = pos.coords;
-        manage_map(latitude, longitude);
-      },
-      () => {}
-    );
+    try {
+      navigator.permissions.query({ name: 'geolocation' }).then(result => {
+        if (result.state === 'granted') {
+          this.is_loading = true;
+          navigator.geolocation.getCurrentPosition(
+            pos => {
+              const { latitude, longitude } = pos.coords;
+              manage_map(latitude, longitude);
+            },
+            () => {}
+          );
+        } else {
+          this.is_loading = false;
+        }
+      });
+    } catch (error) {
+      this.is_loading = false;
+    }
   };
 
   const handle__move_to_place = (lat, lng) => {

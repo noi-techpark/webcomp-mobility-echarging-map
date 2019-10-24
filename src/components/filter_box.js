@@ -15,7 +15,7 @@ export function render__filter_box() {
   const handle__radius = e => {
     this.filters = {
       ...this.filters,
-      radius: parseInt(e.target.value)
+      radius: parseInt(e.target.value, 10)
     };
   };
 
@@ -83,7 +83,7 @@ export function render__filter_box() {
       plug_type: [],
       provider: []
     };
-    let all_checkbox = this.shadowRoot.querySelectorAll('.filter_box input[type="checkbox"]');
+    const all_checkbox = this.shadowRoot.querySelectorAll('.filter_box input[type="checkbox"]');
     for (let i = 0; i < all_checkbox.length; i++) {
       const element = all_checkbox[i];
       element.checked = false;

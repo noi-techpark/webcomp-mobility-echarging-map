@@ -1,9 +1,8 @@
 import { html } from 'lit-element';
-import style from '../scss/filters_values_mobile.scss';
-import { getStyle, utils_capitalize } from '../utils';
-import { t } from '../translations';
-
 import icon_x_orange from '../icons/orange/icon_x_orange.png';
+import style from '../scss/filters_values_mobile.scss';
+import { t } from '../translations';
+import { getStyle, utils_capitalize } from '../utils';
 
 export function render__filter_values_mobile() {
   const repaint_map = () => {
@@ -23,7 +22,7 @@ export function render__filter_values_mobile() {
   };
 
   const handle__access_type = e => {
-    let checkboxes = this.shadowRoot.querySelectorAll(`.filter_box input[value="${e}"]`);
+    const checkboxes = this.shadowRoot.querySelectorAll(`.filter_box input[value="${e}"]`);
     for (let i = 0; i < checkboxes.length; i++) {
       const element = checkboxes[i];
       element.checked = false;
@@ -36,7 +35,7 @@ export function render__filter_values_mobile() {
   };
 
   const handle__plug_type = e => {
-    let checkboxes = this.shadowRoot.querySelectorAll(`.filter_box input[value="${e}"]`);
+    const checkboxes = this.shadowRoot.querySelectorAll(`.filter_box input[value="${e}"]`);
     for (let i = 0; i < checkboxes.length; i++) {
       const element = checkboxes[i];
       element.checked = false;
@@ -48,21 +47,21 @@ export function render__filter_values_mobile() {
     repaint_map();
   };
 
-  const handle__state = e => {
-    this.filters = {
-      ...this.filters,
-      state: this.filters.state.filter(o => o !== e)
-    };
-    repaint_map();
-  };
+  // const handle__state = e => {
+  //   this.filters = {
+  //     ...this.filters,
+  //     state: this.filters.state.filter(o => o !== e)
+  //   };
+  //   repaint_map();
+  // };
 
   return html`
     <style>
       ${getStyle(style)}
     </style>
     <div class="d-sm-none filter_values_mobile d-flex flex-nowrap">
-      ${this.filters.access_type.map(o => {
-        return html`
+      ${this.filters.access_type.map(
+        o => html`
           <div
             class="filter_values_mobile__element d-inline-flex align-items-center mr-1"
             @click="${() => handle__access_type(o)}"
@@ -79,9 +78,9 @@ export function render__filter_values_mobile() {
               <img class="w-16px" src="${icon_x_orange}" alt="" />
             </div>
           </div>
-        `;
-      })}
-      ${Boolean(this.filters.radius)
+        `
+      )}
+      ${this.filters.radius
         ? html`<div class="filter_values_mobile__element d-inline-flex align-items-center mr-1" @click="${() =>
             handle__radius()}">
         <div class="filter_values_mobile__element__text">
@@ -98,8 +97,8 @@ export function render__filter_values_mobile() {
       </div>
     </div>`
         : null}
-      ${this.filters.plug_type.map(o => {
-        return html`
+      ${this.filters.plug_type.map(
+        o => html`
           <div
             class="filter_values_mobile__element d-inline-flex align-items-center mr-1"
             @click="${() => handle__plug_type(o)}"
@@ -116,8 +115,8 @@ export function render__filter_values_mobile() {
               <img class="w-16px" src="${icon_x_orange}" alt="" />
             </div>
           </div>
-        `;
-      })}
+        `
+      )}
     </div>
   `;
 }

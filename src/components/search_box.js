@@ -10,6 +10,8 @@ import { t } from '../translations';
 import icon__close from '../icons/close@2x.png';
 
 export function render__search_box() {
+  const debounced_request = debounce(500, this.request__get_coordinates_from_search);
+
   const handle_onchange = e => {
     this.query_nominatim = e.target.value;
     if (e.target.value) {
@@ -21,12 +23,8 @@ export function render__search_box() {
     }
   };
 
-  const debounced_request = debounce(500, this.request__get_coordinates_from_search);
-
   const manage_map = (lat, lng) => {
-    lat = parseFloat(lat);
-    lng = parseFloat(lng);
-    this.current_location = { lat, lng };
+    this.current_location = { lat: parseFloat(lat), lng: parseFloat(lng) };
     this.current_station = {};
     this.searched_places = [];
     this.showFilters = false;

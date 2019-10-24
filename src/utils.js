@@ -1,8 +1,7 @@
-import { html } from 'lit-element';
-import icon__green_marker from './icons/green/green@2x.png';
-import icon__red_marker from './icons/red/red@2x.png';
-import icon__grey_marker from './icons/grey/grey@2x.png';
 import icon__hydrogen_marker from './icons/blue/hydrogen@2x.png';
+import icon__green_marker from './icons/green/green@2x.png';
+import icon__grey_marker from './icons/grey/grey@2x.png';
+import icon__red_marker from './icons/red/red@2x.png';
 
 export function getLatLongFromStationDetail(o) {
   return { lat: o.latitude, lng: o.longitude };
@@ -20,7 +19,8 @@ export function stationStatusMapper(key, origin) {
 
 export function debounce(delay, fn) {
   let timerId;
-  return function(...args) {
+  // return function (...args) {
+  return (...args) => {
     if (timerId) {
       clearTimeout(timerId);
     }
@@ -34,30 +34,30 @@ export function debounce(delay, fn) {
 export const getStyle = array => array[0][1];
 
 export const utils_capitalize = s => {
-  s = s.toLowerCase();
-  return s.charAt(0).toUpperCase() + s.slice(1);
+  const words = s.toLowerCase();
+  return words.charAt(0).toUpperCase() + words.slice(1);
 };
 
 export const utils_truncate = (str, no_words) => {
   const splitted = str.split(' ');
 
   if (splitted.length > no_words) {
-    return splitted.splice(0, no_words).join(' ') + '...';
+    return `${splitted.splice(0, no_words).join(' ')}...`;
   }
   return splitted.splice(0, no_words).join(' ');
 };
 
 export const encodeXml = s => {
-  s = s.replace('&amp;', '&');
+  const words = s.replace('&amp;', '&');
 
-  return s
-    .replace('&quot;', `"`)
-    .replace('&#x9;', ` \t `)
-    .replace('&#xA;', ` \n `)
+  return words
+    .replace('&quot;', '"')
+    .replace('&#x9;', ' \t ')
+    .replace('&#xA;', ' \n ')
     .replace('#xA;', ' \n ')
-    .replace('&#xD;', ` \r `)
-    .replace('#xD;', ` \r `)
-    .replace(`&&`, '');
+    .replace('&#xD;', ' \r ')
+    .replace('#xD;', ' \r ')
+    .replace('&&', '');
 };
 
 export const get_user_platform = () => {

@@ -18,7 +18,7 @@ import { initialize_swipe } from '../utils/swipe_box';
 import { render__hours_section } from './details_box/hours_section';
 import { render__rating_section } from './details_box/rating_section';
 import { render__state_label } from './state_label';
-import { render__h1 } from './typography.js';
+import { render__h1 } from './typography';
 import icon__up from '../icons/up.svg';
 import icon__down from '../icons/down.svg';
 
@@ -30,7 +30,7 @@ export function render__details_box() {
   const details_box__expand_handle__details = this.shadowRoot.getElementById('details_box__expand_handle__details');
 
   if (user_actions_container__details && details_box__expand_handle__details) {
-    let binded_initialize_swipe = initialize_swipe.bind(this);
+    const binded_initialize_swipe = initialize_swipe.bind(this);
     binded_initialize_swipe(details_box__expand_handle__details, user_actions_container__details);
   }
 
@@ -67,9 +67,7 @@ export function render__details_box() {
               <p class="color-black-300 fw-300">${this.current_station.municipality}</p>
               ${this.render__rating_section()}
               <a
-                href="${`https://www.google.com/maps/dir/${latitude},${longitude}/${this.current_location.lat},${
-                  this.current_location.lng
-                }`}"
+                href="${`https://www.google.com/maps/dir/${latitude},${longitude}/${this.current_location.lat},${this.current_location.lng}`}"
                 target="_blank"
                 class="color-green fs-16 fw-300 mt-2 mb-3 d-block"
               >
@@ -109,16 +107,18 @@ export function render__details_box() {
                       </p> -->
                             <p class="fs-16 mt-1">${t.type_sockets[this.language]}:</p>
                             ${o.outlets.map(
-                              o =>
+                              outlet =>
                                 html`
                                   <div class="d-flex">
                                     <p class="fs-14 mt-1 mr-2">-</p>
                                     <p class="fs-14 mt-1">
-                                      ${o.outletTypeCode} - ${o.maxPower || '--'} kW/h <br />
+                                      ${outlet.outletTypeCode} - ${outlet.maxPower || '--'} kW/h <br />
                                       <span class="fs-12 color-black-400 mt-2 fw-300">
                                         ${t.column[this.language]} ${i + 1} ∙
-                                        ${Object.prototype.hasOwnProperty(o, 'minCurrent') ? o.minCurrent : '*'} -
-                                        ${o.maxCurrent || '*'} A
+                                        ${Object.prototype.hasOwnProperty.call(outlet, 'minCurrent')
+                                          ? outlet.minCurrent
+                                          : '*'}
+                                        - ${outlet.maxCurrent || '*'} A
                                       </span>
                                     </p>
                                   </div>

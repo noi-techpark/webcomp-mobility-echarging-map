@@ -12,5 +12,3 @@ export function render__h1(text, icon) {
     </div>
   `;
 }
-
-export function render__link(url) {}

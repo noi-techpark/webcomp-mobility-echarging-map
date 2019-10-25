@@ -9,15 +9,20 @@ import icon__x_orange from '../icons/orange/icon_x_orange.png';
 
 export function render__modal__star_rating() {
   const handle_star_click = e => {
-    let target = e.target;
-    let star_list = this.shadowRoot.querySelectorAll('#star_rating_1 .star_rating__star');
+    const { target } = e;
+    const star_list = this.shadowRoot.querySelectorAll('#star_rating_1 .star_rating__star');
     for (let i = 0; i < 5; i++) {
       star_list[i].src = icon__star_void_grey;
     }
-    for (let i = 0; i < parseInt(target.dataset.number) + 1; i++) {
+    for (let i = 0; i < parseInt(target.dataset.number, 10) + 1; i++) {
       star_list[i].src = icon__star_full_orange;
     }
-    this.user_vote = { ...this.user_vote, stars: parseInt(target.dataset.number) + 1 };
+    this.user_vote = { ...this.user_vote, stars: parseInt(target.dataset.number, 10) + 1 };
+  };
+
+  const close_modal = () => {
+    this.showRatingModal = false;
+    this.ratingModalStep = 0;
   };
 
   const handle__send_feedback = () => {
@@ -29,11 +34,6 @@ export function render__modal__star_rating() {
     setTimeout(() => {
       close_modal();
     }, 1500);
-  };
-
-  const close_modal = () => {
-    this.showRatingModal = false;
-    this.ratingModalStep = 0;
   };
 
   const handle__change_image = e => {

@@ -1,12 +1,14 @@
-var path = require('path');
+const path = require('path');
 
 module.exports = {
-  mode: 'production',
-  entry: './map_widget.js',
+  mode: 'development',
+  entry: './src/index.js',
+  watch: true,
   output: {
-    path: path.resolve(__dirname, '../../dist'),
-    filename: 'map_widget.min.js'
+    path: path.resolve(__dirname, './work/scripts'),
+    filename: 'map_widget.js'
   },
+  devtool: 'inline-source-map',
   module: {
     rules: [
       {
@@ -29,5 +31,11 @@ module.exports = {
         loader: 'svg-inline-loader'
       }
     ]
+  },
+  devServer: {
+    contentBase: path.join(__dirname, 'work'),
+    compress: true,
+    writeToDisk: true,
+    port: 8000
   }
 };

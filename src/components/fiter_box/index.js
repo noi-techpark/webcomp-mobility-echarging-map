@@ -6,11 +6,11 @@ import { getStyle, utils_capitalize } from '../../utils';
 import { access_types, plug_types } from './constants';
 
 export function render__filter_box() {
-  const repaint_map = () => {
+  const repaint_map = async () => {
     this.map.removeLayer(this.layer_columns);
     this.map.removeLayer(this.layer_user);
-    this.drawMap();
-
+    await this.drawMap();
+    this.showFilters = false;
     this.is_loading = false;
   };
 

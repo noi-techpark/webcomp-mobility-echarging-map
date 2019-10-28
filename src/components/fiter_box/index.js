@@ -1,14 +1,16 @@
 import { html } from 'lit-element';
-import icon__green_marker from '../icons/green/green@2x.png';
-import style from '../scss/details_box.scss';
-import { t } from '../translations';
-import { getStyle, utils_capitalize } from '../utils';
+import icon__green_marker from '../../icons/green/green@2x.png';
+import style from '../../scss/details_box.scss';
+import { t } from '../../translations';
+import { getStyle, utils_capitalize } from '../../utils';
+import { access_types, plug_types } from './constants';
 
 export function render__filter_box() {
   const repaint_map = () => {
     this.map.removeLayer(this.layer_columns);
     this.map.removeLayer(this.layer_user);
     this.drawMap();
+
     this.is_loading = false;
   };
 
@@ -92,15 +94,6 @@ export function render__filter_box() {
     repaint_map();
   };
 
-  const access_types = [[1, 'PUBLIC', t.public], [2, 'PRIVATE', t.private]];
-  const plug_types = [
-    [1, 'Type2Mennekes', 'Type 2 Mennekes'],
-    [2, 'Type 3A', 'Type 3A'],
-    [3, 'CHAdeMO', 'CHAdeMO'],
-    [4, 'CCS', 'Type 1 CCS'],
-    [5, 'Schuko', 'Schuko'],
-    [6, 'Type2 - 230Vac', 'Type2 - 230Vac']
-  ];
   return html`
     <style>
       ${getStyle(style)}

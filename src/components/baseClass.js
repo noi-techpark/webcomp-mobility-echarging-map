@@ -6,8 +6,8 @@ import { request__near_accomodations, request__near_restaurants } from '../api/o
 import { TOKEN } from '../config';
 import user__marker from '../icons/user.png';
 import { render__details_box } from './details_box';
-import { render__filter_box } from './filter_box';
 import { render__filter_values_mobile } from './filter_values_mobile';
+import { render__filter_box } from './fiter_box';
 import { render__modal__star_rating } from './modal__star_rating';
 import { render__loading_overlay } from './overlay_loading';
 import { render__search_box } from './search_box';

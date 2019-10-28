@@ -2,6 +2,7 @@ import { html } from 'lit-element';
 import { unsafeHTML } from 'lit-html/directives/unsafe-html';
 import icon__card from '../icons/card.png';
 import icon__close from '../icons/close@2x.png';
+import icon__down from '../icons/down.svg';
 import icon__green_dot from '../icons/green/green_dot.png';
 import icon_hotel_green from '../icons/green/icon_hotel_green.png';
 import icon_restaurant_green from '../icons/green/icon_restaurant_green.png';
@@ -9,8 +10,7 @@ import icon__info from '../icons/info.png';
 import icon__pin from '../icons/pin.png';
 import icon__red_dot from '../icons/red_dot.png';
 import icon__type_1 from '../icons/type_1.png';
-// import icon__feedback_black from '../icons/black/icon_feedback_black.png';
-// import icon__star_void_grey from '../icons/grey/icon_star_void_grey.png';
+import icon__up from '../icons/up.svg';
 import style from '../scss/details_box.scss';
 import { t } from '../translations';
 import { encodeXml, getStyle, stationStatusMapper, utils_truncate } from '../utils';
@@ -19,8 +19,6 @@ import { render__hours_section } from './details_box/hours_section';
 import { render__rating_section } from './details_box/rating_section';
 import { render__state_label } from './state_label';
 import { render__h1 } from './typography';
-import icon__up from '../icons/up.svg';
-import icon__down from '../icons/down.svg';
 
 export function render__details_box() {
   const { state, accessType, name, plugs_status, paymentInfo, latitude, longitude, accessInfo } = this.current_station;
@@ -197,6 +195,7 @@ export function render__details_box() {
                             'SMGPOI'
                           )}`}"
                           class="color-green color-green--hover fs-16 fw-300 mt-2 mb-2 d-block"
+                          target="_blank"
                           >${t.more_informations[this.language]} →</a
                         >
                       </div>
@@ -216,6 +215,7 @@ export function render__details_box() {
                         <a
                           href="${`https://www.suedtirol.info/${this.language}/tripmapping/acco/${o.Id}`}"
                           class="color-green color-green--hover fs-16 fw-300 mt-2 mb-2 d-block"
+                          target="_blank"
                           >${t.more_informations[this.language]} →</a
                         >
                       </div>

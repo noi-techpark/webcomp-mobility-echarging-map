@@ -3,7 +3,7 @@ import icon__green_marker from '../../icons/green/green@2x.png';
 import style from '../../scss/details_box.scss';
 import { t } from '../../translations';
 import { getStyle, utils_capitalize } from '../../utils';
-import { access_types, plug_types } from './constants';
+import { plug_types } from './api';
 
 export function render__filter_box() {
   const repaint_map = async () => {
@@ -94,6 +94,8 @@ export function render__filter_box() {
     repaint_map();
   };
 
+  // const access_types = await request_access_types();
+
   return html`
     <style>
       ${getStyle(style)}
@@ -132,7 +134,7 @@ export function render__filter_box() {
         <div class="details_box__section mt-3">
           <div class="col-12">
             <p class="fs-14">${t.type_of_access[this.language]}</p>
-            ${access_types.map((o, i) => {
+            ${this.access_types.map((o, i) => {
               return html`
                 <div class="custom-checkbox ${i === 0 ? 'mt-3' : ''}">
                   <label htmlFor="access-${o[0]}" class="fs-16">
@@ -146,7 +148,7 @@ export function render__filter_box() {
                     ${utils_capitalize(o[2][this.language])}
                   </label>
                 </div>
-                ${i !== access_types.length - 1
+                ${i !== this.access_types.length - 1
                   ? html`
                       <hr />
                     `

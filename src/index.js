@@ -202,6 +202,7 @@ class EMobilityMap extends BaseClass {
   async firstUpdated() {
     this.initializeMap();
     this.drawMap();
+    await this.request_access_types();
   }
 
   handleToggleShowFilters() {

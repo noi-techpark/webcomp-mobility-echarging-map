@@ -18,6 +18,7 @@ export const observed_properties = {
   provider_list: { type: Array },
   query_nominatim: { type: String },
   details_mobile_state: { type: Boolean },
+  access_types: { type: Array },
   // Parameters
   logo: { type: String },
   language: { type: String }

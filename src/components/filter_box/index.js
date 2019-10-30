@@ -3,7 +3,7 @@ import icon__green_marker from '../../icons/green/green@2x.png';
 import style from '../../scss/details_box.scss';
 import { t } from '../../translations';
 import { getStyle, utils_capitalize } from '../../utils';
-import { plug_types } from './api';
+// import { plug_types } from './api';
 
 export function render__filter_box() {
   const repaint_map = async () => {
@@ -184,7 +184,7 @@ export function render__filter_box() {
             <p class="fs-14">${t.plug_type[this.language]}</p>
             <!-- "700 bar small vehicles" "UNKNOWN" -->
 
-            ${plug_types.map((o, i) => {
+            ${this.plug_types.map((o, i) => {
               return html`
                 <div class="custom-checkbox ${i === 0 ? 'mt-3' : ''}">
                   <label htmlFor="plug-1" class="fs-16">
@@ -193,7 +193,7 @@ export function render__filter_box() {
                     ${o[2]}
                   </label>
                 </div>
-                ${i !== plug_types.length - 1
+                ${i !== this.plug_types.length - 1
                   ? html`
                       <hr />
                     `

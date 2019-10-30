@@ -26,8 +26,8 @@ class EMobilityMap extends BaseClass {
       [this.current_location.lat, this.current_location.lng],
       13
     );
-    L.tileLayer('https://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-      attribution: ''
+    L.tileLayer('https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}{r}.png', {
+      attribution: '<a href="https://wikimediafoundation.org/wiki/Maps_Terms_of_Use">Wikimedia</a>'
     }).addTo(this.map);
   }
 
@@ -203,6 +203,7 @@ class EMobilityMap extends BaseClass {
     this.initializeMap();
     this.drawMap();
     await this.request_access_types();
+    await this.request_plug_types();
   }
 
   handleToggleShowFilters() {

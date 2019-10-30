@@ -6,13 +6,13 @@ import { request__near_accomodations, request__near_restaurants } from '../api/o
 import { TOKEN } from '../config';
 import user__marker from '../icons/user.png';
 import { render__details_box } from './details_box';
-import { render__filter_values_mobile } from './filter_values_mobile';
 import { render__filter_box } from './filter_box';
+import { request_access_types, request_plug_types } from './filter_box/api';
+import { render__filter_values_mobile } from './filter_values_mobile';
 import { render__modal__star_rating } from './modal__star_rating';
 import { render__loading_overlay } from './overlay_loading';
 import { render__search_box } from './search_box';
 import { render__search_box_underlay } from './search_box_underlay';
-import { request_access_types } from './filter_box/api';
 
 export class BaseClass extends LitElement {
   constructor() {
@@ -44,6 +44,7 @@ export class BaseClass extends LitElement {
     this.query_nominatim = '';
     this.details_mobile_state = false;
     this.access_types = [];
+    this.plug_types = [];
     /* Parameters */
     const [language] = (window.navigator.userLanguage || window.navigator.language).split('-');
     this.language = language;
@@ -56,6 +57,7 @@ export class BaseClass extends LitElement {
     this.render__filter_values_mobile = render__filter_values_mobile.bind(this);
     this.render__search_box_underlay = render__search_box_underlay.bind(this);
     this.request_access_types = request_access_types.bind(this);
+    this.request_plug_types = request_plug_types.bind(this);
     /* Requests */
     this.request__get_stations_details = request__get_stations_details.bind(this);
     this.request__get_stations_plugs_details = request__get_stations_plugs_details.bind(this);

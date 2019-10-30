@@ -42,8 +42,6 @@ export function render__details_box() {
       </style>
       <div class="details_box">
         <div id="details_box__expand_handle__details" class="details_box__expand_handle pt-2 pb-2 d-sm-none">
-          <!-- <div class="details_box__expand_handle__up"></div>
-          <div class="details_box__expand_handle__down"></div> -->
           ${this.details_mobile_state ? unsafeHTML(icon__down) : unsafeHTML(icon__up)}
         </div>
         <div class="details_box__header">
@@ -197,6 +195,7 @@ export function render__details_box() {
                             'SMGPOI'
                           )}`}"
                           class="color-green color-green--hover fs-16 fw-300 mt-2 mb-2 d-block"
+                          target="_blank"
                           >${t.more_informations[this.language]} →</a
                         >
                       </div>
@@ -216,6 +215,7 @@ export function render__details_box() {
                         <a
                           href="${`https://www.suedtirol.info/${this.language}/tripmapping/acco/${o.Id}`}"
                           class="color-green color-green--hover fs-16 fw-300 mt-2 mb-2 d-block"
+                          target="_blank"
                           >${t.more_informations[this.language]} →</a
                         >
                       </div>

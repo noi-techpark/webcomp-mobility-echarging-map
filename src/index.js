@@ -15,6 +15,7 @@ import style__typography from './scss/typography.scss';
 import utilities from './scss/utilities.scss';
 import { getLatLongFromStationDetail, getStyle, get_user_platform, stationStatusMapper } from './utils';
 import { get_provider_list } from './utils/get_provider_list';
+import { request_stations_status_types, request_stations_plugs } from './components/filter_box/api';
 
 class EMobilityMap extends BaseClass {
   static get properties() {
@@ -36,6 +37,7 @@ class EMobilityMap extends BaseClass {
 
     await this.request__get_stations_details();
     await this.request__get_stations_plugs_details();
+    const stations_status_types = await request_stations_status_types();
     this.provider_list = get_provider_list(this.all_stations_details);
 
     /**
@@ -45,11 +47,15 @@ class EMobilityMap extends BaseClass {
     /**
      * Apply filters:
      */
-    let filtered_stations_details = this.all_stations_details.filter(o => {
+    console.log(this.all_stations_details);
+
+    const filtered_stations_details = this.all_stations_details.filter(o => {
       /**
        * radius
        */
-      const marker_position = getLatLongFromStationDetail(o);
+      // console.log(o);
+      const marker_position = getLatLongFromStationDetail(o.scoordinate);
+
       const distance = L.latLng([this.current_location.lat, this.current_location.lng]).distanceTo([
         marker_position.lat,
         marker_position.lng
@@ -61,54 +67,56 @@ class EMobilityMap extends BaseClass {
       return distance / 1000 < this.filters.radius;
     });
 
-    filtered_stations_details = filtered_stations_details.filter(o => {
-      /**
-       * access_type
-       */
-      const condition_access_type = this.filters.access_type.length
-        ? this.filters.access_type.includes(o.accessType)
-        : true;
-      /**
-       *  plug_type
-       */
-      const station_plugs = this.all_plugs_details.filter(plug => plug.parentStation === o.id);
-      const filtered__station_plugs = station_plugs.filter(plug => {
-        let condition = false;
-        plug.outlets.map(outlet => {
-          if (!condition) {
-            condition = this.filters.plug_type.includes(outlet.outletTypeCode);
-          }
-          return undefined;
-        });
-        return condition;
-      });
-      /**
-       * provider
-       */
-      const condition_provider = this.filters.provider.length ? this.filters.provider.includes(o.provider) : true;
+    // filtered_stations_details = filtered_stations_details.filter(o => {
+    //   /**
+    //    * access_type
+    //    */
+    //   const condition_access_type = this.filters.access_type.length
+    //     ? this.filters.access_type.includes(o.accessType)
+    //     : true;
+    //   /**
+    //    *  plug_type
+    //    */
+    //   const station_plugs = this.all_plugs_details.filter(plug => plug.parentStation === o.id);
+    //   const filtered__station_plugs = station_plugs.filter(plug => {
+    //     let condition = false;
+    //     plug.outlets.map(outlet => {
+    //       if (!condition) {
+    //         condition = this.filters.plug_type.includes(outlet.outletTypeCode);
+    //       }
+    //       return undefined;
+    //     });
+    //     return condition;
+    //   });
+    //   /**
+    //    * provider
+    //    */
+    //   const condition_provider = this.filters.provider.length ? this.filters.provider.includes(o.provider) : true;
 
-      const condition_plug_type = this.filters.plug_type.length ? filtered__station_plugs.length : true;
-      if (this.filters.state.length) {
-        /* state TODO: this can disrupt performances */
-        // let plugs_status = [];
-        // for (let i = 0; i < station_plugs.length; i++) {
-        //   const element = station_plugs[i];
-        //   const response = await request__get_plug_details(element.id);
-        //   plugs_status.push(response);
-        // }
-      }
+    //   const condition_plug_type = this.filters.plug_type.length ? filtered__station_plugs.length : true;
+    //   if (this.filters.state.length) {
+    //     /* state TODO: this can disrupt performances */
+    //     // let plugs_status = [];
+    //     // for (let i = 0; i < station_plugs.length; i++) {
+    //     //   const element = station_plugs[i];
+    //     //   const response = await request__get_plug_details(element.id);
+    //     //   plugs_status.push(response);
+    //     // }
+    //   }
 
-      /* Merge conditions */
-      return condition_access_type && condition_provider && Boolean(condition_plug_type);
-    });
+    //   /* Merge conditions */
+    //   return condition_access_type && condition_provider && Boolean(condition_plug_type);
+    // });
 
-    /* Print filtered stations on map */
+    /* PRINT filtered stations on map */
     filtered_stations_details.map(o => {
-      const marker_position = getLatLongFromStationDetail(o);
+      const { smetadata, sorigin } = o;
+      const marker_position = getLatLongFromStationDetail(o.scoordinate);
+      // stations_status_types
       /** Creating the icon */
       const station_icon = L.icon({
-        iconUrl: stationStatusMapper(o.state, o.origin),
-        iconSize: o.state !== 'ACTIVE' && o.state !== 'AVAILABLE' ? [30, 30] : [36, 36]
+        iconUrl: stationStatusMapper(smetadata.state, sorigin),
+        iconSize: smetadata.state !== 'ACTIVE' && smetadata.state !== 'AVAILABLE' ? [30, 30] : [36, 36]
       });
       const marker = L.marker([marker_position.lat, marker_position.lng], {
         icon: station_icon
@@ -116,20 +124,25 @@ class EMobilityMap extends BaseClass {
 
       const action = async () => {
         this.is_loading = true;
-        const station_plugs = this.all_plugs_details.filter(plug => plug.parentStation === o.id);
+        const station_plugs = await request_stations_plugs(o.scode);
+        console.log({ station_plugs });
 
-        const plugs_status = [];
-        for (let i = 0; i < station_plugs.length; i++) {
-          const element = station_plugs[i];
-          const response = request__get_plug_details(element.id);
-          plugs_status.push(response);
-        }
+        //   const station_plugs = this.all_plugs_details.filter(plug => plug.parentStation === o.id);
 
-        await Promise.all(plugs_status);
+        // const plugs_status = [];
+        // for (let i = 0; i < station_plugs.length; i++) {
+        //   const element = station_plugs[i];
+        //   const response = request__get_plug_details(element.id);
+        //   plugs_status.push(response);
+        // }
+
+        //   await Promise.all(plugs_status);
         await this.request__near_restaurants(marker_position.lat, marker_position.lng);
         await this.request__near_accomodations(marker_position.lat, marker_position.lng);
 
-        this.current_station = { ...o, station_plugs, plugs_status };
+        // this.current_station = { ...o, station_plugs, plugs_status };
+        this.current_station = { ...o, station_plugs };
+        console.log(this.current_station);
         this.showFilters = false;
         this.is_loading = false;
       };
@@ -138,10 +151,11 @@ class EMobilityMap extends BaseClass {
 
       columns_layer_array.push(marker);
 
-      return undefined;
+      return null;
     });
 
     this.visibleStations = columns_layer_array.length;
+
     const columns_layer = L.layerGroup(columns_layer_array, {});
 
     /** Prepare the cluster group for station markers */
@@ -281,7 +295,7 @@ class EMobilityMap extends BaseClass {
         </div>
 
         <div
-          style="${this.current_station.id ? 'z-index: 1002;' : 'display: none;'}"
+          style="${this.current_station.scode ? 'z-index: 1002;' : 'display: none;'}"
           class="user_actions_container"
           id="user_actions_container__details"
         >

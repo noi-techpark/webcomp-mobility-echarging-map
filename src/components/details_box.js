@@ -2,6 +2,7 @@ import { html } from 'lit-element';
 import { unsafeHTML } from 'lit-html/directives/unsafe-html';
 import icon__card from '../icons/card.png';
 import icon__close from '../icons/close@2x.png';
+import icon__down from '../icons/down.svg';
 import icon__green_dot from '../icons/green/green_dot.png';
 import icon_hotel_green from '../icons/green/icon_hotel_green.png';
 import icon_restaurant_green from '../icons/green/icon_restaurant_green.png';
@@ -9,8 +10,7 @@ import icon__info from '../icons/info.png';
 import icon__pin from '../icons/pin.png';
 import icon__red_dot from '../icons/red_dot.png';
 import icon__type_1 from '../icons/type_1.png';
-// import icon__feedback_black from '../icons/black/icon_feedback_black.png';
-// import icon__star_void_grey from '../icons/grey/icon_star_void_grey.png';
+import icon__up from '../icons/up.svg';
 import style from '../scss/details_box.scss';
 import { t } from '../translations';
 import { encodeXml, getStyle, stationStatusMapper, utils_truncate } from '../utils';
@@ -19,11 +19,9 @@ import { render__hours_section } from './details_box/hours_section';
 import { render__rating_section } from './details_box/rating_section';
 import { render__state_label } from './state_label';
 import { render__h1 } from './typography';
-import icon__up from '../icons/up.svg';
-import icon__down from '../icons/down.svg';
 
 export function render__details_box() {
-  const { state, accessType, name, plugs_status, paymentInfo, latitude, longitude, accessInfo } = this.current_station;
+  const { state, accessType, name, paymentInfo, latitude, longitude, accessInfo } = this.current_station;
   const { origin } = this.current_station;
 
   const user_actions_container__details = this.shadowRoot.getElementById('user_actions_container__details');
@@ -88,14 +86,15 @@ export function render__details_box() {
               ${
                 this.current_station.station_plugs
                   ? this.current_station.station_plugs.map((o, i) => {
-                      const status = plugs_status[i];
+                      const { smetadata, sactive } = o;
+
                       return html`
                         <div class="element_background d-flex align-items-center pt-2 pb-2 mt-3">
                           <div class="ml-3 mr-3 position-relative">
                             <img
                               class="w-18px d-block position-absolute"
                               style="top: -6px;right: -6px;"
-                              src="${status.value ? icon__green_dot : icon__red_dot}"
+                              src="${sactive ? icon__green_dot : icon__red_dot}"
                             />
                             <img class="w-24px d-block" src="${icon__type_1}" alt="" />
                           </div>
@@ -104,7 +103,7 @@ export function render__details_box() {
                         FAST CHARGE <b>falso</b>
                       </p> -->
                             <p class="fs-16 mt-1">${t.type_sockets[this.language]}:</p>
-                            ${o.outlets.map(
+                            ${smetadata.outlets.map(
                               outlet =>
                                 html`
                                   <div class="d-flex">

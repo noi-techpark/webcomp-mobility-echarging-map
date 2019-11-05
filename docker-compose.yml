@@ -6,8 +6,8 @@ services:
             context: .
             dockerfile: ./dockerfile-node-local
         working_dir: /code/work
-        command: sh serve.sh
+        command: http-server
         volumes:
             - ./:/code
         ports:
-            - "8888:8000"
+            - "8888:8080"

@@ -1,14 +1,16 @@
 import { html } from 'lit-element';
-import icon__green_marker from '../icons/green/green@2x.png';
-import style from '../scss/details_box.scss';
-import { t } from '../translations';
-import { getStyle, utils_capitalize } from '../utils';
+import icon__green_marker from '../../icons/green/green@2x.png';
+import style from '../../scss/details_box.scss';
+import { t } from '../../translations';
+import { getStyle, utils_capitalize } from '../../utils';
+// import { plug_types } from './api';
 
 export function render__filter_box() {
-  const repaint_map = () => {
+  const repaint_map = async () => {
     this.map.removeLayer(this.layer_columns);
     this.map.removeLayer(this.layer_user);
-    this.drawMap();
+    await this.drawMap();
+    this.showFilters = false;
     this.is_loading = false;
   };
 
@@ -92,15 +94,8 @@ export function render__filter_box() {
     repaint_map();
   };
 
-  const access_types = [[1, 'PUBLIC', t.public], [2, 'PRIVATE', t.private]];
-  const plug_types = [
-    [1, 'Type2Mennekes', 'Type 2 Mennekes'],
-    [2, 'Type 3A', 'Type 3A'],
-    [3, 'CHAdeMO', 'CHAdeMO'],
-    [4, 'CCS', 'Type 1 CCS'],
-    [5, 'Schuko', 'Schuko'],
-    [6, 'Type2 - 230Vac', 'Type2 - 230Vac']
-  ];
+  // const access_types = await request_access_types();
+
   return html`
     <style>
       ${getStyle(style)}
@@ -139,7 +134,7 @@ export function render__filter_box() {
         <div class="details_box__section mt-3">
           <div class="col-12">
             <p class="fs-14">${t.type_of_access[this.language]}</p>
-            ${access_types.map((o, i) => {
+            ${this.access_types.map((o, i) => {
               return html`
                 <div class="custom-checkbox ${i === 0 ? 'mt-3' : ''}">
                   <label htmlFor="access-${o[0]}" class="fs-16">
@@ -153,7 +148,7 @@ export function render__filter_box() {
                     ${utils_capitalize(o[2][this.language])}
                   </label>
                 </div>
-                ${i !== access_types.length - 1
+                ${i !== this.access_types.length - 1
                   ? html`
                       <hr />
                     `
@@ -189,7 +184,7 @@ export function render__filter_box() {
             <p class="fs-14">${t.plug_type[this.language]}</p>
             <!-- "700 bar small vehicles" "UNKNOWN" -->
 
-            ${plug_types.map((o, i) => {
+            ${this.plug_types.map((o, i) => {
               return html`
                 <div class="custom-checkbox ${i === 0 ? 'mt-3' : ''}">
                   <label htmlFor="plug-1" class="fs-16">
@@ -198,7 +193,7 @@ export function render__filter_box() {
                     ${o[2]}
                   </label>
                 </div>
-                ${i !== plug_types.length - 1
+                ${i !== this.plug_types.length - 1
                   ? html`
                       <hr />
                     `

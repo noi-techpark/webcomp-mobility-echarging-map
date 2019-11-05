@@ -149,6 +149,16 @@ export const t = {
     fr: 'PRIVATE',
     ru: 'PRIVATE'
   },
+  private_withpublicaccess: {
+    en: 'PRIVATE WITH PUBLIC ACCESS',
+    de: 'PRIVATE WITH PUBLIC ACCESS',
+    it: 'PRIVATO CON PUBBLICO ACCESSO',
+    nl: 'PRIVATE WITH PUBLIC ACCESS',
+    cs: 'PRIVATE WITH PUBLIC ACCESS',
+    pl: 'PRIVATE WITH PUBLIC ACCESS',
+    fr: 'PRIVATE WITH PUBLIC ACCESS',
+    ru: 'PRIVATE WITH PUBLIC ACCESS'
+  },
   write_feedback: {
     en: 'Write feedback',
     de: 'Write feedback',

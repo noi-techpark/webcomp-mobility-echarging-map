@@ -47,14 +47,6 @@ export function render__filter_values_mobile() {
     repaint_map();
   };
 
-  // const handle__state = e => {
-  //   this.filters = {
-  //     ...this.filters,
-  //     state: this.filters.state.filter(o => o !== e)
-  //   };
-  //   repaint_map();
-  // };
-
   return html`
     <style>
       ${getStyle(style)}

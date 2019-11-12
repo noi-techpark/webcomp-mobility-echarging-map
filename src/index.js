@@ -96,14 +96,13 @@ class EMobilityMap extends BaseClass {
           return condition;
         });
       }
-      // Filter plugs and obtain the list of the of those belongs to the station
-
-      // const station_plugs = this.all_plugs_details.filter(plug => plug.parentStation === o.id);
 
       /**
        * provider
        */
-      const condition_provider = this.filters.provider.length ? this.filters.provider.includes(o.provider) : true;
+      const condition_provider = this.filters.provider.length
+        ? this.filters.provider.includes(o.smetadata.provider)
+        : true;
 
       const condition_plug_type = this.filters.plug_type.length ? filtered__station_plugs.length : true;
       if (this.filters.state.length) {

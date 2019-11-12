@@ -21,7 +21,9 @@ import { render__state_label } from './state_label';
 import { render__h1 } from './typography';
 
 export function render__details_box() {
-  const { state, accessType, name, paymentInfo, latitude, longitude, accessInfo } = this.current_station;
+  const { smetadata, sname, scoordinate, accessInfo } = this.current_station;
+  // console.log(this.current_station, smetadata && smetadata.state ? '' : 'lol');
+
   const { origin } = this.current_station;
 
   const user_actions_container__details = this.shadowRoot.getElementById('user_actions_container__details');
@@ -43,7 +45,14 @@ export function render__details_box() {
           ${this.details_mobile_state ? unsafeHTML(icon__down) : unsafeHTML(icon__up)}
         </div>
         <div class="details_box__header">
-          ${render__state_label(state, this.language)} ${render__state_label(accessType, this.language)}
+          ${
+            smetadata
+              ? html`
+                  ${render__state_label(smetadata.state, this.language)}
+                  ${render__state_label(smetadata.accessType, this.language)}
+                `
+              : undefined
+          }
           <div
             class="details_box__close_button"
             @click="${() => {
@@ -57,18 +66,30 @@ export function render__details_box() {
         <div class="details_box__body">
           <!-- Detail box -->
           <div class="details_box__section mt-3">
-            ${render__h1(name, stationStatusMapper(state, origin))}
+            ${render__h1(sname, stationStatusMapper(smetadata ? smetadata.state : false, origin))}
             <div class="col-12">
-              <p class="color-black-300 mt-2 fw-300">${this.current_station.address}</p>
+              ${
+                smetadata
+                  ? html`
+                      <p class="color-black-300 mt-2 fw-300">${smetadata.address}</p>
+                    `
+                  : null
+              }
               <p class="color-black-300 fw-300">${this.current_station.municipality}</p>
               ${this.render__rating_section()}
-              <a
-                href="${`https://www.google.com/maps/dir/${latitude},${longitude}/${this.current_location.lat},${this.current_location.lng}`}"
-                target="_blank"
-                class="color-green fs-16 fw-300 mt-2 mb-3 d-block"
-              >
-                ${t.directions[this.language]} →
-              </a>
+              ${
+                scoordinate
+                  ? html`
+                      <a
+                        href="${`https://www.google.com/maps/dir/${scoordinate.y},${scoordinate.x}/${this.current_location.lat},${this.current_location.lng}`}"
+                        target="_blank"
+                        class="color-green fs-16 fw-300 mt-2 mb-3 d-block"
+                      >
+                        ${t.directions[this.language]} →
+                      </a>
+                    `
+                  : null
+              }
             </div>
           </div>
           <!-- Detail box -->
@@ -86,7 +107,7 @@ export function render__details_box() {
               ${
                 this.current_station.station_plugs
                   ? this.current_station.station_plugs.map((o, i) => {
-                      const { smetadata, sactive } = o;
+                      const { sactive } = o;
 
                       return html`
                         <div class="element_background d-flex align-items-center pt-2 pb-2 mt-3">
@@ -103,7 +124,7 @@ export function render__details_box() {
                         FAST CHARGE <b>falso</b>
                       </p> -->
                             <p class="fs-16 mt-1">${t.type_sockets[this.language]}:</p>
-                            ${smetadata.outlets.map(
+                            ${o.smetadata.outlets.map(
                               outlet =>
                                 html`
                                   <div class="d-flex">
@@ -150,7 +171,7 @@ export function render__details_box() {
               </div>
               <div class="col-12">
                 <a
-                  href="${paymentInfo}"
+                  href="${smetadata ? smetadata.paymentInfo : ''}"
                   class="color-green fs-16 fw-300 mt-2 mb-3 color-green--hover d-block"
                   target="_blank"
                 >

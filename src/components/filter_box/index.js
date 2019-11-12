@@ -47,6 +47,7 @@ export function render__filter_box() {
         plug_type: this.filters.plug_type.filter(o => o !== e.target.value)
       };
     }
+    console.log(this.filters);
   };
 
   const handle__provider = e => {

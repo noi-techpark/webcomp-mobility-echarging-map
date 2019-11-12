@@ -3,7 +3,7 @@ import leaflet_mrkcls from 'leaflet.markercluster';
 import style__markercluster from 'leaflet.markercluster/dist/MarkerCluster.css';
 import style__leaflet from 'leaflet/dist/leaflet.css';
 import { html } from 'lit-element';
-import { request__get_plug_details } from './api/integreen-life';
+// import { request__get_plug_details } from './api/integreen-life';
 import { BaseClass } from './components/baseClass';
 import { render__map_controls } from './components/map_controls';
 import { map_tag } from './components/map_tag';
@@ -15,7 +15,7 @@ import style__typography from './scss/typography.scss';
 import utilities from './scss/utilities.scss';
 import { getLatLongFromStationDetail, getStyle, get_user_platform, stationStatusMapper } from './utils';
 import { get_provider_list } from './utils/get_provider_list';
-import { request_stations_status_types, request_stations_plugs } from './components/filter_box/api';
+import { request_stations_plugs } from './components/filter_box/api';
 
 class EMobilityMap extends BaseClass {
   static get properties() {
@@ -37,23 +37,21 @@ class EMobilityMap extends BaseClass {
 
     await this.request__get_stations_details();
     await this.request__get_stations_plugs_details();
-    const stations_status_types = await request_stations_status_types();
+    // const stations_status_types = await request_stations_status_types();
     this.provider_list = get_provider_list(this.all_stations_details);
 
     /**
      * Render stations markers
      */
     const columns_layer_array = [];
+
     /**
      * Apply filters:
      */
-    console.log(this.all_stations_details);
-
-    const filtered_stations_details = this.all_stations_details.filter(o => {
+    let filtered_stations_details = this.all_stations_details.filter(o => {
       /**
        * radius
        */
-      // console.log(o);
       const marker_position = getLatLongFromStationDetail(o.scoordinate);
 
       const distance = L.latLng([this.current_location.lat, this.current_location.lng]).distanceTo([
@@ -67,46 +65,59 @@ class EMobilityMap extends BaseClass {
       return distance / 1000 < this.filters.radius;
     });
 
-    // filtered_stations_details = filtered_stations_details.filter(o => {
-    //   /**
-    //    * access_type
-    //    */
-    //   const condition_access_type = this.filters.access_type.length
-    //     ? this.filters.access_type.includes(o.accessType)
-    //     : true;
-    //   /**
-    //    *  plug_type
-    //    */
-    //   const station_plugs = this.all_plugs_details.filter(plug => plug.parentStation === o.id);
-    //   const filtered__station_plugs = station_plugs.filter(plug => {
-    //     let condition = false;
-    //     plug.outlets.map(outlet => {
-    //       if (!condition) {
-    //         condition = this.filters.plug_type.includes(outlet.outletTypeCode);
-    //       }
-    //       return undefined;
-    //     });
-    //     return condition;
-    //   });
-    //   /**
-    //    * provider
-    //    */
-    //   const condition_provider = this.filters.provider.length ? this.filters.provider.includes(o.provider) : true;
+    filtered_stations_details = filtered_stations_details.filter(o => {
+      // console.log(o);
 
-    //   const condition_plug_type = this.filters.plug_type.length ? filtered__station_plugs.length : true;
-    //   if (this.filters.state.length) {
-    //     /* state TODO: this can disrupt performances */
-    //     // let plugs_status = [];
-    //     // for (let i = 0; i < station_plugs.length; i++) {
-    //     //   const element = station_plugs[i];
-    //     //   const response = await request__get_plug_details(element.id);
-    //     //   plugs_status.push(response);
-    //     // }
-    //   }
+      /**
+       * access_type
+       */
+      const condition_access_type = this.filters.access_type.length
+        ? this.filters.access_type.includes(o.smetadata ? o.smetadata.accessType : '')
+        : true;
 
-    //   /* Merge conditions */
-    //   return condition_access_type && condition_provider && Boolean(condition_plug_type);
-    // });
+      /**
+       *  plug_type
+       */
+      let filtered__station_plugs = [];
+      if (this.filters.plug_type.length) {
+        const station_plugs = this.all_plugs_details.filter(plug => {
+          return plug.parentStation === o.scode;
+        });
+
+        filtered__station_plugs = station_plugs.filter(plug => {
+          let condition = false;
+          plug.outlets.map(outlet => {
+            if (!condition) {
+              condition = this.filters.plug_type.includes(outlet.outletTypeCode);
+            }
+            return undefined;
+          });
+          return condition;
+        });
+      }
+      // Filter plugs and obtain the list of the of those belongs to the station
+
+      // const station_plugs = this.all_plugs_details.filter(plug => plug.parentStation === o.id);
+
+      /**
+       * provider
+       */
+      const condition_provider = this.filters.provider.length ? this.filters.provider.includes(o.provider) : true;
+
+      const condition_plug_type = this.filters.plug_type.length ? filtered__station_plugs.length : true;
+      if (this.filters.state.length) {
+        /* state TODO: this can disrupt performances */
+        // let plugs_status = [];
+        // for (let i = 0; i < station_plugs.length; i++) {
+        //   const element = station_plugs[i];
+        //   const response = await request__get_plug_details(element.id);
+        //   plugs_status.push(response);
+        // }
+      }
+
+      /* Merge conditions */
+      return condition_access_type && condition_provider && Boolean(condition_plug_type);
+    });
 
     /* PRINT filtered stations on map */
     filtered_stations_details.map(o => {
@@ -125,22 +136,10 @@ class EMobilityMap extends BaseClass {
       const action = async () => {
         this.is_loading = true;
         const station_plugs = await request_stations_plugs(o.scode);
-        console.log({ station_plugs });
 
-        //   const station_plugs = this.all_plugs_details.filter(plug => plug.parentStation === o.id);
-
-        // const plugs_status = [];
-        // for (let i = 0; i < station_plugs.length; i++) {
-        //   const element = station_plugs[i];
-        //   const response = request__get_plug_details(element.id);
-        //   plugs_status.push(response);
-        // }
-
-        //   await Promise.all(plugs_status);
         await this.request__near_restaurants(marker_position.lat, marker_position.lng);
         await this.request__near_accomodations(marker_position.lat, marker_position.lng);
 
-        // this.current_station = { ...o, station_plugs, plugs_status };
         this.current_station = { ...o, station_plugs };
         console.log(this.current_station);
         this.showFilters = false;

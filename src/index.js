@@ -152,7 +152,6 @@ class EMobilityMap extends BaseClass {
         await this.request__near_accomodations(marker_position.lat, marker_position.lng);
 
         this.current_station = { ...o, station_plugs };
-        console.log(this.current_station);
         this.showFilters = false;
         this.is_loading = false;
       };

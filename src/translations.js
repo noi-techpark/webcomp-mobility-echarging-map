@@ -319,6 +319,16 @@ export const t = {
     fr: 'PROVIDER',
     ru: 'PROVIDER'
   },
+  maxPower: {
+    en: 'MAX POWER',
+    de: 'MAX POWER',
+    it: 'MASSIMA POTENZA EROGATA',
+    nl: 'MAX POWER',
+    cs: 'MAX POWER',
+    pl: 'MAX POWER',
+    fr: 'MAX POWER',
+    ru: 'MAX POWER'
+  },
   open_charging_station: {
     en: 'Charging station open',
     de: 'Charging station open',

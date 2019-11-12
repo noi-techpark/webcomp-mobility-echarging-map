@@ -76,15 +76,15 @@ class EMobilityMap extends BaseClass {
         ? this.filters.access_type.includes(o.smetadata ? o.smetadata.accessType : '')
         : true;
 
+      const station_plugs = this.all_plugs_details.filter(plug => {
+        return plug.parentStation === o.scode;
+      });
+
       /**
        *  plug_type
        */
       let filtered__station_plugs = [];
       if (this.filters.plug_type.length) {
-        const station_plugs = this.all_plugs_details.filter(plug => {
-          return plug.parentStation === o.scode;
-        });
-
         filtered__station_plugs = station_plugs.filter(plug => {
           let condition = false;
           plug.outlets.map(outlet => {
@@ -97,6 +97,8 @@ class EMobilityMap extends BaseClass {
         });
       }
 
+      const condition_plug_type = this.filters.plug_type.length ? filtered__station_plugs.length : true;
+
       /**
        * provider
        */
@@ -104,19 +106,28 @@ class EMobilityMap extends BaseClass {
         ? this.filters.provider.includes(o.smetadata.provider)
         : true;
 
-      const condition_plug_type = this.filters.plug_type.length ? filtered__station_plugs.length : true;
-      if (this.filters.state.length) {
-        /* state TODO: this can disrupt performances */
-        // let plugs_status = [];
-        // for (let i = 0; i < station_plugs.length; i++) {
-        //   const element = station_plugs[i];
-        //   const response = await request__get_plug_details(element.id);
-        //   plugs_status.push(response);
-        // }
+      let condition_maxPower = true;
+      if (this.filters.maxPower) {
+        // station_plugs;
+        const outlets = station_plugs.map(plug => plug.outlets);
+        const maxPowers = outlets.flat().map(outlet => parseInt(outlet.maxPower, 10));
+        if (!maxPowers.includes(this.filters.maxPower)) {
+          condition_maxPower = false;
+        }
       }
 
+      /* state TODO: this can disrupt performances */
+      // if (this.filters.state.length) {
+      // let plugs_status = [];
+      // for (let i = 0; i < station_plugs.length; i++) {
+      //   const element = station_plugs[i];
+      //   const response = await request__get_plug_details(element.id);
+      //   plugs_status.push(response);
+      // }
+      // }
+
       /* Merge conditions */
-      return condition_access_type && condition_provider && Boolean(condition_plug_type);
+      return condition_access_type && condition_provider && Boolean(condition_plug_type) && condition_maxPower;
     });
 
     /* PRINT filtered stations on map */

@@ -3,7 +3,6 @@ import icon__green_marker from '../../icons/green/green@2x.png';
 import style from '../../scss/details_box.scss';
 import { t } from '../../translations';
 import { getStyle, utils_capitalize } from '../../utils';
-// import { plug_types } from './api';
 
 export function render__filter_box() {
   const repaint_map = async () => {

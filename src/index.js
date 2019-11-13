@@ -132,8 +132,6 @@ class EMobilityMap extends BaseClass {
 
     /* PRINT filtered stations on map */
     filtered_stations_details.map(o => {
-      console.log(o);
-
       const { smetadata, sorigin } = o;
       const marker_position = getLatLongFromStationDetail(o.scoordinate);
       // stations_status_types

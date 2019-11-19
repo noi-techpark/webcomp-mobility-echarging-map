@@ -1,24 +1,22 @@
+import { fetch_options } from './constants';
+
 const BASE_PATH = 'https://ipchannels.integreen-life.bz.it/emobility/rest/';
 const BASE_PATH_PLUGS = 'https://ipchannels.integreen-life.bz.it/emobility/rest/plugs/';
-
-const fetch_options = {
-  method: 'GET',
-  headers: new Headers({
-    Accept: 'application/json'
-  })
-};
-
-// export async function request__get_stations_ids() {
-//   this.is_loading = true;
-//   let response = await fetch(BASE_PATH + 'get-stations', fetch_options);
-//   this.all_stations_ids = await response.json();
-//   this.is_loading = false;
-// }
+const NINJA_BASE_PATH = 'https://ipchannels.integreen-life.bz.it/ninja/api/v2';
 
 export async function request__get_stations_details() {
   this.is_loading = true;
-  const response = await fetch(`${BASE_PATH}get-station-details`, fetch_options);
-  this.all_stations_details = await response.json();
+  // const response = await fetch(`${BASE_PATH}get-station-details`, fetch_options);
+  const request = await fetch(
+    `${NINJA_BASE_PATH}/flat/EChargingStation?limit=-1&offset=0&where=sactive.eq.true&shownull=false&distinct=true`,
+    fetch_options
+  );
+  // this.all_stations_details = await response.json();
+  const response = await request.json();
+  this.all_stations_details = response.data;
+  // const rresponse = await request.json();
+  // console.log(this.all_stations_details, rresponse.data);
+
   this.is_loading = false;
 }
 

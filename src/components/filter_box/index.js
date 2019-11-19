@@ -77,6 +77,13 @@ export function render__filter_box() {
     }
   };
 
+  const handle__maxPower = e => {
+    this.filters = {
+      ...this.filters,
+      maxPower: parseInt(e.target.value, 10)
+    };
+  };
+
   const handle__reset_filters = () => {
     this.filters = {
       ...this.filters,
@@ -93,8 +100,6 @@ export function render__filter_box() {
     this.shadowRoot.getElementById('input_filter_radius').value = '0';
     repaint_map();
   };
-
-  // const access_types = await request_access_types();
 
   return html`
     <style>
@@ -220,7 +225,24 @@ export function render__filter_box() {
             })}
           </div>
         </div>
+        <!-- maxPower box -->
+        <div class="details_box__section mt-3 mb-3">
+          <div class="col-12">
+            <p class="fs-14 mb-3">${t.maxPower[this.language]}</p>
+            <div class="d-flex align-items-center">
+              <input
+                id="maxPowerInput"
+                type="number"
+                @input=${e => {
+                  handle__maxPower(e);
+                }}
+              />
+              <label class="ml-1 mb-0" htmlFor="maxPowerInput">kWh</label>
+            </div>
+          </div>
+        </div>
       </div>
+      <!-- </div> -->
       <div class="filter_box__footer d-flex pr-3 pl-3">
         <button
           class="flex-fill filter_box_footer__button secondary mr-2"

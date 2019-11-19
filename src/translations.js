@@ -49,16 +49,6 @@ export const t = {
     fr: 'At least one free column',
     ru: 'At least one free column'
   },
-  at_least_one_free_column: {
-    en: 'At least one free column',
-    de: 'At least one free column',
-    it: 'Almeno una colonnina libera',
-    nl: 'At least one free column',
-    cs: 'At least one free column',
-    pl: 'At least one free column',
-    fr: 'At least one free column',
-    ru: 'At least one free column'
-  },
   completely_free: {
     en: 'Completely free',
     de: 'Completely free',

@@ -32,3 +32,28 @@ export async function request_plug_types() {
     return undefined;
   }
 }
+
+export async function request_stations_status_types() {
+  try {
+    const request = await fetch(
+      `${NINJA_BASE_PATH}/flat/EChargingStation?limit=-1&offset=0&select=smetadata.state&where=sactive.eq.true&shownull=false&distinct=true`
+    );
+    const response = await request.json();
+
+    return response.data.map(o => o['smetadata.state']);
+  } catch (e) {
+    return undefined;
+  }
+}
+
+export async function request_stations_plugs(station_id) {
+  try {
+    const request = await fetch(
+      `${NINJA_BASE_PATH}/flat/EChargingPlug?limit=-1&offset=0&where=sactive.eq.true,pcode.eq.${station_id}&shownull=false`
+    );
+    const response = await request.json();
+    return response.data;
+  } catch (e) {
+    return undefined;
+  }
+}

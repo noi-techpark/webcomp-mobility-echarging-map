@@ -2,6 +2,7 @@ import { html } from 'lit-element';
 import { unsafeHTML } from 'lit-html/directives/unsafe-html';
 import icon__card from '../icons/card.png';
 import icon__close from '../icons/close@2x.png';
+import icon__down from '../icons/down.svg';
 import icon__green_dot from '../icons/green/green_dot.png';
 import icon_hotel_green from '../icons/green/icon_hotel_green.png';
 import icon_restaurant_green from '../icons/green/icon_restaurant_green.png';
@@ -9,8 +10,7 @@ import icon__info from '../icons/info.png';
 import icon__pin from '../icons/pin.png';
 import icon__red_dot from '../icons/red_dot.png';
 import icon__type_1 from '../icons/type_1.png';
-// import icon__feedback_black from '../icons/black/icon_feedback_black.png';
-// import icon__star_void_grey from '../icons/grey/icon_star_void_grey.png';
+import icon__up from '../icons/up.svg';
 import style from '../scss/details_box.scss';
 import { t } from '../translations';
 import { encodeXml, getStyle, stationStatusMapper, utils_truncate } from '../utils';
@@ -19,11 +19,11 @@ import { render__hours_section } from './details_box/hours_section';
 import { render__rating_section } from './details_box/rating_section';
 import { render__state_label } from './state_label';
 import { render__h1 } from './typography';
-import icon__up from '../icons/up.svg';
-import icon__down from '../icons/down.svg';
 
 export function render__details_box() {
-  const { state, accessType, name, plugs_status, paymentInfo, latitude, longitude, accessInfo } = this.current_station;
+  const { smetadata, sname, scoordinate, accessInfo } = this.current_station;
+  // console.log(this.current_station, smetadata && smetadata.state ? '' : 'lol');
+
   const { origin } = this.current_station;
 
   const user_actions_container__details = this.shadowRoot.getElementById('user_actions_container__details');
@@ -45,7 +45,14 @@ export function render__details_box() {
           ${this.details_mobile_state ? unsafeHTML(icon__down) : unsafeHTML(icon__up)}
         </div>
         <div class="details_box__header">
-          ${render__state_label(state, this.language)} ${render__state_label(accessType, this.language)}
+          ${
+            smetadata
+              ? html`
+                  ${render__state_label(smetadata.state, this.language)}
+                  ${render__state_label(smetadata.accessType, this.language)}
+                `
+              : undefined
+          }
           <div
             class="details_box__close_button"
             @click="${() => {
@@ -59,18 +66,30 @@ export function render__details_box() {
         <div class="details_box__body">
           <!-- Detail box -->
           <div class="details_box__section mt-3">
-            ${render__h1(name, stationStatusMapper(state, origin))}
+            ${render__h1(sname, stationStatusMapper(smetadata ? smetadata.state : false, origin))}
             <div class="col-12">
-              <p class="color-black-300 mt-2 fw-300">${this.current_station.address}</p>
+              ${
+                smetadata
+                  ? html`
+                      <p class="color-black-300 mt-2 fw-300">${smetadata.address}</p>
+                    `
+                  : null
+              }
               <p class="color-black-300 fw-300">${this.current_station.municipality}</p>
               ${this.render__rating_section()}
-              <a
-                href="${`https://www.google.com/maps/dir/${latitude},${longitude}/${this.current_location.lat},${this.current_location.lng}`}"
-                target="_blank"
-                class="color-green fs-16 fw-300 mt-2 mb-3 d-block"
-              >
-                ${t.directions[this.language]} →
-              </a>
+              ${
+                scoordinate
+                  ? html`
+                      <a
+                        href="${`https://www.google.com/maps/dir/${scoordinate.y},${scoordinate.x}/${this.current_location.lat},${this.current_location.lng}`}"
+                        target="_blank"
+                        class="color-green fs-16 fw-300 mt-2 mb-3 d-block"
+                      >
+                        ${t.directions[this.language]} →
+                      </a>
+                    `
+                  : null
+              }
             </div>
           </div>
           <!-- Detail box -->
@@ -88,14 +107,15 @@ export function render__details_box() {
               ${
                 this.current_station.station_plugs
                   ? this.current_station.station_plugs.map((o, i) => {
-                      const status = plugs_status[i];
+                      const { sactive } = o;
+
                       return html`
                         <div class="element_background d-flex align-items-center pt-2 pb-2 mt-3">
                           <div class="ml-3 mr-3 position-relative">
                             <img
                               class="w-18px d-block position-absolute"
                               style="top: -6px;right: -6px;"
-                              src="${status.value ? icon__green_dot : icon__red_dot}"
+                              src="${sactive ? icon__green_dot : icon__red_dot}"
                             />
                             <img class="w-24px d-block" src="${icon__type_1}" alt="" />
                           </div>
@@ -104,7 +124,7 @@ export function render__details_box() {
                         FAST CHARGE <b>falso</b>
                       </p> -->
                             <p class="fs-16 mt-1">${t.type_sockets[this.language]}:</p>
-                            ${o.outlets.map(
+                            ${o.smetadata.outlets.map(
                               outlet =>
                                 html`
                                   <div class="d-flex">
@@ -151,7 +171,7 @@ export function render__details_box() {
               </div>
               <div class="col-12">
                 <a
-                  href="${paymentInfo}"
+                  href="${smetadata ? smetadata.paymentInfo : ''}"
                   class="color-green fs-16 fw-300 mt-2 mb-3 color-green--hover d-block"
                   target="_blank"
                 >

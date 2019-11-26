@@ -104,7 +104,7 @@ export function render__search_box() {
     }
   };
 
-  const { radius, access_type, plug_type, state, provider } = this.filters;
+  const { radius, access_type, plug_type, state, provider, maxPower } = this.filters;
 
   return html`
     <style>
@@ -135,6 +135,7 @@ export function render__search_box() {
       </div>
       <div @click="${() => this.handleToggleShowFilters()}" class="utils--cursor-pointer">
         ${(radius > 0 ||
+          maxPower ||
           access_type.length ||
           plug_type.length ||
           plug_type.length ||

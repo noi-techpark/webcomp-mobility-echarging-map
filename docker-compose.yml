@@ -1,13 +1,13 @@
-version: '3.4'
-
+version: "3"
 services:
-    app:
-        build: 
-            context: .
-            dockerfile: ./dockerfile-node-local
-        working_dir: /code/work
-        command: http-server
-        volumes:
-            - ./:/code
-        ports:
-            - "8888:8080"
+  app:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    volumes:
+      - ./:/code
+    working_dir: /code
+    command: yarn run start
+    ports:
+      - "8000:8000"
+    tty: true

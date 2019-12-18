@@ -1,10 +1,5 @@
 pipeline {
-    agent {
-        dockerfile {
-            filename 'docker/Dockerfile'
-            additionalBuildArgs '--build-arg JENKINS_USER_ID=`id -u jenkins` --build-arg JENKINS_GROUP_ID=`id -g jenkins`'
-        }
-    }
+    agent any
 
     parameters {
         string(name: 'VERSION', defaultValue: '1.0.0', description: 'Version')
@@ -16,16 +11,37 @@ pipeline {
 
     stages {
         stage('Clean') {
+            agent {
+                dockerfile {
+                    filename 'docker/Dockerfile'
+                    additionalBuildArgs '--build-arg JENKINS_USER_ID=`id -u jenkins` --build-arg JENKINS_GROUP_ID=`id -g jenkins`'
+                    reuseNode true
+                }
+            }
             steps {
                 sh 'rm -rf dist'
             }
         }
         stage('Dependencies') {
+            agent {
+                dockerfile {
+                    filename 'docker/Dockerfile'
+                    additionalBuildArgs '--build-arg JENKINS_USER_ID=`id -u jenkins` --build-arg JENKINS_GROUP_ID=`id -g jenkins`'
+                    reuseNode true
+                }
+            }
             steps {
                 sh 'yarn install'
             }
         }
         stage('Build') {
+            agent {
+                dockerfile {
+                    filename 'docker/Dockerfile'
+                    additionalBuildArgs '--build-arg JENKINS_USER_ID=`id -u jenkins` --build-arg JENKINS_GROUP_ID=`id -g jenkins`'
+                    reuseNode true
+                }
+            }
             steps {
                 sh 'yarn run build'
             }
@@ -34,12 +50,10 @@ pipeline {
             steps {
                 ansiColor('xterm') {
                     sshagent (credentials: ['jenkins_github_ssh_key']) {
-                        sh 'git config --global user.email "info@opendatahub.bz.it"'
-                        sh 'git config --global user.name "Jenkins"'
                         sh 'git remote set-url origin ${GIT_REPOSITORY}'
                         sh 'git add -A'
                         sh 'git commit -m "Verion ${VERSION}"'
-                        sh 'git tag -s -a v${VERSION} -m "Version ${VERSION}"'
+                        sh 'git tag -a v${VERSION} -m "Version ${VERSION}"'
                         sh 'git push origin HEAD:master'
                         sh 'git push origin --tags'
                     }

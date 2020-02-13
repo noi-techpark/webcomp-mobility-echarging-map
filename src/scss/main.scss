@@ -147,7 +147,8 @@ input[type='text'] {
   @media only screen and (min-width: 992px) {
     right: 24px;
     left: auto;
-    width: 94px;
+    width: 172px;
+    height: 72px;
   }
 }
 
@@ -160,7 +161,9 @@ input[type='text'] {
     background-repeat: no-repeat;
   }
   @media only screen and (min-width: 992px) {
-    width: 86px;
+    height: 48px;
+    width: 156px;
+    margin-top: 12px;
   }
 }
 

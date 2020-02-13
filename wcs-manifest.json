@@ -22,6 +22,26 @@
   },
   "configuration": {
     "tagName": "e-mobility-map-widget",
-    "options": []
+    "options": [
+      {
+        "key": "language",
+        "type": "select",
+        "label": "Language",
+        "required": false,
+        "options": {
+          "values": ["en", "de", "it", "nl", "cs", "pl", "fr", "ru"],
+          "default": "en"
+        }
+      },
+      {
+        "key": "logo",
+        "type": "select",
+        "label": "Address of an icon, that should be shown in the lower left corner",
+        "required": false,
+        "options": {
+          "default": "https://www.greenmobility.bz.it/typo3conf/ext/interho/Resources/Public/Img/logo.png"
+        }
+      }
+    ]
   }
 }

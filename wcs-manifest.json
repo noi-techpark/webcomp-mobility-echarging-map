@@ -2,8 +2,21 @@
   "title": "Mobility E-Charging Map",
   "description": "Map to access the Open Data Hub E-Charging Information",
   "descriptionAbstract": "Map to access the Open Data Hub Mobility Information",
-  "license": "AGPL-3.0",
-  "repositoryUrl": "https://github.com/noi-techpark/webcomp-mobility-echarging-map",
+  "license": "AGPL-3.0-or-later",
+  "copyrightHolders": [
+    {
+      "name": "NOI",
+      "email": "info@noi.bz.it",
+      "organization": "NOI S.p.A",
+      "organizationUrl": "https://noi.bz.it"
+    },
+    {
+      "name": "STA",
+      "email": "info@sta.bz.it",
+      "organization": "STA - Südtiroler Transportstrukturen AG / Strutture Trasporto Alto Adige SpA",
+      "organizationUrl": "https://www.sta.bz.it"
+    }
+  ],
   "authors": [
     {
       "name": "Belka",

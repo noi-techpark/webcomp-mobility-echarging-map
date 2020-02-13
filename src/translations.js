@@ -311,7 +311,7 @@ export const t = {
   },
   maxPower: {
     en: 'MAX POWER',
-    de: 'MAXIMALE STROMSTÄRKE',
+    de: 'MAXIMALE LEISTUNG',
     it: 'MASSIMA POTENZA EROGATA',
     nl: 'MAX POWER',
     cs: 'MAX POWER',

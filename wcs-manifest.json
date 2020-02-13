@@ -26,7 +26,7 @@
     }
   ],
   "image": "wcs-logo.png",
-  "searchTags": ["map","sta","mobility"],
+  "searchTags": ["map","mobility"],
   "dist": {
     "basePath": "dist",
     "files": [
@@ -48,7 +48,7 @@
       },
       {
         "key": "logo",
-        "type": "select",
+        "type": "text",
         "label": "Address of an icon, that should be shown in the lower left corner",
         "required": false,
         "options": {

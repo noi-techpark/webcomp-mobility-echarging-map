@@ -110,14 +110,14 @@ export const t = {
     ru: 'NOT AVA.'
   },
   privato_with_p_a: {
-    en: 'PRIVATE WITH PUBLIC ACCESS',
-    de: 'PRIVAT MIT ÖFFENTLICHEM ZUGANG',
-    it: 'PRIVATO CON ACCESSO PUBBLICO',
-    nl: 'PRIVATE WITH PUBLIC ACCESS',
-    cs: 'PRIVATE WITH PUBLIC ACCESS',
-    pl: 'PRIVATE WITH PUBLIC ACCESS',
-    fr: 'PRIVATE WITH PUBLIC ACCESS',
-    ru: 'PRIVATE WITH PUBLIC ACCESS'
+    en: 'PRIVATE WITH P.A.',
+    de: 'PRIVAT MIT Ö.Z.',
+    it: 'PRIVATO CON A.P.',
+    nl: 'PRIVATE WITH P.A.',
+    cs: 'PRIVATE WITH P.A.',
+    pl: 'PRIVATE WITH P.A.',
+    fr: 'PRIVATE WITH P.A.',
+    ru: 'PRIVATE WITH P.A.'
   },
   public: {
     en: 'PUBLIC',
@@ -141,7 +141,7 @@ export const t = {
   },
   private_withpublicaccess: {
     en: 'PRIVATE WITH PUBLIC ACCESS',
-    de: 'PRIVATE WITH PUBLIC ACCESS',
+    de: 'PRIVAT MIT ÖFFENTLICHEM ZUGANG',
     it: 'PRIVATO CON PUBBLICO ACCESSO',
     nl: 'PRIVATE WITH PUBLIC ACCESS',
     cs: 'PRIVATE WITH PUBLIC ACCESS',
@@ -200,14 +200,14 @@ export const t = {
     ru: 'Hours'
   },
   available_columns: {
-    en: 'Available charging stations',
-    de: 'Verfügbare Ladestationen',
-    it: 'Colonnine disponibili',
-    nl: 'Available charging stations',
-    cs: 'Available charging stations',
-    pl: 'Available charging stations',
-    fr: 'Available charging stations',
-    ru: 'Available charging stations'
+    en: 'available charging stations',
+    de: 'verfügbare Ladestationen',
+    it: 'colonnine disponibili',
+    nl: 'available charging stations',
+    cs: 'available charging stations',
+    pl: 'available charging stations',
+    fr: 'available charging stations',
+    ru: 'available charging stations'
   },
   type_sockets: {
     en: 'Type sockets',
@@ -331,7 +331,7 @@ export const t = {
   },
   near_places: {
     en: 'Near places',
-    de: 'Umliegende Orte',
+    de: 'Umgebung',
     it: 'Nelle vicinanze',
     nl: 'Near places',
     cs: 'Near places',

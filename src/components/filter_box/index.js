@@ -117,7 +117,7 @@ export function render__filter_box() {
                 <img class="w-24px mr-1 d-none d-lg-block" src="${icon__green_marker}" alt="" />
               </div>
               <p class="fs-14 color-black-400">
-                ${this.visibleStations} ${t.available_columns[this.language].toLowerCase()}
+                ${this.visibleStations} ${t.available_columns[this.language]}
               </p>
             </div>
           </div>

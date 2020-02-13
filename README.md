@@ -5,13 +5,31 @@ This project contains the map web component for the [Green Mobility South Tyrol]
 [Green Mobility South Tyrol](https://www.greenmobility.bz.it/it/) wants to split the existing functionalities of the website into reusable and independent components. Using these webcomponents, a developer can easily integrate the functionality of the single components into any website.
 The data source for the components is the [Open Data Hub](https://opendatahub.bz.it/) project.
 
-## Table of contents
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**
 
 - [Usage](#usage)
-- [Gettings started](#getting-started)
+  - [Options](#options)
+- [Getting started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Source code](#source-code)
+  - [Dependencies](#dependencies)
+  - [Build](#build)
 - [Deployment](#deployment)
 - [Docker environment](#docker-environment)
+  - [Installation](#installation)
+  - [Dependenices](#dependenices)
+  - [Start and stop the containers](#start-and-stop-the-containers)
+  - [Running commands inside the container](#running-commands-inside-the-container)
 - [Information](#information)
+  - [Support](#support)
+  - [Contributing](#contributing)
+  - [Documentation](#documentation)
+  - [Boilerplate](#boilerplate)
+  - [License](#license)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## Usage
 
@@ -19,6 +37,26 @@ Include the Javascript file `dist/map_widget.min.js` in your HTML and define the
 
 ```html
 <e-mobility-map-widget></e-mobility-map-widget>
+```
+
+### Options
+
+#### Translations
+
+Add `language` as attribute, if you want to translate the web component.
+
+```html
+<e-mobility-dashboard-widget language="en"></e-mobility-dashboard-widget>
+```
+
+Possible values are currently `en`, `de`, `it`, `nl`, `cs`, `pl`, `fr`, `ru` (see [/src/translations.js](/src/translations.js)).
+
+#### Logo
+
+URL of an icon, that will be shown in the lower left corner.
+
+```html
+<e-mobility-map-widget logo="https://www.example.com/your-logo.png"></e-mobility-map-widget>
 ```
 
 ## Getting started

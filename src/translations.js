@@ -1,7 +1,7 @@
 export const t = {
   my_position: {
     en: 'My position',
-    de: 'My position',
+    de: 'Meine Position',
     it: 'La mia posizione',
     nl: 'My position',
     cs: 'My position',
@@ -11,7 +11,7 @@ export const t = {
   },
   apply_filters: {
     en: 'Apply filters',
-    de: 'Apply filters',
+    de: 'Filter anwenden',
     it: 'Applica filtri',
     nl: 'Apply filters',
     cs: 'Apply filters',
@@ -21,7 +21,7 @@ export const t = {
   },
   reset_filters: {
     en: 'Reset filters',
-    de: 'Reset filters',
+    de: 'Filter zurücksetzen',
     it: 'Annulla filtri',
     nl: 'Reset filters',
     cs: 'Reset filters',
@@ -31,7 +31,7 @@ export const t = {
   },
   no_one: {
     en: 'No one',
-    de: 'No one',
+    de: 'Keiner',
     it: 'Nessuno',
     nl: 'No one',
     cs: 'No one',
@@ -40,18 +40,18 @@ export const t = {
     ru: 'No one'
   },
   at_least_one_free_column: {
-    en: 'At least one free column',
-    de: 'At least one free column',
+    en: 'At least one free charging station',
+    de: 'Mindestens eine freie Ladesäule',
     it: 'Almeno una colonnina libera',
-    nl: 'At least one free column',
-    cs: 'At least one free column',
-    pl: 'At least one free column',
-    fr: 'At least one free column',
-    ru: 'At least one free column'
+    nl: 'At least one free charging station',
+    cs: 'At least one free charging station',
+    pl: 'At least one free charging station',
+    fr: 'At least one free charging station',
+    ru: 'At least one free charging station'
   },
   completely_free: {
     en: 'Completely free',
-    de: 'Completely free',
+    de: 'Absolut frei',
     it: 'Completamente libera',
     nl: 'Completely free',
     cs: 'Completely free',
@@ -81,7 +81,7 @@ export const t = {
   },
   maintenance: {
     en: 'MAINTENANCE',
-    de: 'MAINTENANCE',
+    de: 'WARTUNG',
     it: 'MANUTENZIONE',
     nl: 'MAINTENANCE',
     cs: 'MAINTENANCE',
@@ -91,7 +91,7 @@ export const t = {
   },
   not_received: {
     en: 'NOT REC.',
-    de: 'NOT REC.',
+    de: 'NICHT ERHALTEN',
     it: 'NON PERV.',
     nl: 'NOT REC.',
     cs: 'NOT REC.',
@@ -101,7 +101,7 @@ export const t = {
   },
   not_available: {
     en: 'NOT AVA.',
-    de: 'NOT AVA.',
+    de: 'NICHT VERFÜGBAR',
     it: 'NON DISP.',
     nl: 'NOT AVA.',
     cs: 'NOT AVA.',
@@ -110,18 +110,18 @@ export const t = {
     ru: 'NOT AVA.'
   },
   privato_with_p_a: {
-    en: 'PRIVATE WITH P.A.',
-    de: 'PRIVATE WITH P.A.',
-    it: 'PRIVATO CON P.A.',
-    nl: 'PRIVATE WITH P.A.',
-    cs: 'PRIVATE WITH P.A.',
-    pl: 'PRIVATE WITH P.A.',
-    fr: 'PRIVATE WITH P.A.',
-    ru: 'PRIVATE WITH P.A.'
+    en: 'PRIVATE WITH PUBLIC ACCESS',
+    de: 'PRIVAT MIT ÖFFENTLICHEM ZUGANG',
+    it: 'PRIVATO CON ACCESSO PUBBLICO',
+    nl: 'PRIVATE WITH PUBLIC ACCESS',
+    cs: 'PRIVATE WITH PUBLIC ACCESS',
+    pl: 'PRIVATE WITH PUBLIC ACCESS',
+    fr: 'PRIVATE WITH PUBLIC ACCESS',
+    ru: 'PRIVATE WITH PUBLIC ACCESS'
   },
   public: {
     en: 'PUBLIC',
-    de: 'PUBLIC',
+    de: 'ÖFFENTLICH',
     it: 'PUBBLICO',
     nl: 'PUBLIC',
     cs: 'PUBLIC',
@@ -131,7 +131,7 @@ export const t = {
   },
   private: {
     en: 'PRIVATE',
-    de: 'PRIVATE',
+    de: 'PRIVAT',
     it: 'PRIVATO',
     nl: 'PRIVATE',
     cs: 'PRIVATE',
@@ -151,7 +151,7 @@ export const t = {
   },
   write_feedback: {
     en: 'Write feedback',
-    de: 'Write feedback',
+    de: 'Schreibe Feedback',
     it: 'Scrivi feedback',
     nl: 'Write feedback',
     cs: 'Write feedback',
@@ -161,7 +161,7 @@ export const t = {
   },
   directions: {
     en: 'Directions',
-    de: 'Directions',
+    de: 'Richtungen',
     it: 'Indicazioni stradali',
     nl: 'Directions',
     cs: 'Directions',
@@ -171,7 +171,7 @@ export const t = {
   },
   informations: {
     en: 'Informations',
-    de: 'Informations',
+    de: 'Informationen',
     it: 'Informazioni',
     nl: 'Informations',
     cs: 'Informations',
@@ -181,7 +181,7 @@ export const t = {
   },
   more_informations: {
     en: 'More informations',
-    de: 'More informations',
+    de: 'Mehr Informationen',
     it: 'Maggiori informazioni',
     nl: 'More informations',
     cs: 'More informations',
@@ -191,7 +191,7 @@ export const t = {
   },
   hours: {
     en: 'Hours',
-    de: 'Hours',
+    de: 'Stunden',
     it: 'Orari',
     nl: 'Hours',
     cs: 'Hours',
@@ -200,18 +200,18 @@ export const t = {
     ru: 'Hours'
   },
   available_columns: {
-    en: 'Available columns',
-    de: 'Available columns',
+    en: 'Available charging stations',
+    de: 'Verfügbare Ladestationen',
     it: 'Colonnine disponibili',
-    nl: 'Available columns',
-    cs: 'Available columns',
-    pl: 'Available columns',
-    fr: 'Available columns',
-    ru: 'Available columns'
+    nl: 'Available charging stations',
+    cs: 'Available charging stations',
+    pl: 'Available charging stations',
+    fr: 'Available charging stations',
+    ru: 'Available charging stations'
   },
   type_sockets: {
     en: 'Type sockets',
-    de: 'Type sockets',
+    de: 'Anschlusstypen',
     it: 'Tipo prese',
     nl: 'Type sockets',
     cs: 'Type sockets',
@@ -220,18 +220,18 @@ export const t = {
     ru: 'Type sockets'
   },
   column: {
-    en: 'Column',
-    de: 'Column',
+    en: 'Charging station',
+    de: 'Ladestation',
     it: 'Colonnina',
-    nl: 'Column',
-    cs: 'Column',
-    pl: 'Column',
-    fr: 'Column',
-    ru: 'Column'
+    nl: 'Charging station',
+    cs: 'Charging station',
+    pl: 'Charging station',
+    fr: 'Charging station',
+    ru: 'Charging station'
   },
   payment: {
     en: 'Payment',
-    de: 'Payment',
+    de: 'Bezahlung',
     it: 'Pagamento',
     nl: 'Payment',
     cs: 'Payment',
@@ -241,7 +241,7 @@ export const t = {
   },
   search_filters: {
     en: 'Search filters',
-    de: 'Search filters',
+    de: 'Suchfilter',
     it: 'Filtri di ricerca',
     nl: 'Search filters',
     cs: 'Search filters',
@@ -251,7 +251,7 @@ export const t = {
   },
   cancel_filters: {
     en: 'Cancel filters',
-    de: 'Cancel filters',
+    de: 'Filter entfernen',
     it: 'Annulla filtri',
     nl: 'Cancel filters',
     cs: 'Cancel filters',
@@ -261,7 +261,7 @@ export const t = {
   },
   research_range: {
     en: 'RESEARCH RANGE',
-    de: 'RESEARCH RANGE',
+    de: 'SUCHRADIUS',
     it: 'RAGGIO DI RICERCA',
     nl: 'RESEARCH RANGE',
     cs: 'RESEARCH RANGE',
@@ -271,7 +271,7 @@ export const t = {
   },
   type_of_access: {
     en: 'TYPE OF ACCESS',
-    de: 'TYPE OF ACCESS',
+    de: 'ZUGANGSTYP',
     it: 'TIPO DI ACCESSO',
     nl: 'TYPE OF ACCESS',
     cs: 'TYPE OF ACCESS',
@@ -280,18 +280,18 @@ export const t = {
     ru: 'TYPE OF ACCESS'
   },
   column_state: {
-    en: 'COLUMN STATE',
-    de: 'COLUMN STATE',
+    en: 'CHARGING STATION STATE',
+    de: 'STATUS DER LADESTATIONEN',
     it: 'STATO COLONNINA',
-    nl: 'COLUMN STATE',
-    cs: 'COLUMN STATE',
-    pl: 'COLUMN STATE',
-    fr: 'COLUMN STATE',
-    ru: 'COLUMN STATE'
+    nl: 'CHARGING STATION STATE',
+    cs: 'CHARGING STATION STATE',
+    pl: 'CHARGING STATION STATE',
+    fr: 'CHARGING STATION STATE',
+    ru: 'CHARGING STATION STATE'
   },
   plug_type: {
     en: 'PLUG TYPE',
-    de: 'PLUG TYPE',
+    de: 'ANSCHLUSSTYP',
     it: 'TIPOLOGIA PRESA',
     nl: 'PLUG TYPE',
     cs: 'PLUG TYPE',
@@ -301,7 +301,7 @@ export const t = {
   },
   provider: {
     en: 'PROVIDER',
-    de: 'PROVIDER',
+    de: 'ANBIETER',
     it: 'FORNITORE',
     nl: 'PROVIDER',
     cs: 'PROVIDER',
@@ -311,7 +311,7 @@ export const t = {
   },
   maxPower: {
     en: 'MAX POWER',
-    de: 'MAX POWER',
+    de: 'MAXIMALE STROMSTÄRKE',
     it: 'MASSIMA POTENZA EROGATA',
     nl: 'MAX POWER',
     cs: 'MAX POWER',
@@ -321,7 +321,7 @@ export const t = {
   },
   open_charging_station: {
     en: 'Charging station open',
-    de: 'Charging station open',
+    de: 'Ladestation offen',
     it: 'Stazione di ricarica aperta',
     nl: 'Charging station open',
     cs: 'Charging station open',
@@ -331,7 +331,7 @@ export const t = {
   },
   near_places: {
     en: 'Near places',
-    de: 'Near places',
+    de: 'Umliegende Orte',
     it: 'Nelle vicinanze',
     nl: 'Near places',
     cs: 'Near places',
@@ -340,13 +340,13 @@ export const t = {
     ru: 'Near places'
   },
   empty_set__nominatim_locations: {
-    en: 'No resoults',
-    de: 'No resoults',
+    en: 'No results',
+    de: 'Keine Ergebnisse',
     it: 'Nessun risultato',
-    nl: 'No resoults',
-    cs: 'No resoults',
-    pl: 'No resoults',
-    fr: 'No resoults',
-    ru: 'No resoults'
+    nl: 'No results',
+    cs: 'No results',
+    pl: 'No results',
+    fr: 'No results',
+    ru: 'No results'
   }
 };

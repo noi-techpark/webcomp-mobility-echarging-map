@@ -2,7 +2,7 @@ import { html } from 'lit-element';
 import icon_x_orange from '../icons/orange/icon_x_orange.png';
 import style from '../scss/filters_values_mobile.scss';
 import { t } from '../translations';
-import { getStyle, utils_capitalize } from '../utils';
+import { getStyle } from '../utils';
 
 export function render__filter_values_mobile() {
   const repaint_map = () => {
@@ -63,7 +63,7 @@ export function render__filter_values_mobile() {
                 <p class="fs-12 color-black-300">
                   ${t.type_of_access[this.language]}
                 </p>
-                <p class="fs-12">${utils_capitalize(o)}</p>
+                <p class="fs-12">${o}</p>
               </div>
             </div>
             <div class="filter_values_mobile__bkg_white_gradient">

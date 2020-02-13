@@ -91,7 +91,7 @@ export const t = {
   },
   not_received: {
     en: 'NOT REC.',
-    de: 'NICHT ERHALTEN',
+    de: 'NICHT ERH.',
     it: 'NON PERV.',
     nl: 'NOT REC.',
     cs: 'NOT REC.',
@@ -101,7 +101,7 @@ export const t = {
   },
   not_available: {
     en: 'NOT AVA.',
-    de: 'NICHT VERFÜGBAR',
+    de: 'NICHT VERF.',
     it: 'NON DISP.',
     nl: 'NOT AVA.',
     cs: 'NOT AVA.',
@@ -120,34 +120,34 @@ export const t = {
     ru: 'PRIVATE WITH P.A.'
   },
   public: {
-    en: 'PUBLIC',
-    de: 'ÖFFENTLICH',
-    it: 'PUBBLICO',
-    nl: 'PUBLIC',
-    cs: 'PUBLIC',
-    pl: 'PUBLIC',
-    fr: 'PUBLIC',
-    ru: 'PUBLIC'
+    en: 'Public',
+    de: 'Öffentlich',
+    it: 'Pubblico',
+    nl: 'Public',
+    cs: 'Public',
+    pl: 'Public',
+    fr: 'Public',
+    ru: 'Public'
   },
   private: {
-    en: 'PRIVATE',
-    de: 'PRIVAT',
-    it: 'PRIVATO',
-    nl: 'PRIVATE',
-    cs: 'PRIVATE',
-    pl: 'PRIVATE',
-    fr: 'PRIVATE',
-    ru: 'PRIVATE'
+    en: 'Private',
+    de: 'Privat',
+    it: 'Privato',
+    nl: 'Private',
+    cs: 'Private',
+    pl: 'Private',
+    fr: 'Private',
+    ru: 'Private'
   },
   private_withpublicaccess: {
-    en: 'PRIVATE WITH PUBLIC ACCESS',
-    de: 'PRIVAT MIT ÖFFENTLICHEM ZUGANG',
-    it: 'PRIVATO CON PUBBLICO ACCESSO',
-    nl: 'PRIVATE WITH PUBLIC ACCESS',
-    cs: 'PRIVATE WITH PUBLIC ACCESS',
-    pl: 'PRIVATE WITH PUBLIC ACCESS',
-    fr: 'PRIVATE WITH PUBLIC ACCESS',
-    ru: 'PRIVATE WITH PUBLIC ACCESS'
+    en: 'Private with public access',
+    de: 'Privat mit öffentlichem Zugang',
+    it: 'Privato con pubblico accesso',
+    nl: 'Private with public access',
+    cs: 'Private with public access',
+    pl: 'Private with public access',
+    fr: 'Private with public access',
+    ru: 'Private with public access'
   },
   write_feedback: {
     en: 'Write feedback',

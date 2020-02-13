@@ -48,11 +48,6 @@ export function debounce(delay, fn) {
 
 export const getStyle = array => array[0][1];
 
-export const utils_capitalize = s => {
-  const words = s.toLowerCase();
-  return words.charAt(0).toUpperCase() + words.slice(1);
-};
-
 export const utils_truncate = (str, no_words) => {
   const splitted = str.split(' ');
 

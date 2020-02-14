@@ -23,6 +23,6 @@ export function render__state_label(state, lang) {
     PRIVATE: 'purple'
   };
   return html`
-    <div class=${`details_box__status_label ${state_color[state]}`}><p>${state_content[state]}</p></div>
+    <div class=${`details_box__status_label ${state_color[state]}`}><p>${state_content[state].toUpperCase()}</p></div>
   `;
 }

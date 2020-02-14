@@ -149,6 +149,16 @@ export const t = {
     fr: 'Private with public access',
     ru: 'Private with public access'
   },
+  occupied: {
+    en: 'Occupied',
+    de: 'Besetzt',
+    it: 'Occupato',
+    nl: 'Occupied',
+    cs: 'Occupied',
+    pl: 'Occupied',
+    fr: 'Occupied',
+    ru: 'Occupied'
+  },
   write_feedback: {
     en: 'Write feedback',
     de: 'Schreibe Feedback',

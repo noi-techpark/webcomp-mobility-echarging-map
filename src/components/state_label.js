@@ -10,7 +10,8 @@ export function render__state_label(state, lang) {
     FAULT: t.not_available[lang],
     PRIVATE_WITHPUBLICACCESS: t.privato_with_p_a[lang],
     PUBLIC: t.public[lang],
-    PRIVATE: t.private[lang]
+    PRIVATE: t.private[lang],
+    OCCUPIED: t.occupied[lang]
   };
   const state_color = {
     TEMPORARYUNAVAILABLE: 'gray',
@@ -20,7 +21,8 @@ export function render__state_label(state, lang) {
     FAULT: 'red',
     PRIVATE_WITHPUBLICACCESS: 'purple',
     PUBLIC: 'purple',
-    PRIVATE: 'purple'
+    PRIVATE: 'purple',
+    OCCUPIED: 'green'
   };
   return html`
     <div class=${`details_box__status_label ${state_color[state]}`}><p>${state_content[state].toUpperCase()}</p></div>

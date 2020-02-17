@@ -37,7 +37,6 @@ class EMobilityMap extends BaseClass {
 
     await this.request__get_stations_details();
     await this.request__get_stations_plugs_details();
-    // const stations_status_types = await request_stations_status_types();
 
     this.provider_list = get_provider_list(this.all_stations_details);
 
@@ -77,7 +76,7 @@ class EMobilityMap extends BaseClass {
         : true;
 
       const station_plugs = this.all_plugs_details.filter(plug => {
-        return plug.parentStation === o.scode;
+        return plug.pcode === o.scode;
       });
 
       /**

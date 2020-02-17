@@ -42,7 +42,7 @@
         "label": "Language",
         "required": false,
         "options": {
-          "values": ["en", "de", "it", "nl", "cs", "pl", "fr", "ru"],
+          "values": ["en", "de", "it"],
           "default": "en"
         }
       },

@@ -86,7 +86,7 @@ class EMobilityMap extends BaseClass {
       if (this.filters.plug_type.length) {
         filtered__station_plugs = station_plugs.filter(plug => {
           let condition = false;
-          plug.outlets.map(outlet => {
+          plug.smetadata.outlets.map(outlet => {
             if (!condition) {
               condition = this.filters.plug_type.includes(outlet.outletTypeCode);
             }
@@ -108,7 +108,7 @@ class EMobilityMap extends BaseClass {
       let condition_maxPower = true;
       if (this.filters.maxPower) {
         // station_plugs;
-        const outlets = station_plugs.map(plug => plug.outlets);
+        const outlets = station_plugs.map(plug => plug.smetadata.outlets);
         const maxPowers = outlets.flat().map(outlet => parseInt(outlet.maxPower, 10));
         if (!maxPowers.includes(this.filters.maxPower)) {
           condition_maxPower = false;

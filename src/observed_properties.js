@@ -2,6 +2,7 @@ export const observed_properties = {
   all_stations_details: { type: Array },
   all_plugs_details: { type: Array },
   is_loading: { type: Boolean },
+  message: { type: String },
   current_station: { type: Object },
   current_location: { type: Object },
   showFilters: { type: Boolean },

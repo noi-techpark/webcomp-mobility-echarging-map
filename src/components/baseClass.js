@@ -11,6 +11,7 @@ import { request_access_types, request_plug_types } from './filter_box/api';
 import { render__filter_values_mobile } from './filter_values_mobile';
 import { render__modal__star_rating } from './modal__star_rating';
 import { render__loading_overlay } from './overlay_loading';
+import { render__message_overlay } from './overlay_msg';
 import { render__search_box } from './search_box';
 import { render__search_box_underlay } from './search_box_underlay';
 
@@ -53,6 +54,7 @@ export class BaseClass extends LitElement {
     this.render__search_box = render__search_box.bind(this);
     this.render__details_box = render__details_box.bind(this);
     this.render__loading_overlay = render__loading_overlay.bind(this);
+    this.render__message_overlay = render__message_overlay.bind(this);
     this.render__modal__star_rating = render__modal__star_rating.bind(this);
     this.render__filter_box = render__filter_box.bind(this);
     this.render__filter_values_mobile = render__filter_values_mobile.bind(this);

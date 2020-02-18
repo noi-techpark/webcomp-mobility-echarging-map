@@ -16,6 +16,7 @@ import utilities from './scss/utilities.scss';
 import { getLatLongFromStationDetail, getStyle, get_user_platform, stationStatusMapper } from './utils';
 import { get_provider_list } from './utils/get_provider_list';
 import { request_stations_plugs } from './components/filter_box/api';
+import { t } from './translations';
 
 class EMobilityMap extends BaseClass {
   static get properties() {
@@ -195,7 +196,7 @@ class EMobilityMap extends BaseClass {
     btnCenterMap.onclick = () => {
       try {
         navigator.permissions.query({ name: 'geolocation' }).then(result => {
-          if (result.state === 'granted') {
+          if (result.state === 'granted' || result.state === 'prompt') {
             this.is_loading = true;
             navigator.geolocation.getCurrentPosition(
               pos => {
@@ -209,7 +210,22 @@ class EMobilityMap extends BaseClass {
                 this.drawMap();
                 this.is_loading = false;
               },
-              () => {}
+              err => {
+                this.is_loading = false;
+                switch (err.code) {
+                  case 1:
+                    this.message = t.error_location_permission_denied[this.language];
+                    break;
+                  case 2:
+                    this.message = t.error_location_position_unavailable[this.language];
+                    break;
+                  case 3:
+                    this.message = t.error_location_timeout[this.language];
+                    break;
+                  default:
+                    this.message = t.error_unknown[this.language];
+                }
+              }
             );
           } else {
             this.is_loading = false;
@@ -294,7 +310,7 @@ class EMobilityMap extends BaseClass {
         ${getStyle(style__buttons)}
       </style>
       <div id=${'e_mobility_map'} class="e_mobility_map closed platform_${get_user_platform()}">
-        ${this.render__loading_overlay()} ${this.render__search_box_underlay()}
+        ${this.render__loading_overlay()} ${this.render__message_overlay()} ${this.render__search_box_underlay()}
         <div style="z-index: 1003" class="user_actions_container__search_box">
           ${this.render__search_box()}
         </div>

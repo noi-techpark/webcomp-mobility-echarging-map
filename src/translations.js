@@ -178,5 +178,25 @@ export const t = {
     en: 'No results',
     de: 'Keine Ergebnisse',
     it: 'Nessun risultato'
+  },
+  error_location_permission_denied: {
+    en: 'The page does not have the permission to acquire the geolocation',
+    de: 'Die Seite ist nicht berechtigt die Geolokalisation zu erhalten',
+    it: 'Questa pagina non ha i diritti per la geolocalizzazione'
+  },
+  error_location_timeout: {
+    en: 'The acquisition of the geolocation timed out',
+    de: 'Die Abfrage der Geolokalisation dauerte zu lange',
+    it: 'La richiesta per la geolocalizzazione durava troppo lungo'
+  },
+  error_location_position_unavailable: {
+    en: 'Your position is unavailable',
+    de: 'Deine Position steht nicht zur Verfügung',
+    it: 'La tua posizione non è disponibile'
+  },
+  error_unknown: {
+    en: 'Unknown error',
+    de: 'Unbekannter Fehler',
+    it: 'Errore sconosciuto'
   }
 };

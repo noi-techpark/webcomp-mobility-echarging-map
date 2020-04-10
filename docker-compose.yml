@@ -1,13 +1,17 @@
-version: '3.4'
-
+version: "3"
 services:
-    app:
-        build: 
-            context: .
-            dockerfile: ./dockerfile-node-local
-        working_dir: /code/work
-        command: sh serve.sh
-        volumes:
-            - ./:/code
-        ports:
-            - "8888:8000"
+  app:
+    image: node:12
+    volumes:
+      - ./:/code
+    working_dir: /code
+    command: yarn start
+  serve:
+    image: python:3.6-alpine
+    volumes:
+      - ./:/code
+    working_dir: /code/work
+    command: python -m http.server
+    ports:
+      - "8999:8000"
+    tty: true

@@ -2,8 +2,7 @@ import { html } from 'lit-element';
 import icon__green_marker from '../../icons/green/green@2x.png';
 import style from '../../scss/details_box.scss';
 import { t } from '../../translations';
-import { getStyle, utils_capitalize } from '../../utils';
-// import { plug_types } from './api';
+import { getStyle } from '../../utils';
 
 export function render__filter_box() {
   const repaint_map = async () => {
@@ -118,7 +117,7 @@ export function render__filter_box() {
                 <img class="w-24px mr-1 d-none d-lg-block" src="${icon__green_marker}" alt="" />
               </div>
               <p class="fs-14 color-black-400">
-                ${this.visibleStations} ${t.available_columns[this.language].toLowerCase()}
+                ${this.visibleStations} ${t.available_columns[this.language]}
               </p>
             </div>
           </div>
@@ -126,7 +125,7 @@ export function render__filter_box() {
             <div style="border-bottom: 2px solid #f0f1f1;"></div>
           </div>
           <div class="col-12 mt-3 mb-3">
-            <p class="fs-14 color-black-400">${t.research_range[this.language]}</p>
+            <p class="fs-14 color-black-400">${t.research_range[this.language].toUpperCase()}</p>
             <select @change="${e => handle__radius(e)}" name="" id="input_filter_radius" class="mt-2" style="">
               <option value="0">${t.no_one[this.language]}</option>
               <option value="5">5km</option>
@@ -138,7 +137,7 @@ export function render__filter_box() {
         <!-- Detail box -->
         <div class="details_box__section mt-3">
           <div class="col-12">
-            <p class="fs-14">${t.type_of_access[this.language]}</p>
+            <p class="fs-14 color-black-400">${t.type_of_access[this.language].toUpperCase()}</p>
             ${this.access_types.map((o, i) => {
               return html`
                 <div class="custom-checkbox ${i === 0 ? 'mt-3' : ''}">
@@ -150,7 +149,7 @@ export function render__filter_box() {
                       @change="${e => handle__access_type(e)}"
                     />
                     <span class="custom-checkbox-checkbox mr-2"></span>
-                    ${utils_capitalize(o[2][this.language])}
+                    ${o[2][this.language]}
                   </label>
                 </div>
                 ${i !== this.access_types.length - 1
@@ -165,7 +164,7 @@ export function render__filter_box() {
         <!-- Detail box -->
         <div class="details_box__section mt-3 d-none">
           <div class="col-12">
-            <p class="fs-14">${t.column_state[this.language]}</p>
+            <p class="fs-14 color-black-400">${t.column_state[this.language].toUpperCase()}</p>
             <div class="custom-checkbox mt-3">
               <label htmlFor="state-1" class="fs-16">
                 <input type="checkbox" id="state-1" @change="${e => handle__state(e)}" />
@@ -186,7 +185,7 @@ export function render__filter_box() {
         <!-- Detail box -->
         <div class="details_box__section mt-3">
           <div class="col-12">
-            <p class="fs-14">${t.plug_type[this.language]}</p>
+            <p class="fs-14 color-black-400">${t.plug_type[this.language].toUpperCase()}</p>
             <!-- "700 bar small vehicles" "UNKNOWN" -->
 
             ${this.plug_types.map((o, i) => {
@@ -210,7 +209,7 @@ export function render__filter_box() {
         <!-- Detail box -->
         <div class="details_box__section mt-3 mb-3">
           <div class="col-12">
-            <p class="fs-14 mb-3">${t.provider[this.language]}</p>
+            <p class="fs-14 mb-3 color-black-400">${t.provider[this.language].toUpperCase()}</p>
             ${this.provider_list.map((o, i) => {
               return html`
                 <div class="custom-checkbox mt-2">
@@ -228,7 +227,7 @@ export function render__filter_box() {
         <!-- maxPower box -->
         <div class="details_box__section mt-3 mb-3">
           <div class="col-12">
-            <p class="fs-14 mb-3">${t.maxPower[this.language]}</p>
+            <p class="fs-14 mb-3 color-black-400">${t.maxPower[this.language].toUpperCase()}</p>
             <div class="d-flex align-items-center">
               <input
                 id="maxPowerInput"

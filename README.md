@@ -1,91 +1,191 @@
-# Mobility E-Charging Map
+# webcomp-mobility-echarging-map
 
 This project contains the map web component for the [Green Mobility South Tyrol](https://www.greenmobility.bz.it/) project.
 
-## Why
-
-[Greenmobility](https://www.greenmobility.bz.it/it/) wants to split the existing functionalities of the website into reusable and independent components. Using these webcomponents, a developer can easily integrate the functionality of the single components into any website.
+[Green Mobility South Tyrol](https://www.greenmobility.bz.it/it/) wants to split the existing functionalities of the website into reusable and independent components. Using these webcomponents, a developer can easily integrate the functionality of the single components into any website.
 The data source for the components is the [Open Data Hub](https://opendatahub.bz.it/) project.
 
-## Choices
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**
 
-To create more structured and mantainable webcomponents we used [Polymer](https://www.polymer-project.org/), more specifically the [lit-element](https://lit-element.polymer-project.org/) implementation.
+- [Usage](#usage)
+  - [Options](#options)
+- [Getting started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Source code](#source-code)
+  - [Dependencies](#dependencies)
+  - [Build](#build)
+- [Deployment](#deployment)
+- [Docker environment](#docker-environment)
+  - [Installation](#installation)
+  - [Dependenices](#dependenices)
+  - [Start and stop the containers](#start-and-stop-the-containers)
+  - [Running commands inside the container](#running-commands-inside-the-container)
+- [Information](#information)
+  - [Support](#support)
+  - [Contributing](#contributing)
+  - [Documentation](#documentation)
+  - [Boilerplate](#boilerplate)
+  - [License](#license)
 
-CSS styles are transpiled using [Sass](https://sass-lang.com/).
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-We are usign [Webpack](https://webpack.js.org/) to create the bundles.
+## Usage
 
-## Getting Started
+Include the Javascript file `dist/map_widget.min.js` in your HTML and define the web component like this:
+
+```html
+<e-mobility-map-widget></e-mobility-map-widget>
+```
+
+### Options
+
+#### Translations
+
+Add `language` as attribute, if you want to translate the web component.
+
+```html
+<e-mobility-dashboard-widget language="en"></e-mobility-dashboard-widget>
+```
+
+Possible values are currently `en`, `de`, `it`, `nl`, `cs`, `pl`, `fr`, `ru` (see [/src/translations.js](/src/translations.js)).
+
+#### Logo
+
+URL of an icon, that will be shown in the lower left corner.
+
+```html
+<e-mobility-map-widget logo="https://www.example.com/your-logo.png"></e-mobility-map-widget>
+```
+
+## Getting started
+
+These instructions will get you a copy of the project up and running
+on your local machine for development and testing purposes.
 
 ### Prerequisites
 
-To work on the project, you'll need global installations of:
+To build the project, the following prerequisites must be met:
 
-- Node (v11.9.0)
-- Yarn (v1.15.2)
+- Node 12 / Yarn 1
 
-Later versions of the same tools should also work.
+For a ready to use Docker environment with all prerequisites already installed and prepared, you can check out the [Docker environment](#docker-environment) section.
 
-### Installing
+### Source code
 
-A step by step series of examples that tell you how to get a development env running
+Get a copy of the repository:
 
-Install yarn project's dependencies
-
-```
-yarn
+```bash
+git clone https://github.com/noi-techpark/webcomp-mobility-echarging-map.git
 ```
 
-### Developement
+Change directory:
 
-```
-yarn start
-```
-
-This will watch the files in every package configured in the right way to create a Webpack bundle.
-
-### Production
-
-Build all widgets using Webpack's `production` config:
-
-```
-yarn build
+```bash
+cd webcomp-mobility-echarging-map/
 ```
 
-The destination for the resulting code will be the `dist` folder, located at the root of the project.
+### Dependencies
 
-This will serve the "work in progress" website at [http://0.0.0.0:8000/](http://0.0.0.0:8000/).
+Download all dependencies:
+
+```bash
+yarn install
+```
+
+### Build
+
+Build and start the project:
+
+```bash
+yarn run start
+```
+
+The application will be served and can be accessed at [http://localhost:8000](http://localhost:8000).
 
 ## Deployment
 
-To deploy the webcomponents, take the production bundle created with the `yarn build` command and use it as a normal javascrip script.
+To create the distributable files, execute the following command:
 
-We suggest deploying them on a CDN, rather than hardcoding them inside a project, so that future fixes and enhancements of the webcomponents are more easily distributed.
+```bash
+yarn run build
+```
 
-## Running the tests
+## Docker environment
 
-TODO
+For the project a Docker environment is already prepared and ready to use with all necessary prerequisites.
 
-### Break down into end to end tests
+These Docker containers are the same as used by the continuous integration servers.
 
-TODO
+### Installation
 
-### And coding style tests
+Install [Docker](https://docs.docker.com/install/) (with Docker Compose) locally on your machine.
 
-TODO
+### Dependenices
 
-## Contributing
+First, install all dependencies:
 
-See ![CONTRIBUTING.md](CONTRIBUTING.md)
+```bash
+docker-compose run --rm app /bin/bash -c "yarn install"
+```
 
-## Screenshots
+### Start and stop the containers
 
-![map](screenshots/map.png)
+Before start working you have to start the Docker containers:
 
-## Authors
+```
+docker-compose up --build --detach
+```
 
-See ![CONTRIBUTORS.rst](CONTRIBUTORS.rst)
+After finished working you can stop the Docker containers:
 
-## License
+```
+docker-compose stop
+```
 
-See ![LICENSE.md](LICENSE.md)
+### Running commands inside the container
+
+When the containers are running, you can execute any command inside the environment. Just replace the dots `...` in the following example with the command you wish to execute:
+
+```bash
+docker-compose run --rm app /bin/bash -c "..."
+```
+
+Some examples are:
+
+```bash
+docker-compose run --rm app /bin/bash -c "yarn run build"
+```
+
+## Information
+
+### Support
+
+ToDo: For support, please contact [info@opendatahub.bz.it](mailto:info@opendatahub.bz.it).
+
+### Contributing
+
+If you'd like to contribute, please follow the following instructions:
+
+- Fork the repository.
+
+- Checkout a topic branch from the `development` branch.
+
+- Make sure the tests are passing.
+
+- Create a pull request against the `development` branch.
+
+A more detailed description can be found here: [https://github.com/noi-techpark/documentation/blob/master/contributors.md](https://github.com/noi-techpark/documentation/blob/master/contributors.md).
+
+### Documentation
+
+More documentation can be found at [https://opendatahub.readthedocs.io/en/latest/index.html](https://opendatahub.readthedocs.io/en/latest/index.html).
+
+### Boilerplate
+
+The project uses this boilerplate: [https://github.com/noi-techpark/webcomp-boilerplate](https://github.com/noi-techpark/webcomp-boilerplate).
+
+### License
+
+The code in this project is licensed under the GNU AFFERO GENERAL PUBLIC LICENSE Version 3 license. See the [LICENSE.md](LICENSE.md) file for more information.

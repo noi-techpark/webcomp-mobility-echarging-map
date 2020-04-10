@@ -242,7 +242,6 @@ export function render__details_box() {
                     </div>
                   `;
                 })}
-                
               </div>
             </div>
             <!-- End -->

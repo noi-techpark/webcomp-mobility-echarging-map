@@ -3,6 +3,20 @@
   "description": "Map to access the Open Data Hub E-Charging Information",
   "descriptionAbstract": "Map to access the Open Data Hub Mobility Information",
   "license": "AGPL-3.0-or-later",
+  "copyrightHolders": [
+    {
+      "name": "NOI",
+      "email": "info@noi.bz.it",
+      "organization": "NOI S.p.A",
+      "organizationUrl": "https://noi.bz.it"
+    },
+    {
+      "name": "STA",
+      "email": "info@sta.bz.it",
+      "organization": "STA - Südtiroler Transportstrukturen AG / Strutture Trasporto Alto Adige SpA",
+      "organizationUrl": "https://www.sta.bz.it"
+    }
+  ],
   "authors": [
     {
       "name": "Belka",
@@ -12,7 +26,7 @@
     }
   ],
   "image": "wcs-logo.png",
-  "searchTags": ["map","sta","mobility"],
+  "searchTags": ["map","mobility"],
   "dist": {
     "basePath": "dist",
     "files": [
@@ -21,6 +35,26 @@
   },
   "configuration": {
     "tagName": "e-mobility-map-widget",
-    "options": []
+    "options": [
+      {
+        "key": "language",
+        "type": "select",
+        "label": "Language",
+        "required": false,
+        "options": {
+          "values": ["en", "de", "it"],
+          "default": "en"
+        }
+      },
+      {
+        "key": "logo",
+        "type": "text",
+        "label": "Address of an icon, that should be shown in the lower left corner",
+        "required": false,
+        "options": {
+          "default": "https://www.greenmobility.bz.it/typo3conf/ext/interho/Resources/Public/Img/logo.png"
+        }
+      }
+    ]
   }
 }

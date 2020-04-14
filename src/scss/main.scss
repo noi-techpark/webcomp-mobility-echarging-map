@@ -1,7 +1,7 @@
 @import 'colors';
 @import 'mixins';
 
-$map_desktop_height: var(--e-mobility-widget-map-height);
+$map_desktop_height: var(--e-mobility-widget-map-height, 700px);
 $mobile-bottom-controls: 24px;
 
 @mixin dimension() {

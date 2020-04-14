@@ -246,7 +246,7 @@ class EMobilityMap extends BaseClass {
 
   static get styles() {
     console.log(style__markercluster);
-    
+
     return css`
       ${unsafeCSS(style__markercluster)}
       ${unsafeCSS(style__leaflet.toString())}

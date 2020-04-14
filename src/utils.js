@@ -13,6 +13,7 @@ import icon__star_green_marker from './icons/green/green_star.png';
 import icon__star_grey_marker from './icons/grey/grey_star.png';
 import icon__star_red_marker from './icons/red/red_star.png';
 
+
 export function getLatLongFromStationDetail(o) {
   return { lat: o.y, lng: o.x };
 }
@@ -66,11 +67,7 @@ export function debounce(delay, fn) {
   };
 }
 
-export const getStyle = (array, map_desktop_height) => {
-  const style = array[0][1];
-  const configuredStyle = style.replace(new RegExp('"PLACEHOLDER_MAP_DESKTOP_HEIGHT"', 'g'), `${map_desktop_height}px`);
-  return configuredStyle;
-};
+export const getStyle = array => array[0][1];
 
 export const utils_truncate = (str, no_words) => {
   const splitted = str.split(' ');

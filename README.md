@@ -11,6 +11,9 @@ The data source for the components is the [Open Data Hub](https://opendatahub.bz
 
 - [Usage](#usage)
   - [Options](#options)
+    - [Translations](#translations)
+    - [Logo](#logo)
+  - [Styling](#styling)
 - [Getting started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Source code](#source-code)
@@ -58,6 +61,27 @@ URL of an icon, that will be shown in the lower left corner.
 ```html
 <e-mobility-map-widget logo="https://www.example.com/your-logo.png"></e-mobility-map-widget>
 ```
+
+### Styling
+
+This web component has only one style variable, namely
+`--e-mobility-widget-map-height`, which sets the height of the widget.
+
+For example:
+```html
+<style>
+  e-mobility-map-widget.YOUR_CLASS_NAME {
+    --e-mobility-widget-map-height: 200px;
+  }
+</style>
+
+<e-mobility-map-widget class="YOUR_CLASS_NAME" logo="logo.png" language="it"></e-mobility-map-widget>
+```
+
+The width of this component reacts on regular css rules. Configure the `display`
+property accordingly, for instance, as `display: block`, if you want to hardcode
+the dimensions.
+
 
 ## Getting started
 

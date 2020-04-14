@@ -2,9 +2,10 @@ import L from 'leaflet';
 import leaflet_mrkcls from 'leaflet.markercluster';
 import style__markercluster from 'leaflet.markercluster/dist/MarkerCluster.css';
 import style__leaflet from 'leaflet/dist/leaflet.css';
-import { html } from 'lit-element';
+import { html, css, unsafeCSS } from 'lit-element';
 // import { request__get_plug_details } from './api/integreen-life';
 import { BaseClass } from './components/baseClass';
+import { request_stations_plugs } from './components/filter_box/api';
 import { render__map_controls } from './components/map_controls';
 import { map_tag } from './components/map_tag';
 import image_logo from './icons/logo.png';
@@ -15,7 +16,6 @@ import style__typography from './scss/typography.scss';
 import utilities from './scss/utilities.scss';
 import { getLatLongFromStationDetail, getStyle, get_user_platform, stationStatusMapper } from './utils';
 import { get_provider_list } from './utils/get_provider_list';
-import { request_stations_plugs } from './components/filter_box/api';
 
 class EMobilityMap extends BaseClass {
   static get properties() {
@@ -228,6 +228,19 @@ class EMobilityMap extends BaseClass {
     await this.request_plug_types();
   }
 
+  static get styles() {
+    console.log(style__markercluster);
+    
+    return css`
+      ${unsafeCSS(style__markercluster)}
+      ${unsafeCSS(style__leaflet.toString())}
+      ${unsafeCSS(style.toString())}
+      ${unsafeCSS(utilities.toString())}
+      ${unsafeCSS(style__typography.toString())}
+      ${unsafeCSS(style__buttons.toString())}
+    `;
+  }
+
   handleToggleShowFilters() {
     /** Closing details box */
     const user_actions_container__details = this.shadowRoot.getElementById('user_actions_container__details');
@@ -284,15 +297,29 @@ class EMobilityMap extends BaseClass {
   }
 
   render() {
-    return html`
-      <style>
+    // console.log(this.map_desktop_height, this.language);
+    // console.log('rerender');
+
+    /* <style>
         ${style__markercluster}
         ${getStyle(style__leaflet)}
         ${getStyle(style)}
         ${getStyle(utilities)}
         ${getStyle(style__typography)}
         ${getStyle(style__buttons)}
-      </style>
+      </style> */
+
+    console.log(style.toString());
+
+    // <style>
+    //   ${style__markercluster}
+    //   ${style__leaflet.toString()}
+    //   ${style.toString()}
+    //   ${utilities.toString()}
+    //   ${style__typography.toString()}
+    //   ${style__buttons.toString()}
+    // </style>
+    return html`
       <div id=${'e_mobility_map'} class="e_mobility_map closed platform_${get_user_platform()}">
         ${this.render__loading_overlay()} ${this.render__search_box_underlay()}
         <div style="z-index: 1003" class="user_actions_container__search_box">

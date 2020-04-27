@@ -1,6 +1,6 @@
 import { t } from '../../translations';
 
-const NINJA_BASE_PATH = 'https://mobility.api.opendatahub.bz.it/v2/api';
+const NINJA_BASE_PATH = 'https://mobility.api.opendatahub.bz.it/v2';
 
 // export const access_types = [[1, 'PUBLIC', t.public], [2, 'PRIVATE', t.private]];
 export async function request_access_types() {

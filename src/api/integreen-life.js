@@ -1,6 +1,6 @@
 import { fetch_options } from './constants';
 
-const NINJA_BASE_PATH = 'https://mobility.api.opendatahub.bz.it/v2/api';
+const NINJA_BASE_PATH = 'https://mobility.api.opendatahub.bz.it/v2';
 
 /**
  * STATIONS

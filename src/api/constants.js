@@ -4,3 +4,5 @@ export const fetch_options = {
     Accept: 'application/json'
   })
 };
+
+export const fetch_origin = "webcomp-mobility-echarging-map";

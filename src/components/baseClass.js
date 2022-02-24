@@ -1,13 +1,12 @@
 import L from 'leaflet';
 import { LitElement } from 'lit-element';
-import { request__get_stations_details, request__get_stations_plugs_details } from '../api/integreen-life';
+import { request__get_stations_details, request__get_stations_plugs_details, request__access_types, request__plug_types } from '../api/mobility';
 import { request__get_coordinates_from_search } from '../api/nominatim';
-import { request__near_accomodations, request__near_restaurants } from '../api/odh';
+import { request__near_accomodations, request__near_restaurants } from '../api/tourism';
 import { TOKEN } from '../config';
 import user__marker from '../icons/user.png';
 import { render__details_box } from './details_box';
 import { render__filter_box } from './filter_box';
-import { request_access_types, request_plug_types } from './filter_box/api';
 import { render__filter_values_mobile } from './filter_values_mobile';
 import { render__modal__star_rating } from './modal__star_rating';
 import { render__loading_overlay } from './overlay_loading';
@@ -59,8 +58,8 @@ export class BaseClass extends LitElement {
     this.render__filter_box = render__filter_box.bind(this);
     this.render__filter_values_mobile = render__filter_values_mobile.bind(this);
     this.render__search_box_underlay = render__search_box_underlay.bind(this);
-    this.request_access_types = request_access_types.bind(this);
-    this.request_plug_types = request_plug_types.bind(this);
+    this.request__access_types = request__access_types.bind(this);
+    this.request__plug_types = request__plug_types.bind(this);
     /* Requests */
     this.request__get_stations_details = request__get_stations_details.bind(this);
     this.request__get_stations_plugs_details = request__get_stations_plugs_details.bind(this);

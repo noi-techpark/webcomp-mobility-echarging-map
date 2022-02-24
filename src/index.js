@@ -3,7 +3,6 @@ import leaflet_mrkcls from 'leaflet.markercluster';
 import style__markercluster from 'leaflet.markercluster/dist/MarkerCluster.css';
 import style__leaflet from 'leaflet/dist/leaflet.css';
 import { html, css, unsafeCSS } from 'lit-element';
-// import { request__get_plug_details } from './api/integreen-life';
 import { BaseClass } from './components/baseClass';
 import { render__map_controls } from './components/map_controls';
 import { map_tag } from './components/map_tag';
@@ -13,9 +12,9 @@ import style__buttons from './scss/buttons.scss';
 import style from './scss/main.scss';
 import style__typography from './scss/typography.scss';
 import utilities from './scss/utilities.scss';
-import { getLatLongFromStationDetail, getStyle, get_user_platform, stationStatusMapper } from './utils';
+import { getLatLongFromStationDetail, get_user_platform, stationStatusMapper } from './utils';
 import { get_provider_list } from './utils/get_provider_list';
-import { request_stations_plugs } from './components/filter_box/api';
+import { request__stations_plugs } from './api/mobility';
 import { t } from './translations';
 
 class EMobilityMap extends BaseClass {
@@ -116,16 +115,6 @@ class EMobilityMap extends BaseClass {
         }
       }
 
-      /* state TODO: this can disrupt performances */
-      // if (this.filters.state.length) {
-      // let plugs_status = [];
-      // for (let i = 0; i < station_plugs.length; i++) {
-      //   const element = station_plugs[i];
-      //   const response = await request__get_plug_details(element.id);
-      //   plugs_status.push(response);
-      // }
-      // }
-
       /* Merge conditions */
       return condition_access_type && condition_provider && Boolean(condition_plug_type) && condition_maxPower;
     });
@@ -146,7 +135,7 @@ class EMobilityMap extends BaseClass {
 
       const action = async () => {
         this.is_loading = true;
-        const station_plugs = await request_stations_plugs(o.scode);
+        const station_plugs = await request__stations_plugs(o.scode);
 
         await this.request__near_restaurants(marker_position.lat, marker_position.lng);
         await this.request__near_accomodations(marker_position.lat, marker_position.lng);
@@ -240,8 +229,8 @@ class EMobilityMap extends BaseClass {
   async firstUpdated() {
     this.initializeMap();
     this.drawMap();
-    await this.request_access_types();
-    await this.request_plug_types();
+    await this.request__access_types();
+    await this.request__plug_types();
   }
 
   static get styles() {

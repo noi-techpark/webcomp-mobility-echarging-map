@@ -18,3 +18,5 @@ yarn-error.log*
 work/scripts/*
 
 node_modules
+
+dist/

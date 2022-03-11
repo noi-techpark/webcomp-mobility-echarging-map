@@ -73,6 +73,9 @@ export const getStyle = (array, map_desktop_height) => {
 };
 
 export const utils_truncate = (str, no_words) => {
+  if(str == null){
+    return null;
+  }
   const splitted = str.split(' ');
 
   if (splitted.length > no_words) {
@@ -82,6 +85,9 @@ export const utils_truncate = (str, no_words) => {
 };
 
 export const encodeXml = s => {
+  if(s == null){
+    return null;
+  }
   const words = s.replace('&amp;', '&');
 
   return words

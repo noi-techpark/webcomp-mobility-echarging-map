@@ -314,7 +314,7 @@ class EMobilityMap extends BaseClass {
         ${getStyle(style__buttons)}
       </style> */
 
-    console.log(style.toString());
+    // console.log(style.toString());
 
     // <style>
     //   ${style__markercluster}

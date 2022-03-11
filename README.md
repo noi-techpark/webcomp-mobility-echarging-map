@@ -2,7 +2,7 @@
 
 This project contains the map web component for the [Green Mobility South Tyrol](https://www.greenmobility.bz.it/) project.
 
-[![CI](https://github.com/noi-techpark/webcomp-mobility-echarging-map/actions/workflows/ci.yml/badge.svg)](https://github.com/noi-techpark/webcomp-mobility-echarging-map/actions/workflows/ci.yml)
+[![CI/CD](https://github.com/noi-techpark/webcomp-mobility-echarging-map/actions/workflows/main.yml/badge.svg)](https://github.com/noi-techpark/webcomp-mobility-echarging-map/actions/workflows/main.yml)
 
 [Green Mobility South Tyrol](https://www.greenmobility.bz.it/it/) wants to split the existing functionalities of the website into reusable and independent components. Using these webcomponents, a developer can easily integrate the functionality of the single components into any website.
 The data source for the components is the [Open Data Hub](https://opendatahub.bz.it/) project.
@@ -11,28 +11,29 @@ The data source for the components is the [Open Data Hub](https://opendatahub.bz
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**
 
-- [Usage](#usage)
-  - [Options](#options)
-    - [Translations](#translations)
-    - [Logo](#logo)
-  - [Styling](#styling)
-- [Getting started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Source code](#source-code)
-  - [Dependencies](#dependencies)
-  - [Build](#build)
-- [Deployment](#deployment)
-- [Docker environment](#docker-environment)
-  - [Installation](#installation)
-  - [Dependenices](#dependenices)
-  - [Start and stop the containers](#start-and-stop-the-containers)
-  - [Running commands inside the container](#running-commands-inside-the-container)
-- [Information](#information)
-  - [Support](#support)
-  - [Contributing](#contributing)
-  - [Documentation](#documentation)
-  - [Boilerplate](#boilerplate)
-  - [License](#license)
+- [webcomp-mobility-echarging-map](#webcomp-mobility-echarging-map)
+  - [Usage](#usage)
+    - [Options](#options)
+      - [Translations](#translations)
+      - [Logo](#logo)
+    - [Styling](#styling)
+  - [Getting started](#getting-started)
+    - [Prerequisites](#prerequisites)
+    - [Source code](#source-code)
+    - [Dependencies](#dependencies)
+    - [Build](#build)
+  - [Deployment](#deployment)
+  - [Docker environment](#docker-environment)
+    - [Installation](#installation)
+    - [Dependenices](#dependenices)
+    - [Start and stop the containers](#start-and-stop-the-containers)
+    - [Running commands inside the container](#running-commands-inside-the-container)
+  - [Information](#information)
+    - [Support](#support)
+    - [Contributing](#contributing)
+    - [Documentation](#documentation)
+    - [Boilerplate](#boilerplate)
+    - [License](#license)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 

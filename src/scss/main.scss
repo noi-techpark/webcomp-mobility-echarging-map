@@ -52,7 +52,7 @@ $mobile-bottom-controls: 24px;
     }
   }
 
-  @media only screen and (min-width: 992px) {
+  @media only screen and (min-width: 920px) {
     @include dimension();
     position: relative;
     height: $map_desktop_height;
@@ -71,7 +71,7 @@ $mobile-bottom-controls: 24px;
     }
   }
 
-  @media only screen and (min-width: 992px) {
+  @media only screen and (min-width: 920px) {
     @include dimension();
     &.closed {
       @include dimension();
@@ -144,7 +144,7 @@ input[type='text'] {
     display: flex;
     overflow: hidden;
   }
-  @media only screen and (min-width: 992px) {
+  @media only screen and (min-width: 920px) {
     right: 24px;
     left: auto;
     width: 172px;
@@ -160,7 +160,7 @@ input[type='text'] {
     background-position: center;
     background-repeat: no-repeat;
   }
-  @media only screen and (min-width: 992px) {
+  @media only screen and (min-width: 920px) {
     height: 48px;
     width: 156px;
     margin-top: 12px;
@@ -180,7 +180,7 @@ input[type='text'] {
       height: 30vh;
     }
   }
-  @media only screen and (min-width: 992px) {
+  @media only screen and (min-width: 920px) {
     height: $map_desktop_height;
     width: 100%;
     &.closed {
@@ -232,7 +232,7 @@ input[type='text'] {
     width: calc(100% - 48px);
     top: 24px;
   }
-  @media only screen and (min-width: 992px) {
+  @media only screen and (min-width: 920px) {
     width: 320px;
   }
 }
@@ -245,7 +245,7 @@ input[type='text'] {
     top: 64px;
     width: calc(100% - 48px);
   }
-  @media only screen and (min-width: 992px) {
+  @media only screen and (min-width: 920px) {
     width: 320px;
   }
 }

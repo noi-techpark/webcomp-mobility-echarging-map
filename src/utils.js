@@ -9,11 +9,13 @@ import icon__lock_hydrogen_marker from './icons/blue/blue_lock.png';
 import icon__lock_green_marker from './icons/green/green_lock.png';
 import icon__lock_grey_marker from './icons/grey/grey_lock.png';
 import icon__lock_red_marker from './icons/red/red_lock.png';
+import icon__lock_orange_marker from './icons/orange/orange_lock.png';
 
 import icon__star_hydrogen_marker from './icons/blue/blue_star.png';
 import icon__star_green_marker from './icons/green/green_star.png';
 import icon__star_grey_marker from './icons/grey/grey_star.png';
 import icon__star_red_marker from './icons/red/red_star.png';
+import icon__star_orange_marker from './icons/orange/orange_star.png';
 
 export function getLatLongFromStationDetail(o) {
   return { lat: o.y, lng: o.x };
@@ -25,35 +27,52 @@ export function stationStatusMapper(smetadata, mvalue, origin) {
     let tmpobj = {};
     switch (accessType) {
       case 'PRIVATE':
+
+        let iconLock = null;
+
+        if (mvalue == 0) {
+          iconLock = icon__lock_red_marker;
+        } else {
+          iconLock = capacity == mvalue ? icon__lock_green_marker : icon__lock_orange_marker;
+        }
+
         tmpobj = {
           TEMPORARYUNAVAILABLE: icon__lock_grey_marker,
-          AVAILABLE: origin !== 'IIT' ? icon__lock_green_marker : icon__lock_hydrogen_marker,
-          ACTIVE: origin !== 'IIT' ? icon__lock_green_marker : icon__lock_hydrogen_marker,
+          AVAILABLE: origin !== 'IIT' ? iconLock : icon__lock_hydrogen_marker,
+          ACTIVE: origin !== 'IIT' ? iconLock : icon__lock_hydrogen_marker,
           UNKNOWN: icon__unknown_marker
         };
         break;
       case 'PRIVATE_WITHPUBLICACCESS':
+        let iconStar = null;
+
+        if (mvalue == 0) {
+          iconStar = icon__star_red_marker;
+        } else {
+          iconStar = capacity == mvalue ? icon__star_green_marker : icon__star_orange_marker;
+        }
+
         tmpobj = {
           TEMPORARYUNAVAILABLE: icon__star_grey_marker,
-          AVAILABLE: origin !== 'IIT' ? icon__star_green_marker : icon__star_hydrogen_marker,
-          ACTIVE: origin !== 'IIT' ? icon__star_green_marker : icon__star_hydrogen_marker,
+          AVAILABLE: origin !== 'IIT' ? iconStar : icon__star_hydrogen_marker,
+          ACTIVE: origin !== 'IIT' ? iconStar : icon__star_hydrogen_marker,
           UNKNOWN: icon__unknown_marker
         };
         break;
       case 'PUBLIC':
       default:
-        let iconc = null;
+        let icon = null;
 
         if (mvalue == 0) {
-          iconc = icon__red_marker;
+          icon = icon__red_marker;
         } else {
-          iconc = capacity == mvalue ? icon__green_marker : icon__orange_marker;
+          icon = capacity == mvalue ? icon__green_marker : icon__orange_marker;
         }
 
         tmpobj = {
           TEMPORARYUNAVAILABLE: icon__grey_marker,
-          AVAILABLE: origin !== 'IIT' ? iconc : icon__hydrogen_marker,
-          ACTIVE: origin !== 'IIT' ?  iconc : icon__hydrogen_marker,
+          AVAILABLE: origin !== 'IIT' ? icon : icon__hydrogen_marker,
+          ACTIVE: origin !== 'IIT' ?  icon : icon__hydrogen_marker,
           UNKNOWN: icon__unknown_marker
         };
         break;

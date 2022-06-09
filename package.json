@@ -7,7 +7,7 @@
     "start": "webpack-dev-server --open --config webpack.dev.js"
   },
   "dependencies": {
-    "leaflet": "^1.4.0",
+    "leaflet": "^1.4.1",
     "leaflet.markercluster": "^1.4.1",
     "lit-element": "^2.1.0",
     "lodash": "^4.17.15"

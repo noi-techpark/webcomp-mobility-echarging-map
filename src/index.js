@@ -157,7 +157,7 @@ class EMobilityMap extends BaseClass {
     const columns_layer = L.layerGroup(columns_layer_array, {});
 
     /** Prepare the cluster group for station markers */
-    this.layer_columns = new leaflet_mrkcls.MarkerClusterGroup({
+    this.layer_columns = new L.MarkerClusterGroup({
       showCoverageOnHover: false,
       chunkedLoading: true,
       iconCreateFunction(cluster) {

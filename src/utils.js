@@ -1,6 +1,8 @@
 import icon__hydrogen_marker from './icons/blue/hydrogen@2x.png';
 import icon__green_marker from './icons/green/green@2x.png';
+import icon__orange_marker from './icons/orange/orange@2x.png';
 import icon__grey_marker from './icons/grey/grey@2x.png';
+import icon__unknown_marker from './icons/grey/grey_exclamation.png';
 import icon__red_marker from './icons/red/red@2x.png';
 
 import icon__lock_hydrogen_marker from './icons/blue/blue_lock.png';
@@ -17,40 +19,49 @@ export function getLatLongFromStationDetail(o) {
   return { lat: o.y, lng: o.x };
 }
 
-export function stationStatusMapper(key, origin, accessType) {
-  if (key) {
-    var tmpobj = {};
+export function stationStatusMapper(smetadata, mvalue, origin) {
+  if (smetadata) {
+    const { accessType, capacity } = smetadata;
+    let tmpobj = {};
     switch (accessType) {
       case 'PRIVATE':
         tmpobj = {
-          TEMPORARYUNAVAILABLE: icon__lock_red_marker,
+          TEMPORARYUNAVAILABLE: icon__lock_grey_marker,
           AVAILABLE: origin !== 'IIT' ? icon__lock_green_marker : icon__lock_hydrogen_marker,
           ACTIVE: origin !== 'IIT' ? icon__lock_green_marker : icon__lock_hydrogen_marker,
-          UNKNOWN: icon__lock_grey_marker
+          UNKNOWN: icon__unknown_marker
         };
         break;
       case 'PRIVATE_WITHPUBLICACCESS':
         tmpobj = {
-          TEMPORARYUNAVAILABLE: icon__star_red_marker,
+          TEMPORARYUNAVAILABLE: icon__star_grey_marker,
           AVAILABLE: origin !== 'IIT' ? icon__star_green_marker : icon__star_hydrogen_marker,
           ACTIVE: origin !== 'IIT' ? icon__star_green_marker : icon__star_hydrogen_marker,
-          UNKNOWN: icon__star_grey_marker
+          UNKNOWN: icon__unknown_marker
         };
         break;
       case 'PUBLIC':
       default:
+        let iconc = null;
+
+        if (mvalue == 0) {
+          iconc = icon__red_marker;
+        } else {
+          iconc = capacity == mvalue ? icon__green_marker : icon__orange_marker;
+        }
+
         tmpobj = {
-          TEMPORARYUNAVAILABLE: icon__red_marker,
-          AVAILABLE: origin !== 'IIT' ? icon__green_marker : icon__hydrogen_marker,
-          ACTIVE: origin !== 'IIT' ? icon__green_marker : icon__hydrogen_marker,
-          UNKNOWN: icon__grey_marker
+          TEMPORARYUNAVAILABLE: icon__grey_marker,
+          AVAILABLE: origin !== 'IIT' ? iconc : icon__hydrogen_marker,
+          ACTIVE: origin !== 'IIT' ?  iconc : icon__hydrogen_marker,
+          UNKNOWN: icon__unknown_marker
         };
         break;
     }
     const obj = tmpobj;
-    return obj[key] ? obj[key] : icon__grey_marker;
+    return obj[smetadata.state] ? obj[smetadata.state] : icon__unknown_marker;
   }
-  return icon__grey_marker;
+  return icon__unknown_marker;
 }
 
 export function debounce(delay, fn) {
@@ -73,7 +84,7 @@ export const getStyle = (array, map_desktop_height) => {
 };
 
 export const utils_truncate = (str, no_words) => {
-  if(str == null){
+  if (str == null) {
     return null;
   }
   const splitted = str.split(' ');
@@ -85,7 +96,7 @@ export const utils_truncate = (str, no_words) => {
 };
 
 export const encodeXml = s => {
-  if(s == null){
+  if (s == null) {
     return null;
   }
   const words = s.replace('&amp;', '&');

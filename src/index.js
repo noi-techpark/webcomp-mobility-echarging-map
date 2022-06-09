@@ -121,12 +121,12 @@ class EMobilityMap extends BaseClass {
 
     /* PRINT filtered stations on map */
     filtered_stations_details.map(o => {
-      const { smetadata, sorigin } = o;
+      const { smetadata, sorigin, mvalue} = o;
       const marker_position = getLatLongFromStationDetail(o.scoordinate);
       // stations_status_types
       /** Creating the icon */
       const station_icon = L.icon({
-        iconUrl: stationStatusMapper(smetadata.state, sorigin, smetadata.accessType),
+        iconUrl: stationStatusMapper(smetadata,mvalue, sorigin),
         iconSize: smetadata.state !== 'ACTIVE' && smetadata.state !== 'AVAILABLE' ? [30, 30] : [36, 36]
       });
       const marker = L.marker([marker_position.lat, marker_position.lng], {

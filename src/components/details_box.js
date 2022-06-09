@@ -8,7 +8,8 @@ import icon_hotel_green from '../icons/green/icon_hotel_green.png';
 import icon_restaurant_green from '../icons/green/icon_restaurant_green.png';
 import icon__info from '../icons/info.png';
 import icon__pin from '../icons/pin.png';
-import icon__red_dot from '../icons/red_dot.png';
+import icon__red_dot from '../icons/red/red_dot.png';
+import icon__grey_dot from '../icons/grey/grey_dot.png';
 import icon__type_1 from '../icons/type_1.png';
 import icon__up from '../icons/up.svg';
 import style from '../scss/details_box.scss';
@@ -21,8 +22,7 @@ import { render__state_label } from './state_label';
 import { render__h1 } from './typography';
 
 export function render__details_box() {
-  const { smetadata, sname, scoordinate, accessInfo } = this.current_station;
-  // console.log(this.current_station, smetadata && smetadata.state ? '' : 'lol');
+  const { smetadata, sname, scoordinate, accessInfo , mvalue} = this.current_station;
 
   const { origin } = this.current_station;
 
@@ -66,7 +66,7 @@ export function render__details_box() {
         <div class="details_box__body">
           <!-- Detail box -->
           <div class="details_box__section mt-3">
-            ${render__h1(sname, stationStatusMapper(smetadata ? smetadata.state : false, origin))}
+            ${render__h1(sname, stationStatusMapper(smetadata , mvalue, origin))}
             <div class="col-12">
               ${
                 smetadata
@@ -107,7 +107,14 @@ export function render__details_box() {
               ${
                 this.current_station.station_plugs
                   ? this.current_station.station_plugs.map((o, i) => {
-                      const { sactive } = o;
+                      const { mvalue, sactive } = o;
+
+                      let icon = null;
+                      if(sactive){
+                        icon = mvalue == 1 ? icon__green_dot : icon__red_dot;
+                      }else{
+                        icon = icon__grey_dot;
+                      }
 
                       return html`
                         <div class="element_background d-flex align-items-center pt-2 pb-2 mt-3">
@@ -115,7 +122,7 @@ export function render__details_box() {
                             <img
                               class="w-18px d-block position-absolute"
                               style="top: -6px;right: -6px;"
-                              src="${sactive ? icon__green_dot : icon__red_dot}"
+                              src="${icon}"
                             />
                             <img class="w-24px d-block" src="${icon__type_1}" alt="" />
                           </div>

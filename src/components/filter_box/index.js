@@ -34,6 +34,20 @@ export function render__filter_box() {
     }
   };
 
+  const handle__availability = e => {
+    if (e.target.checked) {
+      this.filters = {
+        ...this.filters,
+        availability: true
+      };
+    } else {
+      this.filters = {
+        ...this.filters,
+        availability: false
+      };
+    }
+  }
+
   const handle__plug_type = e => {
     if (e.target.checked) {
       this.filters = {
@@ -88,6 +102,7 @@ export function render__filter_box() {
       ...this.filters,
       radius: 0,
       access_type: [],
+      availability: false,
       plug_type: [],
       provider: []
     };
@@ -122,6 +137,24 @@ export function render__filter_box() {
             </div>
           </div>
           <div class="col-12 p-0 mt-2 d-none d-lg-block">
+          <div style="border-bottom: 2px solid #f0f1f1;"></div>
+        </div>
+        <div class="col-12 mt-3 mb-3">
+          <p class="fs-14 color-black-400">${t.availability[this.language]}</p>
+          <div class="custom-checkbox mt-3">
+          <label class="fs-16">
+            <input
+              value="sss"
+              type="checkbox"
+              id="availability"
+              @change="${e => handle__availability(e)}"
+            />
+            <span class="custom-checkbox-checkbox mr-2"></span>
+            ${t.availability_description[this.language]}
+          </label>
+        </div>
+        </div>
+          <div class="col-12 p-0 mt-2 d-none d-lg-block">
             <div style="border-bottom: 2px solid #f0f1f1;"></div>
           </div>
           <div class="col-12 mt-3 mb-3">
@@ -139,7 +172,7 @@ export function render__filter_box() {
           <div class="col-12">
             <p class="fs-14 color-black-400">${t.type_of_access[this.language].toUpperCase()}</p>
             ${this.access_types.map((o, i) => {
-              return html`
+    return html`
                 <div class="custom-checkbox ${i === 0 ? 'mt-3' : ''}">
                   <label htmlFor="access-${o[0]}" class="fs-16">
                     <input
@@ -153,12 +186,12 @@ export function render__filter_box() {
                   </label>
                 </div>
                 ${i !== this.access_types.length - 1
-                  ? html`
+        ? html`
                       <hr />
                     `
-                  : ''}
+        : ''}
               `;
-            })}
+  })}
           </div>
         </div>
         <!-- Detail box -->
@@ -189,7 +222,7 @@ export function render__filter_box() {
             <!-- "700 bar small vehicles" "UNKNOWN" -->
 
             ${this.plug_types.map((o, i) => {
-              return html`
+    return html`
                 <div class="custom-checkbox ${i === 0 ? 'mt-3' : ''}">
                   <label htmlFor="plug-1" class="fs-16">
                     <input type="checkbox" id="plug-${o[0]}" value="${o[1]}" @change="${e => handle__plug_type(e)}" />
@@ -198,12 +231,12 @@ export function render__filter_box() {
                   </label>
                 </div>
                 ${i !== this.plug_types.length - 1
-                  ? html`
+        ? html`
                       <hr />
                     `
-                  : null}
+        : null}
               `;
-            })}
+  })}
           </div>
         </div>
         <!-- Detail box -->
@@ -211,7 +244,7 @@ export function render__filter_box() {
           <div class="col-12">
             <p class="fs-14 mb-3 color-black-400">${t.provider[this.language].toUpperCase()}</p>
             ${this.provider_list.map((o, i) => {
-              return html`
+    return html`
                 <div class="custom-checkbox mt-2">
                   <label htmlFor=${`provider-${i + 1}`} class="fs-16">
                     <input type="checkbox" id=${`provider-${i + 1}`} value=${o} @change="${e => handle__provider(e)}" />
@@ -221,7 +254,7 @@ export function render__filter_box() {
                 </div>
                 <hr />
               `;
-            })}
+  })}
           </div>
         </div>
         <!-- maxPower box -->
@@ -233,8 +266,8 @@ export function render__filter_box() {
                 id="maxPowerInput"
                 type="number"
                 @input=${e => {
-                  handle__maxPower(e);
-                }}
+      handle__maxPower(e);
+    }}
               />
               <label class="ml-1 mb-0" htmlFor="maxPowerInput">kWh</label>
             </div>
@@ -246,9 +279,9 @@ export function render__filter_box() {
         <button
           class="flex-fill filter_box_footer__button secondary mr-2"
           @click="${() => {
-            this.showFilters = false;
-            handle__reset_filters();
-          }}"
+      this.showFilters = false;
+      handle__reset_filters();
+    }}"
         >
           ${t.cancel_filters[this.language]}
         </button>

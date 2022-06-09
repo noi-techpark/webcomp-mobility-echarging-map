@@ -115,18 +115,23 @@ class EMobilityMap extends BaseClass {
         }
       }
 
+      /**
+ * provider
+ */
+      const condition_availability = this.filters.availability ? o.mvalue > 0 : true;
+
       /* Merge conditions */
-      return condition_access_type && condition_provider && Boolean(condition_plug_type) && condition_maxPower;
+      return condition_access_type && condition_provider && Boolean(condition_plug_type) && condition_maxPower && condition_availability;
     });
 
     /* PRINT filtered stations on map */
     filtered_stations_details.map(o => {
-      const { smetadata, sorigin, mvalue} = o;
+      const { smetadata, sorigin, mvalue } = o;
       const marker_position = getLatLongFromStationDetail(o.scoordinate);
       // stations_status_types
       /** Creating the icon */
       const station_icon = L.icon({
-        iconUrl: stationStatusMapper(smetadata,mvalue, sorigin),
+        iconUrl: stationStatusMapper(smetadata, mvalue, sorigin),
         iconSize: [36, 36]
       });
       const marker = L.marker([marker_position.lat, marker_position.lng], {

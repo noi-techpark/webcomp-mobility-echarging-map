@@ -39,6 +39,16 @@ export const t = {
     de: 'Verfügbar',
     it: 'Disponibile'
   },
+  availability: {
+    en: 'Availability',
+    de: 'Verfügbarkeit',
+    it: 'Disponibiilità'
+  },
+  availability_description: {
+    en: 'Only with available charging stations',
+    de: 'Nur verfügbare Ladestationen',
+    it: 'Solo colonnine disponibiili'
+  },
   maintenance: {
     en: 'Maintenance',
     de: 'Wartung',

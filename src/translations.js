@@ -20,7 +20,7 @@ export const t = {
     it: 'Nessuno'
   },
   at_least_one_free_column: {
-    en: 'At least one free charging station',
+    en: 'At least one free charging plug',
     de: 'Mindestens eine freie Ladesäule',
     it: 'Almeno una colonnina libera'
   },

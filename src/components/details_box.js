@@ -24,7 +24,7 @@ import { render__h1 } from './typography';
 export function render__details_box() {
   const { smetadata, sname, scoordinate, accessInfo , mvalue} = this.current_station;
 
-  const { origin } = this.current_station;
+  const { sorigin } = this.current_station;
 
   const user_actions_container__details = this.shadowRoot.getElementById('user_actions_container__details');
   const details_box__expand_handle__details = this.shadowRoot.getElementById('details_box__expand_handle__details');
@@ -66,7 +66,7 @@ export function render__details_box() {
         <div class="details_box__body">
           <!-- Detail box -->
           <div class="details_box__section mt-3">
-            ${render__h1(sname, stationStatusMapper(smetadata , mvalue, origin))}
+            ${render__h1(sname, stationStatusMapper(smetadata , mvalue, sorigin))}
             <div class="col-12">
               ${
                 smetadata

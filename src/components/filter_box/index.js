@@ -262,7 +262,7 @@ export function render__filter_box() {
           <div class="col-12">
             <p class="fs-14 mb-3 color-black-400">${t.maxPower[this.language].toUpperCase()}</p>
             <div class="d-flex align-items-center">
-              <input
+              <input min="0"
                 id="maxPowerInput"
                 type="number"
                 @input=${e => {

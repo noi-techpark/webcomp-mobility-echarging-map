@@ -110,7 +110,7 @@ class EMobilityMap extends BaseClass {
         // station_plugs;
         const outlets = station_plugs.map(plug => plug.smetadata.outlets);
         const maxPowers = outlets.flat().map(outlet => parseInt(outlet.maxPower, 10));
-        if (!maxPowers.includes(this.filters.maxPower)) {
+        if (!maxPowers.some(m => m >= this.filters.maxPower)) {
           condition_maxPower = false;
         }
       }

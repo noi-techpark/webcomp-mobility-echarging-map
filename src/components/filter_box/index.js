@@ -101,6 +101,7 @@ export function render__filter_box() {
     this.filters = {
       ...this.filters,
       radius: 0,
+      maxPower: 0,
       access_type: [],
       availability: false,
       plug_type: [],
@@ -112,6 +113,7 @@ export function render__filter_box() {
       element.checked = false;
     }
     this.shadowRoot.getElementById('input_filter_radius').value = '0';
+    this.shadowRoot.getElementById('maxPowerInput').value = '0';
     repaint_map();
   };
 

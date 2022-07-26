@@ -169,10 +169,10 @@ export const t = {
     de: 'Anbieter',
     it: 'Fornitore'
   },
-  maxPower: {
-    en: 'Max power',
-    de: 'Maximale Leistung',
-    it: 'Massima potenza erogata'
+  minPower: {
+    en: 'Min power',
+    de: 'Minimale Leistung',
+    it: 'Minima potenza erogata'
   },
   open_charging_station: {
     en: 'Charging station open',

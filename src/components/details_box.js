@@ -22,9 +22,15 @@ import { render__state_label } from './state_label';
 import { render__h1 } from './typography';
 
 export function render__details_box() {
-  const { smetadata, sname, scoordinate, accessInfo , mvalue} = this.current_station;
+  const { smetadata, sname, scoordinate, accessInfo, mvalue } = this.current_station;
 
   const { sorigin } = this.current_station;
+
+  // converts unicode characters to strings like \u00df for ß in "Straße"
+  const address = smetadata != undefined ? smetadata.address.replace(/\\u[\dA-F]{4}/gi,
+    function (match) {
+      return String.fromCharCode(parseInt(match.replace(/\\u/g, ''), 16));
+    }) : null;
 
   const user_actions_container__details = this.shadowRoot.getElementById('user_actions_container__details');
   const details_box__expand_handle__details = this.shadowRoot.getElementById('details_box__expand_handle__details');
@@ -33,6 +39,8 @@ export function render__details_box() {
     const binded_initialize_swipe = initialize_swipe.bind(this);
     binded_initialize_swipe(details_box__expand_handle__details, user_actions_container__details);
   }
+
+
 
   this.render__rating_section = render__rating_section.bind(this);
 
@@ -45,20 +53,19 @@ export function render__details_box() {
           ${this.details_mobile_state ? unsafeHTML(icon__down) : unsafeHTML(icon__up)}
         </div>
         <div class="details_box__header">
-          ${
-            smetadata
-              ? html`
+          ${smetadata
+      ? html`
                   ${render__state_label(smetadata.state, this.language)}
                   ${render__state_label(smetadata.accessType, this.language)}
                 `
-              : undefined
-          }
+      : undefined
+    }
           <div
             class="details_box__close_button"
             @click="${() => {
-              user_actions_container__details.classList.remove('open');
-              this.current_station = {};
-            }}"
+      user_actions_container__details.classList.remove('open');
+      this.current_station = {};
+    }}"
           >
             <img src="${icon__close}" alt="" />
           </div>
@@ -66,20 +73,13 @@ export function render__details_box() {
         <div class="details_box__body">
           <!-- Detail box -->
           <div class="details_box__section mt-3">
-            ${render__h1(sname, stationStatusMapper(smetadata , mvalue, sorigin))}
+            ${render__h1(sname, stationStatusMapper(smetadata, mvalue, sorigin))}
             <div class="col-12">
-              ${
-                smetadata
-                  ? html`
-                      <p class="color-black-300 mt-2 fw-300">${smetadata.address}</p>
-                    `
-                  : null
-              }
+              <p class="color-black-300 mt-2 fw-300"> ${address} <span>
               <p class="color-black-300 fw-300">${this.current_station.municipality}</p>
               ${this.render__rating_section()}
-              ${
-                scoordinate
-                  ? html`
+              ${scoordinate
+      ? html`
                       <a
                         href="${`https://www.google.com/maps/dir/${scoordinate.y},${scoordinate.x}/${this.current_location.lat},${this.current_location.lng}`}"
                         target="_blank"
@@ -88,8 +88,8 @@ export function render__details_box() {
                         ${t.directions[this.language]} →
                       </a>
                     `
-                  : null
-              }
+      : null
+    }
             </div>
           </div>
           <!-- Detail box -->
@@ -104,19 +104,18 @@ export function render__details_box() {
               </div>
             </div>
             <div class="col-12">
-              ${
-                this.current_station.station_plugs
-                  ? this.current_station.station_plugs.map((o, i) => {
-                      const { mvalue, sactive } = o;
+              ${this.current_station.station_plugs
+      ? this.current_station.station_plugs.map((o, i) => {
+        const { mvalue, sactive } = o;
 
-                      let icon = null;
-                      if(sactive){
-                        icon = mvalue == 1 ? icon__green_dot : icon__red_dot;
-                      }else{
-                        icon = icon__grey_dot;
-                      }
+        let icon = null;
+        if (sactive) {
+          icon = mvalue == 1 ? icon__green_dot : icon__red_dot;
+        } else {
+          icon = icon__grey_dot;
+        }
 
-                      return html`
+        return html`
                         <div class="element_background d-flex align-items-center pt-2 pb-2 mt-3">
                           <div class="ml-3 mr-3 position-relative">
                             <img
@@ -132,8 +131,8 @@ export function render__details_box() {
                       </p> -->
                             <p class="fs-16 mt-1">${t.type_sockets[this.language]}:</p>
                             ${o.smetadata.outlets.map(
-                              outlet =>
-                                html`
+          outlet =>
+            html`
                                   <div class="d-flex">
                                     <p class="fs-14 mt-1 mr-2">-</p>
                                     <p class="fs-14 mt-1">
@@ -141,23 +140,23 @@ export function render__details_box() {
                                       <span class="fs-12 color-black-400 mt-2 fw-300">
                                         ${t.column[this.language]} ${i + 1} ∙
                                         ${Object.prototype.hasOwnProperty.call(outlet, 'minCurrent')
-                                          ? outlet.minCurrent
-                                          : '*'}
+                ? outlet.minCurrent
+                : '*'}
                                         - ${outlet.maxCurrent || '*'} A
                                       </span>
                                     </p>
                                   </div>
                                 `
-                            )}
+        )}
                           </div>
                           <!-- <div class="text-center flex-fill mr-2 ml-2">
                             <img class="w-24px d-table mr-auto ml-auto" src="${icon__info}" alt="" />
                           </div> -->
                         </div>
                       `;
-                    })
-                  : null
-              }
+      })
+      : null
+    }
             </div>
             </div>
             <!-- Detail box -->
@@ -188,9 +187,8 @@ export function render__details_box() {
             </div>
             <!-- Detail box -->
             <div class="details_box__section mt-3">
-              ${
-                this.station_near_restaurants.length || this.station_near_accomodations.length
-                  ? html`
+              ${this.station_near_restaurants.length || this.station_near_accomodations.length
+      ? html`
                       <div class="col-12 d-flex align-items-center">
                         <div>
                           <img class="w-16px mr-2 d-block" src="${icon__pin}" alt="" />
@@ -200,11 +198,11 @@ export function render__details_box() {
                         </div>
                       </div>
                     `
-                  : null
-              }
+      : null
+    }
               <div class="col-12">
                 ${this.station_near_restaurants.map(o => {
-                  return html`
+      return html`
                     <div class="element_background d-flex pt-2 pb-2 mt-3">
                       <div class="ml-3 mr-3 position-relative mt-2">
                         <img class="w-24px d-block" src="${icon_restaurant_green}" alt="" />
@@ -213,14 +211,14 @@ export function render__details_box() {
                         <p class="fs-16 mt-1">${o.Detail[this.language] ? o.Detail[this.language].Title : '---'}</p>
                         <p class="fs-12 color-black-400 mt-1 pr-2">
                           ${o.Detail[this.language]
-                            ? utils_truncate(encodeXml(o.Detail[this.language].BaseText), 40)
-                            : 'No description'}
+          ? utils_truncate(encodeXml(o.Detail[this.language].BaseText), 40)
+          : 'No description'}
                         </p>
                         <a
                           href="${`https://www.suedtirol.info/${this.language}/tripmapping/activity/${o.Id.replace(
-                            'GASTRO',
-                            'SMGPOI'
-                          )}`}"
+            'GASTRO',
+            'SMGPOI'
+          )}`}"
                           class="color-green color-green--hover fs-16 fw-300 mt-2 mb-2 d-block"
                           target="_blank"
                           >${t.more_informations[this.language]} →</a
@@ -228,9 +226,9 @@ export function render__details_box() {
                       </div>
                     </div>
                   `;
-                })}
+    })}
                 ${this.station_near_accomodations.map(o => {
-                  return html`
+      return html`
                     <div class="element_background d-flex pt-2 pb-2 mt-3">
                       <div class="ml-3 mr-3 position-relative mt-2">
                         <img class="w-24px d-block" src="${icon_hotel_green}" alt="" />
@@ -248,7 +246,7 @@ export function render__details_box() {
                       </div>
                     </div>
                   `;
-                })}
+    })}
               </div>
             </div>
             <!-- End -->

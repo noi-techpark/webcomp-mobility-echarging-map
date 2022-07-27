@@ -271,7 +271,7 @@ export function render__filter_box() {
       handle__maxPower(e);
     }}
               />
-              <label class="ml-1 mb-0" htmlFor="maxPowerInput">kWh</label>
+              <label class="ml-1 mb-0" htmlFor="maxPowerInput">kW</label>
             </div>
           </div>
         </div>

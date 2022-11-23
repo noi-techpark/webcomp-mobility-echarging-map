@@ -58,7 +58,7 @@
       },
       {
         "key": "isFullScreen",
-        "type": "bool",        
+        "type": "null",        
         "required": false,
         "label": "If true sets the default view to full screen and to minified otherwise",
         "options": {

@@ -6,6 +6,7 @@ import { html, css, unsafeCSS } from 'lit-element';
 import { BaseClass } from './components/baseClass';
 import { render__map_controls } from './components/map_controls';
 import { map_tag } from './components/map_tag';
+import { map_tag_minified } from './components/map_tag_minified';
 import image_logo from './icons/logo.png';
 import { observed_properties } from './observed_properties';
 import style__buttons from './scss/buttons.scss';
@@ -330,7 +331,7 @@ class EMobilityMap extends BaseClass {
     //   ${style__buttons.toString()}
     // </style>
     return html`
-      <div id=${'e_mobility_map'} class="e_mobility_map platform_${get_user_platform()}">
+      <div id=${'e_mobility_map'} class="e_mobility_map platform_${get_user_platform()} ${this.fullScreen ? '': 'closed'}">
         ${this.render__loading_overlay()} ${this.render__message_overlay()} ${this.render__search_box_underlay()}
         <div style="z-index: 1003" class="user_actions_container__search_box">
           ${this.render__search_box()}
@@ -354,7 +355,7 @@ class EMobilityMap extends BaseClass {
           ${this.render__filter_box()}
         </div>
 
-        ${map_tag}
+        ${this.fullScreen ? map_tag : map_tag_minified}
 
         <div class="logo_container">
           <div class="img" style="background-image: url(${this.logo ? this.logo : image_logo})"></div>

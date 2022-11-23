@@ -23,5 +23,6 @@ export const observed_properties = {
   plug_types: { type: Array },
   // Parameters
   logo: { type: String },
-  language: { type: String }
+  language: { type: String },
+  fullScreen: { type: Boolean }
 };

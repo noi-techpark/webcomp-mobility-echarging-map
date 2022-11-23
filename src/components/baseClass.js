@@ -38,7 +38,7 @@ export class BaseClass extends LitElement {
     this.ratingModalStep = 0;
     this.showRatingModal = false;
     this.token = TOKEN;
-    // this.isFullScreen = false;
+    this.isFullScreen = false;
     this.station_near_restaurants = [];
     this.station_near_accomodations = [];
     this.provider_list = [];

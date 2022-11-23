@@ -6,7 +6,7 @@ import { html, css, unsafeCSS } from 'lit-element';
 import { BaseClass } from './components/baseClass';
 import { render__map_controls } from './components/map_controls';
 import { map_tag } from './components/map_tag';
-import { map_tag_minified } from './components/map_tag_minified';
+import { map_tag_closed } from './components/map_tag_closed';
 import image_logo from './icons/logo.png';
 import { observed_properties } from './observed_properties';
 import style__buttons from './scss/buttons.scss';
@@ -355,7 +355,7 @@ class EMobilityMap extends BaseClass {
           ${this.render__filter_box()}
         </div>
 
-        ${this.fullScreen ? map_tag : map_tag_minified}
+        ${this.fullScreen ? map_tag : map_tag_closed}
 
         <div class="logo_container">
           <div class="img" style="background-image: url(${this.logo ? this.logo : image_logo})"></div>

@@ -13,7 +13,6 @@ export const observed_properties = {
   showRatingModal: { type: Boolean },
   ratingModalStep: { type: Number },
   user_vote: { type: Object },
-  isFullScreen: { type: Boolean },
   station_near_restaurants: { type: Object },
   station_near_accomodations: { type: Object },
   provider_list: { type: Array },
@@ -24,5 +23,5 @@ export const observed_properties = {
   // Parameters
   logo: { type: String },
   language: { type: String },
-  fullScreen: { type: Boolean }
+  isFullScreen: { type: Boolean }
 };

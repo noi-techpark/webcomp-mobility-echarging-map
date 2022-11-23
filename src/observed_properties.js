@@ -23,5 +23,5 @@ export const observed_properties = {
   // Parameters
   logo: { type: String },
   language: { type: String },
-  isFullScreen: { type: Boolean }
+  isFullScreen: { type: Boolean, attribute: 'isFullScreen' }
 };

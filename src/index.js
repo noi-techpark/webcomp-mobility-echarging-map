@@ -308,6 +308,7 @@ class EMobilityMap extends BaseClass {
   }
 
   render() {
+    console.log(this.isFullScreen);
     // console.log(this.map_desktop_height, this.language);
     // console.log('rerender');
 

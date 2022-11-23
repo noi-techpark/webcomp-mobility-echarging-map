@@ -356,7 +356,7 @@ class EMobilityMap extends BaseClass {
           ${this.render__filter_box()}
         </div>
 
-        ${this.isFullScreen ? map_tag : map_tag_closed}
+        ${map_tag}
 
         <div class="logo_container">
           <div class="img" style="background-image: url(${this.logo ? this.logo : image_logo})"></div>

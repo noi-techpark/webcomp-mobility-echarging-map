@@ -6,7 +6,7 @@ import { html, css, unsafeCSS } from 'lit-element';
 import { BaseClass } from './components/baseClass';
 import { render__map_controls } from './components/map_controls';
 import { map_tag } from './components/map_tag';
-import { map_tag_closed } from './components/map_tag_closed';
+// import { map_tag_closed } from './components/map_tag_closed';
 import image_logo from './icons/logo.png';
 import { observed_properties } from './observed_properties';
 import style__buttons from './scss/buttons.scss';
@@ -24,7 +24,14 @@ class EMobilityMap extends BaseClass {
   }
 
   async initializeMap() {
-    this.map = L.map(this.shadowRoot.getElementById('map'), { zoomControl: false }).setView(
+    // closed or opens map on mobile depending on mobileFullScreen
+    const map = this.shadowRoot.getElementById('map');
+    if (this.mobileFullScreen) {
+      const e_mobility_map = this.shadowRoot.getElementById('e_mobility_map');
+      e_mobility_map.classList.toggle('closed');
+      map.classList.toggle('closed');
+    }
+    this.map = L.map(map, { zoomControl: false }).setView(
       [this.current_location.lat, this.current_location.lng],
       13
     );
@@ -269,8 +276,8 @@ class EMobilityMap extends BaseClass {
 
   handleFullScreenMap() {
     const e_mobility_map = this.shadowRoot.getElementById('e_mobility_map');
-    const map = this.shadowRoot.getElementById('map');
     e_mobility_map.classList.toggle('closed');
+    const map = this.shadowRoot.getElementById('map');
     map.classList.toggle('closed');
 
     if (this.isFullScreen) {
@@ -308,7 +315,6 @@ class EMobilityMap extends BaseClass {
   }
 
   render() {
-    console.log(this.isFullScreen);
     // console.log(this.map_desktop_height, this.language);
     // console.log('rerender');
 
@@ -332,7 +338,7 @@ class EMobilityMap extends BaseClass {
     //   ${style__buttons.toString()}
     // </style>
     return html`
-      <div id=${'e_mobility_map'} class="e_mobility_map  ${this.isFullScreen ? '' : 'closed'} platform_${get_user_platform()}">
+      <div id=${'e_mobility_map'} class="e_mobility_map closed platform_${get_user_platform()}">
         ${this.render__loading_overlay()} ${this.render__message_overlay()} ${this.render__search_box_underlay()}
         <div style="z-index: 1003" class="user_actions_container__search_box">
           ${this.render__search_box()}

@@ -20,8 +20,9 @@ export const observed_properties = {
   details_mobile_state: { type: Boolean },
   access_types: { type: Array },
   plug_types: { type: Array },
+  isFullScreen: { type: Boolean },
   // Parameters
   logo: { type: String },
   language: { type: String },
-  isFullScreen: { type: Boolean }
+  mobileFullScreen: { type: Boolean }
 };

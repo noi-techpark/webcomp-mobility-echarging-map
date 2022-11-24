@@ -26,7 +26,9 @@ class EMobilityMap extends BaseClass {
   async initializeMap() {
     // closed or opens map on mobile depending on mobileFullScreen
     const map = this.shadowRoot.getElementById('map');
-    if (this.mobileFullScreen) {
+    console.log(this.mobileFullScreen);
+    if (this.mobileFullScreen == undefined) {
+      this.isFullScreen = false;
       const e_mobility_map = this.shadowRoot.getElementById('e_mobility_map');
       e_mobility_map.classList.toggle('closed');
       map.classList.toggle('closed');
@@ -338,7 +340,7 @@ class EMobilityMap extends BaseClass {
     //   ${style__buttons.toString()}
     // </style>
     return html`
-      <div id=${'e_mobility_map'} class="e_mobility_map closed platform_${get_user_platform()}">
+      <div id=${'e_mobility_map'} class="e_mobility_map platform_${get_user_platform()}">
         ${this.render__loading_overlay()} ${this.render__message_overlay()} ${this.render__search_box_underlay()}
         <div style="z-index: 1003" class="user_actions_container__search_box">
           ${this.render__search_box()}

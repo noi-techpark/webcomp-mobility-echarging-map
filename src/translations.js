@@ -109,6 +109,11 @@ export const t = {
     de: 'Mehr Informationen',
     it: 'Maggiori informazioni'
   },
+  website: {
+    en: 'Website',
+    de: 'Webseite',
+    it: 'Sito web'
+  },
   hours: {
     en: 'Hours',
     de: 'Stunden',

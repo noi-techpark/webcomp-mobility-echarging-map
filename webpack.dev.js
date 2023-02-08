@@ -36,6 +36,7 @@ module.exports = {
     contentBase: path.join(__dirname, 'work'),
     compress: true,
     writeToDisk: true,
-    port: 8999
+    port: 8998,
+    host: '0.0.0.0'
   }
 };

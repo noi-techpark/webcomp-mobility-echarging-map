@@ -215,14 +215,20 @@ export function render__details_box() {
           : 'No description'}
                         </p>
                         <a
-                          href="${`https://www.suedtirol.info/${this.language}/tripmapping/activity/${o.Id.replace(
-            'GASTRO',
-            'SMGPOI'
-          )}`}"
+                          href="${`https://www.suedtirol.info/${this.language}/tripmapping/activity/${o.Id
+          .replace('GASTRO', 'SMGPOI')
+          .replace('_reduced', '')}`}"
                           class="color-green color-green--hover fs-16 fw-300 mt-2 mb-2 d-block"
                           target="_blank"
                           >${t.more_informations[this.language]} →</a
                         >
+                        ${o.ContactInfos[this.language].Url ? html`
+                        <a
+                          href="${`${o.ContactInfos[this.language].Url}`}"
+                          class="color-green color-green--hover fs-16 fw-300 mt-2 mb-2 d-block"
+                          target="_blank"
+                          >${t.website[this.language]} →</a
+                        >` : ''}
                       </div>
                     </div>
                   `;
@@ -238,11 +244,18 @@ export function render__details_box() {
                           ${o.AccoDetail[this.language] ? o.AccoDetail[this.language].Name : '---'}
                         </p>
                         <a
-                          href="${`https://www.suedtirol.info/${this.language}/tripmapping/acco/${o.Id}`}"
+                          href="${`https://www.suedtirol.info/${this.language}/tripmapping/acco/${o.Id.replace('_REDUCED', '')}`}"
                           class="color-green color-green--hover fs-16 fw-300 mt-2 mb-2 d-block"
                           target="_blank"
                           >${t.more_informations[this.language]} →</a
                         >
+                        ${o.AccoDetail[this.language].Website ? html`
+                          <a
+                            href="${`${o.AccoDetail[this.language].Website}`}"
+                            class="color-green color-green--hover fs-16 fw-300 mt-2 mb-2 d-block"
+                            target="_blank"
+                            >${t.website[this.language]} →</a
+                          >` : ''}
                       </div>
                     </div>
                   `;

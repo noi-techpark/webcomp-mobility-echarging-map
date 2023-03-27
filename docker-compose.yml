@@ -5,7 +5,7 @@ services:
       context: .
       dockerfile: infrastructure/docker/node.dockerfile
     volumes:
-      - ./:/code:Z
+      - ./:/code
     working_dir: /code
     command: sh -c "test -d node_modules || npm install; npm run start"
     ports:

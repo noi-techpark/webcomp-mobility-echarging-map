@@ -27,7 +27,7 @@ export function render__details_box() {
   const { sorigin } = this.current_station;
 
   // converts unicode characters to strings like \u00df for ß in "Straße"
-  const address = smetadata != undefined ? smetadata.address.replace(/\\u[\dA-F]{4}/gi,
+  const address = smetadata != undefined && smetadata.address != undefined ? smetadata.address.replace(/\\u[\dA-F]{4}/gi,
     function (match) {
       return String.fromCharCode(parseInt(match.replace(/\\u/g, ''), 16));
     }) : null;

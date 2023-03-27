@@ -5,7 +5,7 @@ const NINJA_BASE_PATH = 'https://mobility.api.opendatahub.bz.it/v2';
 
 export async function request__access_types() {
   const request = await fetch(
-    `${NINJA_BASE_PATH}/flat/EChargingStation/*/latest?limit=-1&offset=0&select=smetadata.accessType&where=sactive.eq.true&shownull=false&distinct=true&origin=${fetch_origin}`
+    `${NINJA_BASE_PATH}/flat/EChargingStation?limit=-1&offset=0&select=smetadata.accessType&where=sactive.eq.true&shownull=false&distinct=true&origin=${fetch_origin}`
   );
   const response = await request.json();
   this.access_types = response.data.map((o, i) => [
@@ -33,30 +33,47 @@ export async function request__plug_types() {
   }
 }
 
+// merge lists of stations by scode
+function merge_by_scode(...lists_to_merge) {
+  const ret = {};
+  lists_to_merge.flat().forEach(e => ret[e.scode] = {...ret[e.scode], ...e});
+  return Object.values(ret);
+}
+
 export async function request__stations_plugs(station_id) {
   try {
-    const request = await fetch(
-      `${NINJA_BASE_PATH}/flat/EChargingPlug/*/latest?limit=-1&offset=0&where=sactive.eq.true,pcode.eq.${station_id}&shownull=false&origin=${fetch_origin}`
-    );
-    const response = await request.json();
-    return response.data;
+    // some stations don't have data and therefore don't show up in the level 4 ninja API call
+    // So we have to do two separate requests and merge the data
+    const all_plugs = await (await fetch(
+      `${NINJA_BASE_PATH}/flat/EChargingPlug?limit=-1&offset=0&where=sactive.eq.true,pcode.eq.${station_id}&shownull=false&origin=${fetch_origin}`
+    )).json();
+    const plugs_with_data = await (await fetch(
+      `${NINJA_BASE_PATH}/flat/EChargingPlug/echarging-plug-status/latest?select=mvalue,scode&limit=-1&offset=0&where=sactive.eq.true,pcode.eq.${station_id}&shownull=false&origin=${fetch_origin}`
+    )).json();
+
+    return merge_by_scode(all_plugs.data, plugs_with_data.data);
   } catch (e) {
     return undefined;
   }
 }
-
 
 /**
  * STATIONS
  */
 export async function request__get_stations_details() {
   this.is_loading = true;
-  const request = await fetch(
-    `${NINJA_BASE_PATH}/flat/EChargingStation/*/latest?limit=-1&offset=0&where=sactive.eq.true&shownull=false&distinct=true&origin=${fetch_origin}`,
+  // some stations don't have data and therefore don't show up in the level 4 ninja API call
+  // So we have to do two separate requests and merge the data
+  const all_stations = await(await fetch(
+    `${NINJA_BASE_PATH}/flat/EChargingStation?limit=-1&offset=0&where=sactive.eq.true&shownull=false&distinct=true&origin=${fetch_origin}`,
     fetch_options
-  );
-  const response = await request.json();
-  this.all_stations_details = response.data;
+  )).json();
+  const stations_with_data = await(await fetch(
+    `${NINJA_BASE_PATH}/flat/EChargingStation/number-available/latest?select=mvalue,scode&limit=-1&offset=0&where=sactive.eq.true&shownull=false&distinct=true&origin=${fetch_origin}`,
+    fetch_options
+  )).json();
+
+  this.all_stations_details = merge_by_scode(all_stations.data, stations_with_data.data);
   this.is_loading = false;
 }
 

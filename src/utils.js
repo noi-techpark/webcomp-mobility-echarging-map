@@ -1,5 +1,6 @@
 import icon__hydrogen_marker from './icons/blue/hydrogen@2x.png';
 import icon__green_marker from './icons/green/green@2x.png';
+import icon__green_alt_marker from './icons/green/green_alt_lightning.png';
 import icon__orange_marker from './icons/orange/orange@2x.png';
 import icon__grey_marker from './icons/grey/grey@2x.png';
 import icon__unknown_marker from './icons/grey/grey_exclamation.png';
@@ -63,7 +64,9 @@ export function stationStatusMapper(smetadata, mvalue, origin) {
       default:
         let icon = null;
 
-        if (mvalue == 0) {
+        if (mvalue === undefined) {
+          icon = icon__green_alt_marker;
+        } else if (mvalue == 0) {
           icon = icon__red_marker;
         } else {
           icon = capacity == mvalue ? icon__green_marker : icon__orange_marker;

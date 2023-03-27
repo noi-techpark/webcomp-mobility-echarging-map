@@ -33,7 +33,7 @@ export async function request__plug_types() {
   }
 }
 
-// merge lists of stations by scode
+// merge lists of stations by scode. Also flags which ones are static (have no data)
 function merge_by_scode(...lists_to_merge) {
   const ret = {};
   lists_to_merge.flat().forEach(e => ret[e.scode] = {...ret[e.scode], ...e});
@@ -42,8 +42,6 @@ function merge_by_scode(...lists_to_merge) {
 
 export async function request__stations_plugs(station_id) {
   try {
-    // some stations don't have data and therefore don't show up in the level 4 ninja API call
-    // So we have to do two separate requests and merge the data
     const all_plugs = await (await fetch(
       `${NINJA_BASE_PATH}/flat/EChargingPlug?limit=-1&offset=0&where=sactive.eq.true,pcode.eq.${station_id}&shownull=false&origin=${fetch_origin}`
     )).json();
@@ -62,8 +60,6 @@ export async function request__stations_plugs(station_id) {
  */
 export async function request__get_stations_details() {
   this.is_loading = true;
-  // some stations don't have data and therefore don't show up in the level 4 ninja API call
-  // So we have to do two separate requests and merge the data
   const all_stations = await(await fetch(
     `${NINJA_BASE_PATH}/flat/EChargingStation?limit=-1&offset=0&where=sactive.eq.true&shownull=false&distinct=true&origin=${fetch_origin}`,
     fetch_options

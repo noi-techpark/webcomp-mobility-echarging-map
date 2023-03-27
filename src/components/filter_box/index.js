@@ -48,6 +48,20 @@ export function render__filter_box() {
     }
   }
 
+  const handle__realtime = e => {
+    if (e.target.checked) {
+      this.filters = {
+        ...this.filters,
+        realtime: true
+      };
+    } else {
+      this.filters = {
+        ...this.filters,
+        realtime: false
+      };
+    }
+  }
+
   const handle__plug_type = e => {
     if (e.target.checked) {
       this.filters = {
@@ -104,6 +118,7 @@ export function render__filter_box() {
       maxPower: 0,
       access_type: [],
       availability: false,
+      realtime: false,
       plug_type: [],
       provider: []
     };
@@ -153,6 +168,17 @@ export function render__filter_box() {
             />
             <span class="custom-checkbox-checkbox mr-2"></span>
             ${t.availability_description[this.language]}
+          </label>
+          <div class="custom-checkbox mt-3">
+          <label class="fs-16">
+            <input
+              value="sss"
+              type="checkbox"
+              id="realtime"
+              @change="${e => handle__realtime(e)}"
+            />
+            <span class="custom-checkbox-checkbox mr-2"></span>
+            ${t.realtime_description[this.language]}
           </label>
         </div>
         </div>

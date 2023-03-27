@@ -4,6 +4,7 @@ import icon__card from '../icons/card.png';
 import icon__close from '../icons/close@2x.png';
 import icon__down from '../icons/down.svg';
 import icon__green_dot from '../icons/green/green_dot.png';
+import icon__grey_dot_question from '../icons/grey/grey_dot_question.png';
 import icon_hotel_green from '../icons/green/icon_hotel_green.png';
 import icon_restaurant_green from '../icons/green/icon_restaurant_green.png';
 import icon__info from '../icons/info.png';
@@ -39,8 +40,6 @@ export function render__details_box() {
     const binded_initialize_swipe = initialize_swipe.bind(this);
     binded_initialize_swipe(details_box__expand_handle__details, user_actions_container__details);
   }
-
-
 
   this.render__rating_section = render__rating_section.bind(this);
 
@@ -95,6 +94,20 @@ export function render__details_box() {
           <!-- Detail box -->
           ${render__hours_section(accessInfo, this.language)}
           <!-- Detail box -->
+          ${this.current_station.mvalue === undefined ? html`
+          <div class="details_box__section mt-3 pb-3">
+            <div class="col-12 d-flex align-items-center">
+              <div>
+                  <img class="w-16px mr-2 d-block" src="${icon__info}" alt="" />
+              </div>
+              <div>
+                <p class="mb-0 mt-0 fs-16 ff-sued fw-400">
+                  ${t.no_real_time_data[this.language]}
+                </p>
+              </div>
+            </div>
+          </div>`: null}
+          <!-- Detail box -->
           <div class="details_box__section mt-3 pb-3">
             <div class="col-12 d-flex align-items-center">
               <div>
@@ -110,7 +123,16 @@ export function render__details_box() {
 
         let icon = null;
         if (sactive) {
-          icon = mvalue == 1 ? icon__green_dot : icon__red_dot;
+          switch(mvalue){
+            case undefined:
+              icon = icon__grey_dot_question;
+              break;
+            case 1:
+              icon = icon__green_dot;
+              break;
+            default:
+              icon = icon__red_dot;
+          }
         } else {
           icon = icon__grey_dot;
         }

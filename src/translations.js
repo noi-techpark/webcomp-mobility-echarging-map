@@ -49,6 +49,11 @@ export const t = {
     de: 'Nur verfügbare Ladestationen',
     it: 'Solo colonnine disponibiili'
   },
+  realtime_description: {
+    en: 'Only real-time availability',
+    de: 'Nur mit Echtzeit-Daten',
+    it: 'Solo disponibilità in tempo reale'
+  },
   maintenance: {
     en: 'Maintenance',
     de: 'Wartung',
@@ -96,7 +101,7 @@ export const t = {
   },
   directions: {
     en: 'Directions',
-    de: 'Richtungen',
+    de: 'Wegbeschreibung',
     it: 'Indicazioni stradali'
   },
   informations: {
@@ -123,6 +128,11 @@ export const t = {
     en: 'available charging stations',
     de: 'verfügbare Ladestationen',
     it: 'colonnine disponibili'
+  },
+  no_real_time_data: {
+    en: 'No real time data available for this station',
+    de: 'Keine Echtzeitdaten für diese Station verfügbar',
+    it: 'Nessun dato in tempo reale disponibile'
   },
   type_sockets: {
     en: 'Type sockets',

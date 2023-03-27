@@ -125,13 +125,16 @@ class EMobilityMap extends BaseClass {
         }
       }
 
-      /**
- * provider
- */
       const condition_availability = this.filters.availability ? o.mvalue > 0 : true;
+      const condition_realtime = this.filters.realtime ? o.mvalue >= 0 : true;
 
       /* Merge conditions */
-      return condition_access_type && condition_provider && Boolean(condition_plug_type) && condition_maxPower && condition_availability;
+      return condition_access_type 
+        && condition_provider 
+        && Boolean(condition_plug_type) 
+        && condition_maxPower 
+        && condition_availability 
+        && condition_realtime;
     });
 
     /* PRINT filtered stations on map */

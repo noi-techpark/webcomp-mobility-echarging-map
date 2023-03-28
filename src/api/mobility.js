@@ -1,7 +1,7 @@
 import { t } from '../translations';
 import { fetch_options, fetch_origin } from './constants';
 
-const NINJA_BASE_PATH = 'https://mobility.api.opendatahub.bz.it/v2';
+const NINJA_BASE_PATH = 'https://mobility.api.opendatahub.com/v2';
 
 export async function request__access_types() {
   const request = await fetch(
@@ -33,7 +33,7 @@ export async function request__plug_types() {
   }
 }
 
-// merge lists of stations by scode. Also flags which ones are static (have no data)
+// merge lists of stations by scode
 function merge_by_scode(...lists_to_merge) {
   const ret = {};
   lists_to_merge.flat().forEach(e => ret[e.scode] = {...ret[e.scode], ...e});

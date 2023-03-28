@@ -1,6 +1,6 @@
 import icon__hydrogen_marker from './icons/blue/hydrogen@2x.png';
 import icon__green_marker from './icons/green/green@2x.png';
-import icon__green_alt_marker from './icons/green/green_alt_lightning.png';
+import icon__teal_marker from './icons/teal/teal_lightning.png';
 import icon__orange_marker from './icons/orange/orange@2x.png';
 import icon__grey_marker from './icons/grey/grey@2x.png';
 import icon__unknown_marker from './icons/grey/grey_exclamation.png';
@@ -8,12 +8,14 @@ import icon__red_marker from './icons/red/red@2x.png';
 
 import icon__lock_hydrogen_marker from './icons/blue/blue_lock.png';
 import icon__lock_green_marker from './icons/green/green_lock.png';
+import icon__lock_teal_marker from './icons/teal/teal_lock.png';
 import icon__lock_grey_marker from './icons/grey/grey_lock.png';
 import icon__lock_red_marker from './icons/red/red_lock.png';
 import icon__lock_orange_marker from './icons/orange/orange_lock.png';
 
 import icon__star_hydrogen_marker from './icons/blue/blue_star.png';
 import icon__star_green_marker from './icons/green/green_star.png';
+import icon__star_teal_marker from './icons/teal/teal_star.png';
 import icon__star_grey_marker from './icons/grey/grey_star.png';
 import icon__star_red_marker from './icons/red/red_star.png';
 import icon__star_orange_marker from './icons/orange/orange_star.png';
@@ -33,8 +35,10 @@ export function stationStatusMapper(smetadata, mvalue, origin) {
 
         if (mvalue == 0) {
           iconLock = icon__lock_red_marker;
-        } else {
+        } else if(mvalue > 0) {
           iconLock = capacity == mvalue ? icon__lock_green_marker : icon__lock_orange_marker;
+        } else {
+          iconLock = icon__lock_teal_marker;
         }
 
         tmpobj = {
@@ -49,8 +53,10 @@ export function stationStatusMapper(smetadata, mvalue, origin) {
 
         if (mvalue == 0) {
           iconStar = icon__star_red_marker;
-        } else {
+        } else if (mvalue > 0) {
           iconStar = capacity == mvalue ? icon__star_green_marker : icon__star_orange_marker;
+        } else {
+          iconStar = icon__star_teal_marker;
         }
 
         tmpobj = {
@@ -64,12 +70,12 @@ export function stationStatusMapper(smetadata, mvalue, origin) {
       default:
         let icon = null;
 
-        if (mvalue === undefined) {
-          icon = icon__green_alt_marker;
-        } else if (mvalue == 0) {
+        if (mvalue == 0) {
           icon = icon__red_marker;
-        } else {
+        } else if (mvalue > 0) {
           icon = capacity == mvalue ? icon__green_marker : icon__orange_marker;
+        } else {
+          icon = icon__teal_marker;
         }
 
         tmpobj = {

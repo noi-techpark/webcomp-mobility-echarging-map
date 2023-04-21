@@ -11,6 +11,7 @@ import icon__info from '../icons/info.png';
 import icon__pin from '../icons/pin.png';
 import icon__red_dot from '../icons/red/red_dot.png';
 import icon__grey_dot from '../icons/grey/grey_dot.png';
+import icon__teal_info from '../icons/teal/teal_info.png';
 import icon__type_1 from '../icons/type_1.png';
 import icon__up from '../icons/up.svg';
 import style from '../scss/details_box.scss';
@@ -98,7 +99,7 @@ export function render__details_box() {
           <div class="details_box__section mt-3 pb-3">
             <div class="col-12 d-flex align-items-center">
               <div>
-                  <img class="w-16px mr-2 d-block" src="${icon__info}" alt="" />
+                  <img class="w-18px mr-2 d-block" src="${icon__teal_info}" alt="" />
               </div>
               <div>
                 <p class="mb-0 mt-0 fs-16 ff-sued fw-400">

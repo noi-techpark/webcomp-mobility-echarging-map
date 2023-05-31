@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: NOI Techpark <digital@noi.bz.it>
+//
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 import { fetch_origin } from './constants';
 
 const BASE_PATH = 'https://tourism.opendatahub.bz.it/v1';

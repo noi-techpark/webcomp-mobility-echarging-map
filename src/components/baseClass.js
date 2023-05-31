@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: NOI Techpark <digital@noi.bz.it>
+//
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 import L from 'leaflet';
 import { LitElement } from 'lit-element';
 import { request__get_stations_details, request__get_stations_plugs_details, request__access_types, request__plug_types } from '../api/mobility';

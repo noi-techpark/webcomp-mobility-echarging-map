@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: NOI Techpark <digital@noi.bz.it>
+//
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 import { html } from 'lit-element';
 import icon__star_void_grey from '../icons/grey/icon_star_void_grey.png';
 import icon__x_grey from '../icons/grey/icon_x_grey.png';

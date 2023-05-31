@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: NOI Techpark <digital@noi.bz.it>
+//
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 import L from 'leaflet';
 import leaflet_mrkcls from 'leaflet.markercluster';
 import style__markercluster from 'leaflet.markercluster/dist/MarkerCluster.css';

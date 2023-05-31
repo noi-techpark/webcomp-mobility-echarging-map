@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: NOI Techpark <digital@noi.bz.it>
+
+SPDX-License-Identifier: CC0-1.0
+-->
+
 # webcomp-mobility-echarging-map
 
 This project contains the map web component for the [Green Mobility South Tyrol](https://www.greenmobility.bz.it/) project.

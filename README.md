@@ -8,6 +8,7 @@ SPDX-License-Identifier: CC0-1.0
 
 This project contains the map web component for the [Green Mobility South Tyrol](https://www.greenmobility.bz.it/) project.
 
+![REUSE Compliance](https://github.com/noi-techpark/webcomp-mobility-echarging-map/actions/workflows/reuse.yml/badge.svg)
 [![CI/CD](https://github.com/noi-techpark/webcomp-mobility-echarging-map/actions/workflows/main.yml/badge.svg)](https://github.com/noi-techpark/webcomp-mobility-echarging-map/actions/workflows/main.yml)
 
 [Green Mobility South Tyrol](https://www.greenmobility.bz.it/it/) wants to split the existing functionalities of the website into reusable and independent components. Using these webcomponents, a developer can easily integrate the functionality of the single components into any website.

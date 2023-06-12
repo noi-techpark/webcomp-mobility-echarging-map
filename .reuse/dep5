@@ -3,6 +3,6 @@ Upstream-Name: webcomp-mobility-echarging-map
 Upstream-Contact: NOI Techpark <<digital@noi.bz.it>>
 Source: https://github.com/noi-techpark/webcomp-mobility-echarging-map
 
-Files: .github/* infrastructure/* .gitignore LICENSE.md .editorconfig .env.example .mailmap .prettierrc CONTRIBUTORS.rst *.png *.svg *.json *.ttf
+Files: .github/* infrastructure/* .gitignore .pre-commit-config.yaml LICENSE.md .editorconfig .env.example .mailmap .prettierrc CONTRIBUTORS.rst *.png *.svg *.json *.ttf
 Copyright: (c) NOI Techpark <digital@noi.bz.it>
 License: CC0-1.0

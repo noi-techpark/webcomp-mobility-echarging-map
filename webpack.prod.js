@@ -3,6 +3,7 @@
 // SPDX-License-Identifier: CC0-1.0
 
 var path = require('path');
+var Dotenv = require('dotenv-webpack');
 
 module.exports = {
   mode: 'production',
@@ -33,5 +34,8 @@ module.exports = {
         loader: 'svg-inline-loader'
       }
     ]
-  }
+  },
+  plugins: [
+    new Dotenv()
+  ]
 };

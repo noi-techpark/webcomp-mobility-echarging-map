@@ -3,6 +3,7 @@
 // SPDX-License-Identifier: CC0-1.0
 
 const path = require('path');
+var Dotenv = require('dotenv-webpack');
 
 module.exports = {
   mode: 'development',
@@ -42,5 +43,8 @@ module.exports = {
     writeToDisk: true,
     port: 8998,
     host: '0.0.0.0'
-  }
+  },
+  plugins: [
+    new Dotenv()
+  ]
 };

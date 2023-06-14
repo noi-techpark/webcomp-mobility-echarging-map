@@ -5,7 +5,7 @@
 import { t } from '../translations';
 import { fetch_options, fetch_origin } from './constants';
 
-const NINJA_BASE_PATH = 'https://mobility.api.opendatahub.com/v2';
+const NINJA_BASE_PATH = process.env.NINJA_BASE_PATH;
 
 export async function request__access_types() {
   const request = await fetch(

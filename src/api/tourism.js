@@ -4,7 +4,7 @@
 
 import { fetch_origin } from './constants';
 
-const BASE_PATH = 'https://tourism.opendatahub.bz.it/v1';
+const BASE_PATH = process.env.TOURISM_BASE_PATH;
 
 export async function request__near_restaurants(lat, lon) {
   const response = await fetch(

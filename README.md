@@ -12,7 +12,7 @@ This project contains the map web component for the [Green Mobility South Tyrol]
 [![CI/CD](https://github.com/noi-techpark/webcomp-mobility-echarging-map/actions/workflows/main.yml/badge.svg)](https://github.com/noi-techpark/webcomp-mobility-echarging-map/actions/workflows/main.yml)
 
 [Green Mobility South Tyrol](https://www.greenmobility.bz.it/it/) wants to split the existing functionalities of the website into reusable and independent components. Using these webcomponents, a developer can easily integrate the functionality of the single components into any website.
-The data source for the components is the [Open Data Hub](https://opendatahub.bz.it/) project.
+The data source for the components is the [Open Data Hub](https://opendatahub.com/) project.
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -196,7 +196,7 @@ docker-compose run --rm app /bin/bash -c "npm run build"
 
 ### Support
 
-ToDo: For support, please contact [help@opendatahub.bz.it](mailto:help@opendatahub.bz.it).
+ToDo: For support, please contact [help@opendatahub.com](mailto:help@opendatahub.com).
 
 ### Contributing
 

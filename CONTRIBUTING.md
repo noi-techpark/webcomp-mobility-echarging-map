@@ -16,4 +16,4 @@ We expect you to use **npm** as package management tool, so that we can create g
 ## Continuous integration
 for each web component we need automatic checks if the minimum requirements are met and will therefore do some basic checks like if the folder you pushed is empty, or if there are no javascript files. Furthermore we will try to run your tests with npm.
 
-For more information write to help@opendatahub.bz.it
+For more information write to help@opendatahub.com

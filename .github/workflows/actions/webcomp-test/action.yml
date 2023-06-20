@@ -1,0 +1,15 @@
+# SPDX-FileCopyrightText: NOI Techpark <digital@noi.bz.it>
+#
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+name: 'Webcomponent testing'
+
+inputs:
+  origin-test-enabled:
+    description: 'Enable testing for a set origin parameter, currently tests whether or not the string origin is contained somewhere.'
+    required: false
+    default: true
+  
+runs:
+  using: 'node16'
+  main: 'index.js'

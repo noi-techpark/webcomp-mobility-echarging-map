@@ -23,7 +23,7 @@ jobs:
           node-version: ${{env.NODE_VERSION}}
 
       - name: Webcomp Test
-        uses: noi-techpark/webcomp-mobility-echarging-map/.github/actions/webcomp-test@action-testing
+        uses: noi-techpark/github-actions/webcomp-test@webcomp-test
         with:
           origin-test-enabled: false
 

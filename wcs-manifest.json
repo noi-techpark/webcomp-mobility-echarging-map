@@ -4,6 +4,7 @@
   "descriptionAbstract": "Map to access the Open Data Hub Mobility Information",
   "license": "AGPL-3.0-or-later",
   "repositoryUrl": "https://github.com/noi-techpark/webcomp-mobility-echarging-map.git",
+  "shortName": "mobility-e-charging-map",
   "copyrightHolders": [
     {
       "name": "NOI",

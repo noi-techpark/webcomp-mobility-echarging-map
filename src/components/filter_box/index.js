@@ -214,7 +214,7 @@ export function render__filter_box() {
                       @change="${e => handle__access_type(e)}"
                     />
                     <span class="custom-checkbox-checkbox mr-2"></span>
-                    ${o[2][this.language]}
+                    ${o[2] === undefined ? 'whaat' : o[2][this.language]}
                   </label>
                 </div>
                 ${i !== this.access_types.length - 1

@@ -88,6 +88,11 @@ export const t = {
     de: 'Privat',
     it: 'Privato'
   },
+  unknown: {
+    en: 'Unkown',
+    de: 'Unbekannt',
+    it: 'Sconosciuto'
+  },
   private_withpublicaccess: {
     en: 'Private with public access',
     de: 'Privat mit öffentlichem Zugang',

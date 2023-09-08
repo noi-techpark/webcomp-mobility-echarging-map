@@ -40,7 +40,7 @@ export async function request__plug_types() {
 // merge lists of stations by scode
 function merge_by_scode(...lists_to_merge) {
   const ret = {};
-  lists_to_merge.flat().forEach(e => ret[e.scode] = {...ret[e.scode], ...e});
+  lists_to_merge.flat().forEach(e => ret[e.scode] = { ...ret[e.scode], ...e });
   return Object.values(ret);
 }
 
@@ -64,11 +64,11 @@ export async function request__stations_plugs(station_id) {
  */
 export async function request__get_stations_details() {
   this.is_loading = true;
-  const all_stations = await(await fetch(
+  const all_stations = await (await fetch(
     `${NINJA_BASE_PATH}/flat/EChargingStation?limit=-1&offset=0&where=sactive.eq.true&shownull=false&distinct=true&origin=${fetch_origin}`,
     fetch_options
   )).json();
-  const stations_with_data = await(await fetch(
+  const stations_with_data = await (await fetch(
     `${NINJA_BASE_PATH}/flat/EChargingStation/number-available/latest?select=mvalue,scode&limit=-1&offset=0&where=sactive.eq.true&shownull=false&distinct=true&origin=${fetch_origin}`,
     fetch_options
   )).json();

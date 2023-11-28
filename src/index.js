@@ -42,7 +42,7 @@ class EMobilityMap extends BaseClass {
       13
     );
     L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-      attribution: '&copy; <a href="https://opendatahub.com">OpenDataHub.com</a> | &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">Carto</a>'
+      attribution: '<a href="https://opendatahub.com">OpenDataHub.com</a> | &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">Carto</a>'
     }).addTo(this.map);
   }
 

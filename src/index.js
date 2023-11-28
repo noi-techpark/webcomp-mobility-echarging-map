@@ -42,7 +42,7 @@ class EMobilityMap extends BaseClass {
       13
     );
     L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">Carto</a>'
+      attribution: '&copy; <a href="https://opendatahub.com">OpenDataHub.com</a> | &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">Carto</a>'
     }).addTo(this.map);
   }
 
@@ -133,11 +133,11 @@ class EMobilityMap extends BaseClass {
       const condition_realtime = this.filters.realtime ? o.mvalue >= 0 : true;
 
       /* Merge conditions */
-      return condition_access_type 
-        && condition_provider 
-        && Boolean(condition_plug_type) 
-        && condition_maxPower 
-        && condition_availability 
+      return condition_access_type
+        && condition_provider
+        && Boolean(condition_plug_type)
+        && condition_maxPower
+        && condition_availability
         && condition_realtime;
     });
 

@@ -23,6 +23,7 @@ The data source for the components is the [Open Data Hub](https://opendatahub.co
     - [Options](#options)
       - [Translations](#translations)
       - [Logo](#logo)
+      - [Marker](#marker)
     - [Styling](#styling)
   - [Getting started](#getting-started)
     - [Prerequisites](#prerequisites)
@@ -41,6 +42,7 @@ The data source for the components is the [Open Data Hub](https://opendatahub.co
     - [Documentation](#documentation)
     - [Boilerplate](#boilerplate)
     - [License](#license)
+    - [REUSE](#reuse)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -72,6 +74,14 @@ URL of an icon, that will be shown in the lower left corner.
 <e-mobility-map-widget logo="https://www.example.com/your-logo.png"></e-mobility-map-widget>
 ```
 
+#### Marker
+
+To configure desired starting location with marker, add `current_location` attribute. `lat` and `lng` will be the Latitude and Longitude coordinates of your desired location, respectively.
+
+```html
+<e-mobility-map-widget current_location='{ "lat": 46.5, "lng": 11.33 }'></e-mobility-map-widget>
+```
+
 ### Styling
 
 This web component has only one style variable, namely
@@ -85,7 +95,12 @@ For example:
   }
 </style>
 
-<e-mobility-map-widget class="YOUR_CLASS_NAME" logo="logo.png" language="it"></e-mobility-map-widget>
+<e-mobility-map-widget 
+  class="YOUR_CLASS_NAME" 
+  logo="logo.png" 
+  language="it"
+  current_location='{ "lat": 46.5, "lng": 11.33 }'
+></e-mobility-map-widget>
 ```
 
 The width of this component reacts on regular css rules. Configure the `display`

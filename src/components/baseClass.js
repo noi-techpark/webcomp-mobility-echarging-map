@@ -27,7 +27,6 @@ export class BaseClass extends LitElement {
     this.current_station = {};
     this.userMarker = null;
     this.is_loading = false;
-    this.current_location = { lat: 46.479, lng: 11.331 };
     this.showFilters = false;
     this.filters = {
       radius: 0,
@@ -53,6 +52,7 @@ export class BaseClass extends LitElement {
     /* Parameters */
     const [language] = (window.navigator.userLanguage || window.navigator.language).split('-');
     this.language = language;
+    this.current_location = { lat: 46.479, lng: 11.331 };
     /* Bindings */
     this.render__search_box = render__search_box.bind(this);
     this.render__details_box = render__details_box.bind(this);

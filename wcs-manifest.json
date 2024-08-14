@@ -65,7 +65,16 @@
         "options": {
           "default": true
         }
-      }     
+      },     
+      {
+        "key": "current_location",
+        "type": "text",
+        "label": "Coordinates of the current location in the following format: { \"lat\": 46.479, \"lng\": 11.331 }",
+        "required": true, 
+        "options": {
+          "default": "{ \"lat\": 46.479, \"lng\": 11.331 }"
+        }
+      }
     ]
   }
 }

@@ -8,7 +8,6 @@ export const observed_properties = {
   is_loading: { type: Boolean },
   message: { type: String },
   current_station: { type: Object },
-  current_location: { type: Object },
   showFilters: { type: Boolean },
   filters: { type: Object },
   visibleStations: { type: Number },
@@ -28,5 +27,6 @@ export const observed_properties = {
   // Parameters
   logo: { type: String },
   language: { type: String },
+  current_location: { type: Object },
   mobileFullScreen: { type: Boolean }
 };

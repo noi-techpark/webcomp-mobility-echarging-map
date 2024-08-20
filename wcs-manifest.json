@@ -74,7 +74,16 @@
         "options": {
           "default": "{ \"lat\": 46.479, \"lng\": 11.331 }"
         }
-      }
+      },
+      {
+        "key": "fontFamily",
+        "type": "text",
+        "label": "Main font family",
+        "required": false,
+        "options": {
+          "default": "Suedtirol"
+        }
+      }      
     ]
   }
 }

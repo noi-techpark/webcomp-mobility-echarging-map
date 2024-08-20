@@ -53,6 +53,7 @@ export class BaseClass extends LitElement {
     const [language] = (window.navigator.userLanguage || window.navigator.language).split('-');
     this.language = language;
     this.current_location = { lat: 46.479, lng: 11.331 };
+    this.fontFamily = "";
     /* Bindings */
     this.render__search_box = render__search_box.bind(this);
     this.render__details_box = render__details_box.bind(this);

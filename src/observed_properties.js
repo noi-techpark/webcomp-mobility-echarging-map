@@ -28,5 +28,6 @@ export const observed_properties = {
   logo: { type: String },
   language: { type: String },
   current_location: { type: Object },
+  fontFamily: { type: String },
   mobileFullScreen: { type: Boolean }
 };

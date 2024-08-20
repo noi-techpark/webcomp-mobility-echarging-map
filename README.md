@@ -24,6 +24,7 @@ The data source for the components is the [Open Data Hub](https://opendatahub.co
       - [Translations](#translations)
       - [Logo](#logo)
       - [Marker](#marker)
+      - [Font](#font)
     - [Styling](#styling)
   - [Getting started](#getting-started)
     - [Prerequisites](#prerequisites)
@@ -82,6 +83,14 @@ To configure desired starting location with marker, add `current_location` attri
 <e-mobility-map-widget current_location='{ "lat": 46.5, "lng": 11.33 }'></e-mobility-map-widget>
 ```
 
+#### Font
+
+To configure desired font, add `fontFamily` attribute. 
+
+```html
+<e-mobility-map-widget fontFamily="Arial"></e-mobility-map-widget>
+```
+
 ### Styling
 
 This web component has only one style variable, namely
@@ -100,6 +109,7 @@ For example:
   logo="logo.png" 
   language="it"
   current_location='{ "lat": 46.5, "lng": 11.33 }'
+  fontFamily="Arial"
 ></e-mobility-map-widget>
 ```
 

@@ -21,6 +21,7 @@ import { getLatLongFromStationDetail, get_user_platform, stationStatusMapper } f
 import { get_provider_list } from './utils/get_provider_list';
 import { request__stations_plugs } from './api/mobility';
 import { t } from './translations';
+import {styleMap} from 'lit-html/directives/style-map.js';
 
 class EMobilityMap extends BaseClass {
   static get properties() {
@@ -346,15 +347,12 @@ class EMobilityMap extends BaseClass {
     //   ${style__typography.toString()}
     //   ${style__buttons.toString()}
     // </style>
+    let styles = {
+      'font-family': this.fontFamily ? this.fontFamily :  "Suedtirol",
+    };
     return html`
 
-      <style>
-        * {
-          --w-c-font-family: ${this.fontFamily};
-        }
-      </style>
-
-      <div id=${'e_mobility_map'} class="e_mobility_map platform_${get_user_platform()}">
+      <div id=${'e_mobility_map'} class="e_mobility_map platform_${get_user_platform()}" style=${styleMap(styles)}>
         ${this.render__loading_overlay()} ${this.render__message_overlay()} ${this.render__search_box_underlay()}
         <div style="z-index: 1003" class="user_actions_container__search_box">
           ${this.render__search_box()}

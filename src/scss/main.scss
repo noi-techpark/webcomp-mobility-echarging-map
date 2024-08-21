@@ -18,7 +18,6 @@ $mobile-bottom-controls: 24px;
 .e_mobility_map {
   @media only screen and (min-width: 320px) {
     @include map_dimensions_tns();
-    font-family: 'Suedtirol';
     color: $black;
     background-color: $black-50;
     height: 100vh;

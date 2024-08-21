@@ -85,7 +85,7 @@ To configure desired starting location with marker, add `current_location` attri
 
 #### Font
 
-To configure desired font, add `fontFamily` attribute. 
+To configure desired font, add `fontFamily` attribute. Default font is "Suedtirol".
 
 ```html
 <e-mobility-map-widget fontFamily="Arial"></e-mobility-map-widget>

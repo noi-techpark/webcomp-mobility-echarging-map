@@ -349,10 +349,10 @@ class EMobilityMap extends BaseClass {
     // </style>
     let styles = {
       'font-family': this.fontFamily ? this.fontFamily :  "Suedtirol",
+      '--w-c-font-family': this.fontFamily ? this.fontFamily :  "Suedtirol",
     };
     return html`
-
-      <div id=${'e_mobility_map'} class="e_mobility_map platform_${get_user_platform()}" style=${styleMap(styles)}>
+       <div id=${'e_mobility_map'} class="e_mobility_map platform_${get_user_platform()}" style=${styleMap(styles)}>
         ${this.render__loading_overlay()} ${this.render__message_overlay()} ${this.render__search_box_underlay()}
         <div style="z-index: 1003" class="user_actions_container__search_box">
           ${this.render__search_box()}

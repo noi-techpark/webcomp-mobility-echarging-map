@@ -67,9 +67,9 @@ export async function request__stations_plugs(station_id) {
   try {
     // Fetch both regular and OCPI plug statuses along with plug data
     const [all_plugs, plugs_with_data, ocpi_plugs] = await Promise.all([
-      fetch(`${NINJA_BASE_PATH}/flat/EChargingPlug?limit=-1&offset=0&where=sactive.eq.true,pcode.eq.${station_id}&shownull=false&origin=${fetch_origin}`).then(res => res.json()),
-      fetch(`${NINJA_BASE_PATH}/flat/EChargingPlug/echarging-plug-status/latest?select=mvalue,scode&limit=-1&offset=0&where=sactive.eq.true,pcode.eq.${station_id}&shownull=false&origin=${fetch_origin}`).then(res => res.json()),
-      fetch(`${NINJA_BASE_PATH}/flat/EChargingPlug/echarging-plug-status-ocpi/latest?select=mvalue,scode&limit=-1&offset=0&where=sactive.eq.true,pcode.eq.${station_id}&shownull=false&origin=${fetch_origin}`).then(res => res.json())
+      fetch(`${NINJA_BASE_PATH}/flat/EChargingPlug?limit=-1&offset=0&where=sactive.eq.true,pcode.eq.\"${station_id}\"&shownull=false&origin=${fetch_origin}`).then(res => res.json()),
+      fetch(`${NINJA_BASE_PATH}/flat/EChargingPlug/echarging-plug-status/latest?select=mvalue,scode&limit=-1&offset=0&where=sactive.eq.true,pcode.eq.\"${station_id}\"&shownull=false&origin=${fetch_origin}`).then(res => res.json()),
+      fetch(`${NINJA_BASE_PATH}/flat/EChargingPlug/echarging-plug-status-ocpi/latest?select=mvalue,scode&limit=-1&offset=0&where=sactive.eq.true,pcode.eq.\"${station_id}\"&shownull=false&origin=${fetch_origin}`).then(res => res.json())
     ]);
 
     // Combine both status sources

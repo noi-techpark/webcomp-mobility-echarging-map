@@ -17,6 +17,7 @@ export function render__state_label(state, lang) {
     PRIVATE: t.private[lang],
     OCCUPIED: t.occupied[lang]
   };
+
   const state_color = {
     TEMPORARYUNAVAILABLE: 'gray',
     ACTIVE: 'green',
@@ -28,7 +29,16 @@ export function render__state_label(state, lang) {
     PRIVATE: 'purple',
     OCCUPIED: 'red'
   };
+
+  // Check if the state is valid
+  if (!state_content[state]) {
+    console.warn(`Invalid state: ${state}. Falling back to 'UNKNOWN'.`);
+    state = 'UNKNOWN'; // Fallback to a valid state
+  }
+
   return html`
-    <div class=${`details_box__status_label ${state_color[state]}`}><p>${state_content[state].toUpperCase()}</p></div>
+    <div class=${`details_box__status_label ${state_color[state]}`}>
+      <p>${state_content[state].toUpperCase()}</p>
+    </div>
   `;
 }

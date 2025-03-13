@@ -101,17 +101,28 @@ class EMobilityMap extends BaseClass {
       if (this.filters.plug_type.length) {
         filtered__station_plugs = station_plugs.filter(plug => {
           let condition = false;
-          plug.smetadata.outlets.map(outlet => {
-            if (!condition) {
-              condition = this.filters.plug_type.includes(outlet.outletTypeCode);
-            }
-            return undefined;
-          });
-          return condition;
+      // Check for outlets
+      if (plug.smetadata.outlets) {
+        plug.smetadata.outlets.forEach(outlet => {
+          if (!condition) {
+            condition = this.filters.plug_type.includes(outlet.outletTypeCode);
+          }
+        });
+      }
+      // Check for connectors
+      else if (plug.smetadata.connectors) {
+        plug.smetadata.connectors.forEach(connector => {
+          if (!condition) {
+            condition = this.filters.plug_type.includes(connector.standard);
+          }
         });
       }
 
-      const condition_plug_type = this.filters.plug_type.length ? filtered__station_plugs.length : true;
+      return condition;
+    });
+  }
+
+  const condition_plug_type = this.filters.plug_type.length ? filtered__station_plugs.length : true;
 
       /**
        * provider

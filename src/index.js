@@ -128,7 +128,7 @@ class EMobilityMap extends BaseClass {
        * provider
        */
       const condition_provider = this.filters.provider.length
-        ? this.filters.provider.includes(o.smetadata.provider)
+        ? this.filters.provider.includes(o.smetadata.provider || o.sorigin)
         : true;
 
       let condition_maxPower = true;

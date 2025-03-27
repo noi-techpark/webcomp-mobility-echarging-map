@@ -125,7 +125,7 @@ class EMobilityMap extends BaseClass {
   const condition_plug_type = this.filters.plug_type.length ? filtered__station_plugs.length : true;
 
       /**
-       * provider
+       * providerr
        */
       const condition_provider = this.filters.provider.length
         ? this.filters.provider.includes(o.smetadata.provider || o.sorigin)

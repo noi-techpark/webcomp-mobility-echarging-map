@@ -188,13 +188,10 @@ export function render__details_box() {
                               <div class="d-flex">
                                 <p class="fs-14 mt-1 mr-2">-</p>
                                 <p class="fs-14 mt-1">
-                                  ${connector.standard} - ${connector.maxPower !== undefined ? connector.maxPower.toLocaleString(this.language) : '--'} kW <br />
+                                  ${connector.standard} - ${typeof connector.max_electric_power === "number"  ? (connector.max_electric_power / 1000).toLocaleString(this.language) : '--'} kW <br />
                                   <span class="fs-12 color-black-400 mt-2 fw-300">
                                     ${t.column[this.language]} ${i + 1} ∙
-                                    ${Object.prototype.hasOwnProperty.call(connector, 'minCurrent')
-                                      ? connector.minCurrent
-                                      : '*'}
-                                    - ${connector.maxCurrent || '*'} A
+                                    ${connector.max_ampere || '*'} A
                                   </span>
                                 </p>
                               </div>

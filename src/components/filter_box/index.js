@@ -200,33 +200,6 @@ export function render__filter_box() {
           </div>
         </div>
         <!-- Detail box -->
-        <div class="details_box__section mt-3">
-          <div class="col-12">
-            <p class="fs-14 color-black-400">${t.type_of_access[this.language].toUpperCase()}</p>
-            ${this.access_types.map((o, i) => {
-    return html`
-                <div class="custom-checkbox ${i === 0 ? 'mt-3' : ''}">
-                  <label htmlFor="access-${o[0]}" class="fs-16">
-                    <input
-                      value="${o[1]}"
-                      type="checkbox"
-                      id="access-${o[0]}"
-                      @change="${e => handle__access_type(e)}"
-                    />
-                    <span class="custom-checkbox-checkbox mr-2"></span>
-                    ${o[2] === undefined ? 'whaat' : o[2][this.language]}
-                  </label>
-                </div>
-                ${i !== this.access_types.length - 1
-        ? html`
-                      <hr />
-                    `
-        : ''}
-              `;
-  })}
-          </div>
-        </div>
-        <!-- Detail box -->
         <div class="details_box__section mt-3 d-none">
           <div class="col-12">
             <p class="fs-14 color-black-400">${t.column_state[this.language].toUpperCase()}</p>

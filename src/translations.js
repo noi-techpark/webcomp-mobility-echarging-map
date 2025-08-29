@@ -173,11 +173,6 @@ export const t = {
     de: 'Suchradius',
     it: 'Raggio di ricerca'
   },
-  type_of_access: {
-    en: 'Type of access',
-    de: 'Zugangsart',
-    it: 'Tipo di accesso'
-  },
   column_state: {
     en: 'Charging station state',
     de: 'Status der Ladestation',

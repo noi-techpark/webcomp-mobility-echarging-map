@@ -83,13 +83,6 @@ class EMobilityMap extends BaseClass {
     filtered_stations_details = filtered_stations_details.filter(o => {
       // console.log(o);
 
-      /**
-       * access_type
-       */
-      const condition_access_type = this.filters.access_type.length
-        ? this.filters.access_type.includes(o.smetadata ? o.smetadata.accessType : '')
-        : true;
-
       const station_plugs = this.all_plugs_details.filter(plug => {
         return plug.pcode === o.scode;
       });
@@ -145,8 +138,7 @@ class EMobilityMap extends BaseClass {
       const condition_realtime = this.filters.realtime ? o.mvalue >= 0 : true;
 
       /* Merge conditions */
-      return condition_access_type
-        && condition_provider
+      return condition_provider
         && Boolean(condition_plug_type)
         && condition_maxPower
         && condition_availability
@@ -263,7 +255,6 @@ class EMobilityMap extends BaseClass {
   async firstUpdated() {
     this.initializeMap();
     this.drawMap();
-    await this.request__access_types();
     await this.request__plug_types();
   }
 

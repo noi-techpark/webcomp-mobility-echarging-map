@@ -97,11 +97,11 @@ export async function request__stations_plugs(station_id) {
 export async function request__get_stations_details() {
   this.is_loading = true;
   const all_stations = await (await fetch(
-    `${NINJA_BASE_PATH}/flat/EChargingStation?limit=-1&offset=0&where=sactive.eq.true&shownull=false&distinct=true&origin=${fetch_origin}`,
+    `${NINJA_BASE_PATH}/flat/EChargingStation?limit=-1&offset=0&where=sactive.eq.true,sorigin.neq.IIT&shownull=false&distinct=true&origin=${fetch_origin}`,
     fetch_options
   )).json();
   const stations_with_data = await (await fetch(
-    `${NINJA_BASE_PATH}/flat/EChargingStation/number-available/latest?select=mvalue,scode&limit=-1&offset=0&where=sactive.eq.true&shownull=false&distinct=true&origin=${fetch_origin}`,
+    `${NINJA_BASE_PATH}/flat/EChargingStation/number-available/latest?select=mvalue,scode&limit=-1&offset=0&where=sactive.eq.true,sorigin.neq.IIT&shownull=false&distinct=true&origin=${fetch_origin}`,
     fetch_options
   )).json();
 

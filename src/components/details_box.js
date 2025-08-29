@@ -49,6 +49,7 @@ export function render__details_box() {
   // Handle missing state and accessType
   const state = (smetadata && smetadata.state) || 'UNKNOWN'; // Default to 'UNKNOWN' if state is missing
   const accessType = (smetadata && smetadata.accessType) || 'UNKNOWN'; // Default to 'UNKNOWN' if accessType is missing
+  const payment_link = "https://www.neogy.it/en/public-network-charging/direct-payment.html";
 
   return html`
     <style>
@@ -217,7 +218,7 @@ export function render__details_box() {
           </div>
           <div class="col-12">
             <a
-              href="${smetadata ? smetadata.paymentInfo : ''}"
+               href="${payment_link}"
               class="color-green fs-16 fw-300 mt-2 mb-3 color-green--hover d-block"
               target="_blank"
             >

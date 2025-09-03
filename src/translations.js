@@ -129,9 +129,9 @@ export const t = {
     it: 'Orari'
   },
   available_columns: {
-    en: 'available charging stations',
-    de: 'verfügbare Ladestationen',
-    it: 'colonnine disponibili'
+    en: 'Available charging stations',
+    de: 'Verfügbare Ladestationen',
+    it: 'Colonnine disponibili'
   },
   no_real_time_data: {
     en: 'No real time data available for this station',

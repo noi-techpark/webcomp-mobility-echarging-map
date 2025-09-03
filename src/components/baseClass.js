@@ -30,7 +30,6 @@ export class BaseClass extends LitElement {
     this.showFilters = false;
     this.filters = {
       radius: 0,
-      access_type: [],
       plug_type: [],
       state: [],
       provider: [],
@@ -47,7 +46,6 @@ export class BaseClass extends LitElement {
     this.provider_list = [];
     this.query_nominatim = '';
     this.details_mobile_state = false;
-    this.access_types = [];
     this.plug_types = [];
     /* Parameters */
     const [language] = (window.navigator.userLanguage || window.navigator.language).split('-');

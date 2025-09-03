@@ -106,7 +106,6 @@ export function render__filter_box() {
       ...this.filters,
       radius: 0,
       maxPower: 0,
-      access_type: [],
       availability: false,
       realtime: false,
       plug_type: [],

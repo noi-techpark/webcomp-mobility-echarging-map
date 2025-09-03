@@ -63,7 +63,6 @@ export function render__details_box() {
         ${smetadata
           ? html`
               ${render__state_label(state, this.language)}
-              ${render__state_label(accessType, this.language)}
             `
           : undefined
         }

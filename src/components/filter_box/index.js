@@ -24,20 +24,6 @@ export function render__filter_box() {
     };
   };
 
-  const handle__access_type = e => {
-    if (e.target.checked) {
-      this.filters = {
-        ...this.filters,
-        access_type: [...this.filters.access_type, e.target.value]
-      };
-    } else {
-      this.filters = {
-        ...this.filters,
-        access_type: this.filters.access_type.filter(o => o !== e.target.value)
-      };
-    }
-  };
-
   const handle__availability = e => {
     if (e.target.checked) {
       this.filters = {

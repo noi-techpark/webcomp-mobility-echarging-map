@@ -25,19 +25,6 @@ export function render__filter_values_mobile() {
     repaint_map();
   };
 
-  const handle__access_type = e => {
-    const checkboxes = this.shadowRoot.querySelectorAll(`.filter_box input[value="${e}"]`);
-    for (let i = 0; i < checkboxes.length; i++) {
-      const element = checkboxes[i];
-      element.checked = false;
-    }
-    this.filters = {
-      ...this.filters,
-      access_type: this.filters.access_type.filter(o => o !== e)
-    };
-    repaint_map();
-  };
-
   const handle__plug_type = e => {
     const checkboxes = this.shadowRoot.querySelectorAll(`.filter_box input[value="${e}"]`);
     for (let i = 0; i < checkboxes.length; i++) {

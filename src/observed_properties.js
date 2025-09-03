@@ -21,7 +21,6 @@ export const observed_properties = {
   provider_list: { type: Array },
   query_nominatim: { type: String },
   details_mobile_state: { type: Boolean },
-  access_types: { type: Array },
   plug_types: { type: Array },
   isFullScreen: { type: Boolean },
   // Parameters

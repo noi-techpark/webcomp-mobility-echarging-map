@@ -93,11 +93,6 @@ export const t = {
     de: 'Unbekannt',
     it: 'Sconosciuto'
   },
-  private_withpublicaccess: {
-    en: 'Private with public access',
-    de: 'Privat mit öffentlichem Zugang',
-    it: 'Privato con pubblico accesso'
-  },
   occupied: {
     en: 'Occupied',
     de: 'Besetzt',

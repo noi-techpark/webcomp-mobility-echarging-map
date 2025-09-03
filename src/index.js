@@ -152,7 +152,7 @@ class EMobilityMap extends BaseClass {
       // stations_status_types
       /** Creating the icon */
       const station_icon = L.icon({
-        iconUrl: stationStatusMapper(smetadata, mvalue, sorigin),
+        iconUrl: stationStatusMapper(smetadata, mvalue),
         iconSize: [36, 36]
       });
       const marker = L.marker([marker_position.lat, marker_position.lng], {

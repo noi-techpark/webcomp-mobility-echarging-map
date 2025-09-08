@@ -153,6 +153,11 @@ export const t = {
     de: 'Bezahlung',
     it: 'Pagamento'
   },
+  operator: {
+    en: 'Operator',
+    de: 'Betreiber',
+    it: 'Gestore'
+  },
   search_filters: {
     en: 'Search filters',
     de: 'Suchfilter',

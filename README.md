@@ -161,7 +161,7 @@ Build and start the project:
 npm run start
 ```
 
-The application will be served and can be accessed at [http://localhost:8000](http://localhost:8000).
+The application will be served and can be accessed at [http://localhost:8998](http://localhost:8998).
 
 ## Deployment
 

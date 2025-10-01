@@ -25,19 +25,6 @@ export function render__filter_values_mobile() {
     repaint_map();
   };
 
-  const handle__access_type = e => {
-    const checkboxes = this.shadowRoot.querySelectorAll(`.filter_box input[value="${e}"]`);
-    for (let i = 0; i < checkboxes.length; i++) {
-      const element = checkboxes[i];
-      element.checked = false;
-    }
-    this.filters = {
-      ...this.filters,
-      access_type: this.filters.access_type.filter(o => o !== e)
-    };
-    repaint_map();
-  };
-
   const handle__plug_type = e => {
     const checkboxes = this.shadowRoot.querySelectorAll(`.filter_box input[value="${e}"]`);
     for (let i = 0; i < checkboxes.length; i++) {
@@ -56,26 +43,6 @@ export function render__filter_values_mobile() {
       ${getStyle(style)}
     </style>
     <div class="d-sm-none filter_values_mobile d-flex flex-nowrap">
-      ${this.filters.access_type.map(
-        o => html`
-          <div
-            class="filter_values_mobile__element d-inline-flex align-items-center mr-1"
-            @click="${() => handle__access_type(o)}"
-          >
-            <div class="filter_values_mobile__element__text">
-              <div class="pr-2 pl-2">
-                <p class="fs-12 color-black-300">
-                  ${t.type_of_access[this.language]}
-                </p>
-                <p class="fs-12">${o}</p>
-              </div>
-            </div>
-            <div class="filter_values_mobile__bkg_white_gradient">
-              <img class="w-16px" src="${icon_x_orange}" alt="" />
-            </div>
-          </div>
-        `
-      )}
       ${this.filters.radius
         ? html`<div class="filter_values_mobile__element d-inline-flex align-items-center mr-1" @click="${() =>
             handle__radius()}">

@@ -148,7 +148,7 @@ export function render__details_box() {
                         icon = icon__green_dot; 
                         break;    
                       default:
-                        icon = icon__red_dot;
+                        icon = icon__grey_dot_question;
                     }
                   } else {
                     icon = icon__grey_dot;

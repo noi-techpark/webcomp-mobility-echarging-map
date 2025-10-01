@@ -7,7 +7,7 @@ import icon__green_marker from './icons/green/green@2x.png';
 import icon__teal_marker from './icons/teal/teal_lightning.png';
 import icon__orange_marker from './icons/orange/orange@2x.png';
 import icon__grey_marker from './icons/grey/grey@2x.png';
-//import icon__unknown_marker from './icons/grey/grey_exclamation.png'; 
+import icon__unknown_marker from './icons/grey/grey_exclamation.png'; 
 import icon__red_marker from './icons/red/red@2x.png';
 
 import icon__lock_hydrogen_marker from './icons/blue/blue_lock.png';
@@ -27,7 +27,7 @@ import icon__star_orange_marker from './icons/orange/orange_star.png';
 export function getLatLongFromStationDetail(o) {
   return { lat: o.y, lng: o.x };
 }
-//change unknown to green since new ocpi station don't have the state
+
 export function stationStatusMapper(smetadata, mvalue) {
   if (smetadata) {
     
@@ -36,18 +36,18 @@ export function stationStatusMapper(smetadata, mvalue) {
     let iconLock = null;
 
     if (mvalue == 0) {
-      iconLock = icon__lock_red_marker;
+      iconLock = icon__red_marker;
     } else if (mvalue > 0) {
-      iconLock = capacity == mvalue ? icon__lock_green_marker : icon__lock_orange_marker;
+      iconLock = capacity == mvalue ? icon__green_marker : icon__orange_marker;
     } else {
-      iconLock = icon__lock_teal_marker;
+      iconLock = icon__teal_marker;
     }
 
     const obj = {
       TEMPORARYUNAVAILABLE: icon__grey_marker,
       AVAILABLE: iconLock,
       ACTIVE: iconLock,
-      UNKNOWN: icon__green_marker
+      UNKNOWN: icon__grey_marker,
     };
     return obj[state] ? obj[state] : icon__green_marker;
   }

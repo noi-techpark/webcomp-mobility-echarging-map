@@ -7,7 +7,7 @@ import icon__green_marker from './icons/green/green@2x.png';
 import icon__teal_marker from './icons/teal/teal_lightning.png';
 import icon__orange_marker from './icons/orange/orange@2x.png';
 import icon__grey_marker from './icons/grey/grey@2x.png';
-//import icon__unknown_marker from './icons/grey/grey_exclamation.png'; 
+import icon__unknown_marker from './icons/grey/grey_exclamation.png'; 
 import icon__red_marker from './icons/red/red@2x.png';
 
 import icon__lock_hydrogen_marker from './icons/blue/blue_lock.png';
@@ -27,72 +27,31 @@ import icon__star_orange_marker from './icons/orange/orange_star.png';
 export function getLatLongFromStationDetail(o) {
   return { lat: o.y, lng: o.x };
 }
-//change unknown to green since new ocpi station don't have the state
-export function stationStatusMapper(smetadata, mvalue, origin) {
+
+export function stationStatusMapper(smetadata, mvalue) {
   if (smetadata) {
-    const { accessType, capacity } = smetadata;
-    let tmpobj = {};
-    switch (accessType) {
-      case 'PRIVATE':
+    
+    const { capacity, state } = smetadata;
 
-        let iconLock = null;
+    let iconLock = null;
 
-        if (mvalue == 0) {
-          iconLock = icon__lock_red_marker;
-        } else if(mvalue > 0) {
-          iconLock = capacity == mvalue ? icon__lock_green_marker : icon__lock_orange_marker;
-        } else {
-          iconLock = icon__lock_teal_marker;
-        }
-
-        tmpobj = {
-          TEMPORARYUNAVAILABLE: icon__lock_grey_marker,
-          AVAILABLE: origin !== 'IIT' ? iconLock : icon__lock_hydrogen_marker,
-          ACTIVE: origin !== 'IIT' ? iconLock : icon__lock_hydrogen_marker,
-          UNKNOWN: icon__green_marker
-        };
-        break;
-      case 'PRIVATE_WITHPUBLICACCESS':
-        let iconStar = null;
-
-        if (mvalue == 0) {
-          iconStar = icon__star_red_marker;
-        } else if (mvalue > 0) {
-          iconStar = capacity == mvalue ? icon__star_green_marker : icon__star_orange_marker;
-        } else {
-          iconStar = icon__star_teal_marker;
-        }
-
-        tmpobj = {
-          TEMPORARYUNAVAILABLE: icon__star_grey_marker,
-          AVAILABLE: origin !== 'IIT' ? iconStar : icon__star_hydrogen_marker,
-          ACTIVE: origin !== 'IIT' ? iconStar : icon__star_hydrogen_marker,
-          UNKNOWN: icon__green_marker
-        };
-        break;
-      case 'PUBLIC':
-      default:
-        let icon = null;
-
-        if (mvalue == 0) {
-          icon = icon__red_marker;
-        } else if (mvalue > 0) {
-          icon = capacity == mvalue ? icon__green_marker : icon__orange_marker;
-        } else {
-          icon = icon__teal_marker;
-        }
-
-        tmpobj = {
-          TEMPORARYUNAVAILABLE: icon__grey_marker,
-          AVAILABLE: origin !== 'IIT' ? icon : icon__hydrogen_marker,
-          ACTIVE: origin !== 'IIT' ?  icon : icon__hydrogen_marker,
-          UNKNOWN: icon__green_marker 
-        };
-        break;
+    if (mvalue == 0) {
+      iconLock = icon__red_marker;
+    } else if (mvalue > 0) {
+      iconLock = capacity == mvalue ? icon__green_marker : icon__orange_marker;
+    } else {
+      iconLock = icon__teal_marker;
     }
-    const obj = tmpobj;
-    return obj[smetadata.state] ? obj[smetadata.state] : icon__green_marker;
+
+    const obj = {
+      TEMPORARYUNAVAILABLE: icon__grey_marker,
+      AVAILABLE: iconLock,
+      ACTIVE: iconLock,
+      UNKNOWN: icon__grey_marker,
+    };
+    return obj[state] ? obj[state] : icon__green_marker;
   }
+
   return icon__green_marker;
 }
 

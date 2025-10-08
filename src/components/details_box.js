@@ -26,6 +26,7 @@ import { render__hours_section } from './details_box/hours_section';
 import { render__rating_section } from './details_box/rating_section';
 import { render__state_label } from './state_label';
 import { render__h1 } from './typography';
+import { providerWebsites } from '../providers';
 
 export function render__details_box() {
   const { smetadata, sname, scoordinate, accessInfo, mvalue } = this.current_station;
@@ -49,6 +50,8 @@ export function render__details_box() {
   // Handle missing state and accessType
   const state = (smetadata && smetadata.state) || 'UNKNOWN'; // Default to 'UNKNOWN' if state is missing
   const accessType = (smetadata && smetadata.accessType) || 'UNKNOWN'; // Default to 'UNKNOWN' if accessType is missing
+  const payment_link = "https://www.neogy.it/en/public-network-charging/direct-payment.html";
+  const operator = (smetadata && smetadata.provider) || 'UNKNOWN';
 
   return html`
     <style>
@@ -62,7 +65,6 @@ export function render__details_box() {
         ${smetadata
           ? html`
               ${render__state_label(state, this.language)}
-              ${render__state_label(accessType, this.language)}
             `
           : undefined
         }
@@ -77,7 +79,7 @@ export function render__details_box() {
         </div>
       </div>
       <div class="details_box__body">
-        <!-- Detail box -->
+        <!-- Station name detail box -->
         <div class="details_box__section mt-3">
           ${render__h1(sname, stationStatusMapper(smetadata, mvalue, sorigin))}
           <div class="col-12">
@@ -115,7 +117,7 @@ export function render__details_box() {
             </div>
           </div>
         ` : null}
-        <!-- Detail box -->
+        <!-- Available columns detail box -->
         <div class="details_box__section mt-3 pb-3">
           <div class="col-12 d-flex align-items-center">
             <div>
@@ -146,7 +148,7 @@ export function render__details_box() {
                         icon = icon__green_dot; 
                         break;    
                       default:
-                        icon = icon__red_dot;
+                        icon = icon__grey_dot_question;
                     }
                   } else {
                     icon = icon__grey_dot;
@@ -205,7 +207,7 @@ export function render__details_box() {
             }
           </div>
         </div>
-        <!-- Detail box -->
+        <!-- Payment detail box -->
         <div class="details_box__section mt-3 pb-3">
           <div class="col-12 d-flex align-items-center">
             <div>
@@ -217,15 +219,44 @@ export function render__details_box() {
           </div>
           <div class="col-12">
             <a
-              href="${smetadata ? smetadata.paymentInfo : ''}"
-              class="color-green fs-16 fw-300 mt-2 mb-3 color-green--hover d-block"
+              href="${payment_link}"
+              class="color-green fs-16 fw-300 mt-2 color-green--hover d-block"
               target="_blank"
             >
               ${t.more_informations[this.language]} →
             </a>
           </div>
         </div>
-        <!-- Detail box -->
+        ${operator !== 'UNKNOWN' ? html`
+        <!-- Operator detail box -->
+        <div class="details_box__section mt-3">
+          <div class="col-12 d-flex align-items-center">
+            <div>
+              <img class="w-16px mr-2 d-block" src="${icon__info}" alt="" />
+            </div>
+            <div>
+              <p class="mb-0 mt-0 fs-18 ff-sued fw-400">${t.operator[this.language]}</p>
+            </div>
+          </div>
+          <div class="col-12 pb-3">
+            <div class="element_background d-flex pt-2 pb-2 mt-3">
+              <div class="ml-3 flex-fill">
+                <p class="fs-16 mt-1">${operator}</p>
+                ${providerWebsites[operator] ? html`
+                  <a
+                    href="${providerWebsites[operator]}"
+                    class="color-green color-green--hover fs-16 fw-300 mt-2 mb-2 d-block"
+                    target="_blank"
+                  >
+                    ${t.website[this.language]} →
+                  </a>
+              ` : null}
+              </div>
+            </div>
+          </div>
+        </div>
+      ` : null}
+        <!-- Nearby Locations detail box -->
         <div class="details_box__section mt-3">
           ${this.station_near_restaurants.length || this.station_near_accomodations.length
             ? html`

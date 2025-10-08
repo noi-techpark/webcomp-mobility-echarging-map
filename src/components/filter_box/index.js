@@ -24,20 +24,6 @@ export function render__filter_box() {
     };
   };
 
-  const handle__access_type = e => {
-    if (e.target.checked) {
-      this.filters = {
-        ...this.filters,
-        access_type: [...this.filters.access_type, e.target.value]
-      };
-    } else {
-      this.filters = {
-        ...this.filters,
-        access_type: this.filters.access_type.filter(o => o !== e.target.value)
-      };
-    }
-  };
-
   const handle__availability = e => {
     if (e.target.checked) {
       this.filters = {
@@ -120,7 +106,6 @@ export function render__filter_box() {
       ...this.filters,
       radius: 0,
       maxPower: 0,
-      access_type: [],
       availability: false,
       realtime: false,
       plug_type: [],
@@ -197,33 +182,6 @@ export function render__filter_box() {
               <option value="10">10km</option>
               <option value="15">15km</option>
             </select>
-          </div>
-        </div>
-        <!-- Detail box -->
-        <div class="details_box__section mt-3">
-          <div class="col-12">
-            <p class="fs-14 color-black-400">${t.type_of_access[this.language].toUpperCase()}</p>
-            ${this.access_types.map((o, i) => {
-    return html`
-                <div class="custom-checkbox ${i === 0 ? 'mt-3' : ''}">
-                  <label htmlFor="access-${o[0]}" class="fs-16">
-                    <input
-                      value="${o[1]}"
-                      type="checkbox"
-                      id="access-${o[0]}"
-                      @change="${e => handle__access_type(e)}"
-                    />
-                    <span class="custom-checkbox-checkbox mr-2"></span>
-                    ${o[2] === undefined ? 'whaat' : o[2][this.language]}
-                  </label>
-                </div>
-                ${i !== this.access_types.length - 1
-        ? html`
-                      <hr />
-                    `
-        : ''}
-              `;
-  })}
           </div>
         </div>
         <!-- Detail box -->

@@ -4,7 +4,7 @@
 
 import L from 'leaflet';
 import { LitElement } from 'lit-element';
-import { request__get_stations_details, request__get_stations_plugs_details, request__access_types, request__plug_types } from '../api/mobility';
+import { request__get_stations_details, request__get_stations_plugs_details, request__plug_types } from '../api/mobility';
 import { request__get_coordinates_from_search } from '../api/nominatim';
 import { request__near_accomodations, request__near_restaurants } from '../api/tourism';
 import { TOKEN } from '../config';
@@ -30,7 +30,6 @@ export class BaseClass extends LitElement {
     this.showFilters = false;
     this.filters = {
       radius: 0,
-      access_type: [],
       plug_type: [],
       state: [],
       provider: [],
@@ -47,7 +46,6 @@ export class BaseClass extends LitElement {
     this.provider_list = [];
     this.query_nominatim = '';
     this.details_mobile_state = false;
-    this.access_types = [];
     this.plug_types = [];
     /* Parameters */
     const [language] = (window.navigator.userLanguage || window.navigator.language).split('-');
@@ -63,7 +61,6 @@ export class BaseClass extends LitElement {
     this.render__filter_box = render__filter_box.bind(this);
     this.render__filter_values_mobile = render__filter_values_mobile.bind(this);
     this.render__search_box_underlay = render__search_box_underlay.bind(this);
-    this.request__access_types = request__access_types.bind(this);
     this.request__plug_types = request__plug_types.bind(this);
     /* Requests */
     this.request__get_stations_details = request__get_stations_details.bind(this);

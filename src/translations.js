@@ -93,11 +93,6 @@ export const t = {
     de: 'Unbekannt',
     it: 'Sconosciuto'
   },
-  private_withpublicaccess: {
-    en: 'Private with public access',
-    de: 'Privat mit öffentlichem Zugang',
-    it: 'Privato con pubblico accesso'
-  },
   occupied: {
     en: 'Occupied',
     de: 'Besetzt',
@@ -134,9 +129,9 @@ export const t = {
     it: 'Orari'
   },
   available_columns: {
-    en: 'available charging stations',
-    de: 'verfügbare Ladestationen',
-    it: 'colonnine disponibili'
+    en: 'Available charging stations',
+    de: 'Verfügbare Ladestationen',
+    it: 'Colonnine disponibili'
   },
   no_real_time_data: {
     en: 'No real time data available for this station',
@@ -158,6 +153,11 @@ export const t = {
     de: 'Bezahlung',
     it: 'Pagamento'
   },
+  operator: {
+    en: 'Operator',
+    de: 'Betreiber',
+    it: 'Gestore'
+  },
   search_filters: {
     en: 'Search filters',
     de: 'Suchfilter',
@@ -172,11 +172,6 @@ export const t = {
     en: 'Research range',
     de: 'Suchradius',
     it: 'Raggio di ricerca'
-  },
-  type_of_access: {
-    en: 'Type of access',
-    de: 'Zugangsart',
-    it: 'Tipo di accesso'
   },
   column_state: {
     en: 'Charging station state',

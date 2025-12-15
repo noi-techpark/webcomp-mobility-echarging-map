@@ -193,6 +193,91 @@ export const t = {
     de: 'Minimale Leistung',
     it: 'Minima potenza erogata'
   },
+  accessible_stations: {
+    en: 'Accessible stations',
+    de: 'Zugängliche Stationen',
+    it: 'Stazioni accessibili'
+  },
+  accessibility_info: {
+    en: 'Accessibility Information',
+    de: 'Barrierefreiheit Informationen',
+    it: 'Informazioni di Accessibilità'
+  },
+  accessibility: {
+    en: 'Accessible for disabled visitors',
+    de: 'Zugänglich für Menschen mit Behinderungen',
+    it: 'Accessibile per persone con disabilità'
+  },
+  survey_date: {
+    en: 'Survey Date',
+    de: 'Erhebungsdatum',
+    it: 'Data del Rilievo'
+  },
+  vertical_road_signs: {
+    en: 'Vertical road signs present',
+    de: 'Vertikale Verkehrszeichen vorhanden',
+    it: 'Segnaletica verticale presente'
+  },
+  horizontal_road_signs: {
+    en: 'Horizontal floor markings present',
+    de: 'Horizontale Bodenmarkierungen vorhanden',
+    it: 'Marcature orizzontali presenti'
+  },
+  charging_cable_length: {
+    en: 'Charging cable length',
+    de: 'Ladekabellänge',
+    it: 'Lunghezza cavo di ricarica'
+  },
+  stepless_access: {
+    en: 'Stepless sidewalk connection',
+    de: 'Stufenlose Gehwegverbindung',
+    it: 'Collegamento marciapiede senza gradini'
+  },
+  charging_pistol_height: {
+    en: 'Charging pistol operation height',
+    de: 'Bedienungshöhe der Ladepistole',
+    it: 'Altezza di funzionamento della pistola di ricarica'
+  },
+  parking_space: {
+    en: 'Free parking space next to charging point',
+    de: 'Kostenloser Parkplatz neben der Ladestation',
+    it: 'Spazio di parcheggio gratuito accanto al punto di ricarica'
+  },
+  display_height: {
+    en: 'Display/card reader operation height',
+    de: 'Bedienungshöhe des Displays/Kartenlesers',
+    it: 'Altezza di funzionamento del display/lettore di schede'
+  },
+  send_feedback: {
+    en: 'Send Feedback',
+    de: 'Feedback senden',
+    it: 'Invia Feedback'
+  },
+  feedback_about_accessibility: {
+    en: 'Send feedback about accessibility information',
+    de: 'Feedback zu Barrierefreiheitsinformationen senden',
+    it: 'Invia feedback sulle informazioni di accessibilità'
+  },
+  yes: {
+    en: 'Yes',
+    de: 'Ja',
+    it: 'Sì'
+  },
+  no: {
+    en: 'No',
+    de: 'Nein',
+    it: 'No'
+  },
+  cm: {
+    en: 'cm',
+    de: 'cm',
+    it: 'cm'
+  },
+  image: {
+    en: 'Image',
+    de: 'Bild',
+    it: 'Immagine'
+  },
   open_charging_station: {
     en: 'Charging station open',
     de: 'Ladestation offen',
@@ -227,5 +312,10 @@ export const t = {
     en: 'Unknown error',
     de: 'Unbekannter Fehler',
     it: 'Errore sconosciuto'
+  },
+  accessibility_info_not_available: {
+    en: 'Accessibility information not available for this station',
+    de: 'Barrierefreiheitsinformationen für diese Station nicht verfügbar',
+    it: 'Informazioni di accessibilità non disponibili per questa stazione'
   }
 };

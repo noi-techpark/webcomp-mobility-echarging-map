@@ -29,13 +29,39 @@ import { render__h1 } from './typography';
 import { providerWebsites } from '../providers';
 
 export function render__details_box() {
-  const { smetadata, sname, scoordinate, accessInfo, mvalue } = this.current_station;
+  const { smetadata, sname, scoordinate, accessInfo, mvalue, scode } = this.current_station;
   const { sorigin } = this.current_station;
 
+  let accessibility_data, accessibility_image;
+
+  if (
+    this.current_station &&
+    this.current_station.accessibility &&
+    this.current_station.accessibility.accessibility &&
+    this.current_station.accessibility.accessibility.AdditionalProperties &&
+    this.current_station.accessibility.accessibility.AdditionalProperties.EchargingDataProperties
+  ) {
+    accessibility_data = this.current_station.accessibility.accessibility.AdditionalProperties.EchargingDataProperties;
+  }
+
+  if (
+    this.current_station &&
+    this.current_station.accessibility &&
+    this.current_station.accessibility.accessibility &&
+    this.current_station.accessibility.accessibility.ImageGallery &&
+    this.current_station.accessibility.accessibility.ImageGallery.length > 0 &&
+    this.current_station.accessibility.accessibility.ImageGallery[0].ImageUrl
+  ) {
+    accessibility_image = this.current_station.accessibility.accessibility.ImageGallery[0].ImageUrl;
+  }
+
   // Convert unicode characters to strings like \u00df for ß in "Straße"
-  const address = smetadata != undefined && smetadata.address != undefined ? smetadata.address.replace(/\\u[\dA-F]{4}/gi, function (match) {
-    return String.fromCharCode(parseInt(match.replace(/\\u/g, ''), 16));
-  }) : null;
+  const address =
+    smetadata != undefined && smetadata.address != undefined
+      ? smetadata.address.replace(/\\u[\dA-F]{4}/gi, function(match) {
+          return String.fromCharCode(parseInt(match.replace(/\\u/g, ''), 16));
+        })
+      : null;
 
   const user_actions_container__details = this.shadowRoot.getElementById('user_actions_container__details');
   const details_box__expand_handle__details = this.shadowRoot.getElementById('details_box__expand_handle__details');
@@ -48,14 +74,16 @@ export function render__details_box() {
   this.render__rating_section = render__rating_section.bind(this);
 
   // Handle missing state and accessType
-  const state = (smetadata && smetadata.state) || 'UNKNOWN'; // Default to 'UNKNOWN' if state is missing
-  const accessType = (smetadata && smetadata.accessType) || 'UNKNOWN'; // Default to 'UNKNOWN' if accessType is missing
-  const payment_link = "https://www.neogy.it/en/public-network-charging/direct-payment.html";
+  const state = (smetadata && smetadata.state) || 'UNKNOWN';
+  const accessType = (smetadata && smetadata.accessType) || 'UNKNOWN';
+  const payment_link = 'https://www.neogy.it/en/public-network-charging/direct-payment.html';
   const operator = (smetadata && smetadata.provider) || 'UNKNOWN';
 
   return html`
     <style>
-      ${getStyle(style)}
+      ${getStyle(style)} .accessibility-card {
+        margin: 15px;
+      }
     </style>
     <div class="details_box">
       <div id="details_box__expand_handle__details" class="details_box__expand_handle pt-2 pb-2 d-sm-none">
@@ -66,8 +94,7 @@ export function render__details_box() {
           ? html`
               ${render__state_label(state, this.language)}
             `
-          : undefined
-        }
+          : undefined}
         <div
           class="details_box__close_button"
           @click="${() => {
@@ -96,27 +123,28 @@ export function render__details_box() {
                     ${t.directions[this.language]} →
                   </a>
                 `
-              : null
-            }
+              : null}
           </div>
         </div>
         <!-- Detail box -->
         ${render__hours_section(accessInfo, this.language)}
         <!-- Detail box -->
-        ${this.current_station.mvalue === undefined ? html`
-          <div class="details_box__section mt-3 pb-3">
-            <div class="col-12 d-flex align-items-center">
-              <div>
-                <img class="w-18px mr-2 d-block" src="${icon__teal_info}" alt="" />
+        ${this.current_station.mvalue === undefined
+          ? html`
+              <div class="details_box__section mt-3 pb-3">
+                <div class="col-12 d-flex align-items-center">
+                  <div>
+                    <img class="w-18px mr-2 d-block" src="${icon__teal_info}" alt="" />
+                  </div>
+                  <div>
+                    <p class="mb-0 mt-0 fs-16 ff-sued fw-400">
+                      ${t.no_real_time_data[this.language]}
+                    </p>
+                  </div>
+                </div>
               </div>
-              <div>
-                <p class="mb-0 mt-0 fs-16 ff-sued fw-400">
-                  ${t.no_real_time_data[this.language]}
-                </p>
-              </div>
-            </div>
-          </div>
-        ` : null}
+            `
+          : null}
         <!-- Available columns detail box -->
         <div class="details_box__section mt-3 pb-3">
           <div class="col-12 d-flex align-items-center">
@@ -141,12 +169,12 @@ export function render__details_box() {
                       case 1:
                         icon = icon__green_dot;
                         break;
-                      case "AVAILABLE":
+                      case 'AVAILABLE':
                         icon = icon__green_dot;
                         break;
-                      case "CHARGING":
-                        icon = icon__green_dot; 
-                        break;    
+                      case 'CHARGING':
+                        icon = icon__green_dot;
+                        break;
                       default:
                         icon = icon__grey_dot_question;
                     }
@@ -161,52 +189,236 @@ export function render__details_box() {
                   return html`
                     <div class="element_background d-flex align-items-center pt-2 pb-2 mt-3">
                       <div class="ml-3 mr-3 position-relative">
-                        <img
-                          class="w-18px d-block position-absolute"
-                          style="top: -6px; right: -6px;"
-                          src="${icon}"
-                        />
+                        <img class="w-18px d-block position-absolute" style="top: -6px; right: -6px;" src="${icon}" />
                         <img class="w-24px d-block" src="${icon__type_1}" alt="" />
                       </div>
                       <div>
                         <p class="fs-16 mt-1">${t.type_sockets[this.language]}:</p>
                         ${outlets.length > 0
-                          ? outlets.map(outlet => html`
-                              <div class="d-flex">
-                                <p class="fs-14 mt-1 mr-2">-</p>
-                                <p class="fs-14 mt-1">
-                                  ${outlet.outletTypeCode} - ${outlet.maxPower !== undefined ? outlet.maxPower.toLocaleString(this.language) : '--'} kW <br />
-                                  <span class="fs-12 color-black-400 mt-2 fw-300">
-                                    ${t.column[this.language]} ${i + 1} ∙
-                                    ${Object.prototype.hasOwnProperty.call(outlet, 'minCurrent')
-                                      ? outlet.minCurrent
-                                      : '*'}
-                                    - ${outlet.maxCurrent || '*'} A
-                                  </span>
-                                </p>
-                              </div>
-                            `)
-                          : connectors.map(connector => html`
-                              <div class="d-flex">
-                                <p class="fs-14 mt-1 mr-2">-</p>
-                                <p class="fs-14 mt-1">
-                                  ${connector.standard} - ${typeof connector.max_electric_power === "number"  ? (connector.max_electric_power / 1000).toLocaleString(this.language) : '--'} kW <br />
-                                  <span class="fs-12 color-black-400 mt-2 fw-300">
-                                    ${t.column[this.language]} ${i + 1} ∙
-                                    ${connector.max_ampere || '*'} A
-                                  </span>
-                                </p>
-                              </div>
-                            `)
-                        }
+                          ? outlets.map(
+                              outlet => html`
+                                <div class="d-flex">
+                                  <p class="fs-14 mt-1 mr-2">-</p>
+                                  <p class="fs-14 mt-1">
+                                    ${outlet.outletTypeCode} -
+                                    ${outlet.maxPower !== undefined
+                                      ? outlet.maxPower.toLocaleString(this.language)
+                                      : '--'}
+                                    kW <br />
+                                    <span class="fs-12 color-black-400 mt-2 fw-300">
+                                      ${t.column[this.language]} ${i + 1} ∙
+                                      ${Object.prototype.hasOwnProperty.call(outlet, 'minCurrent')
+                                        ? outlet.minCurrent
+                                        : '*'}
+                                      - ${outlet.maxCurrent || '*'} A
+                                    </span>
+                                  </p>
+                                </div>
+                              `
+                            )
+                          : connectors.map(
+                              connector => html`
+                                <div class="d-flex">
+                                  <p class="fs-14 mt-1 mr-2">-</p>
+                                  <p class="fs-14 mt-1">
+                                    ${connector.standard} -
+                                    ${typeof connector.max_electric_power === 'number'
+                                      ? (connector.max_electric_power / 1000).toLocaleString(this.language)
+                                      : '--'}
+                                    kW <br />
+                                    <span class="fs-12 color-black-400 mt-2 fw-300">
+                                      ${t.column[this.language]} ${i + 1} ∙ ${connector.max_ampere || '*'} A
+                                    </span>
+                                  </p>
+                                </div>
+                              `
+                            )}
                       </div>
                     </div>
                   `;
                 })
-              : null
-            }
+              : null}
           </div>
         </div>
+
+        <!-- Accessibility Information Section -->
+        <div class="details_box__section mt-3 pb-3">
+          <div class="col-12 d-flex align-items-center">
+            <div>
+              <img class="w-16px mr-2 d-block" src="${icon__info}" alt="" />
+            </div>
+            <div>
+              <p class="mb-0 mt-0 fs-18 ff-sued fw-400">${t.accessibility_info[this.language]}</p>
+            </div>
+          </div>
+
+          ${accessibility_data
+            ? html`
+                <!-- Accessibility Status -->
+                <div class="element_background d-flex align-items-center pt-2 pb-2 mt-3 accessibility-card">
+                  <div class="ml-3 flex-fill">
+                    <p class="fs-16 mt-1 fw-400">${t.accessibility[this.language]}</p>
+                    <p class="fs-14 color-black-400 mt-1">
+                      ${accessibility_data.ChargingStationAccessible ? t.yes[this.language] : t.no[this.language]}
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Survey Date -->
+                ${accessibility_data.SurveyType
+                  ? html`
+                      <div class="element_background d-flex align-items-center pt-2 pb-2 mt-3 accessibility-card">
+                        <div class="ml-3 flex-fill">
+                          <p class="fs-16 mt-1 fw-400">${t.survey_date[this.language]}</p>
+                          <p class="fs-14 color-black-400 mt-1">${accessibility_data.SurveyType}</p>
+                        </div>
+                      </div>
+                    `
+                  : null}
+
+                <!-- Vertical Road Signs -->
+                ${accessibility_data.VerticalRoadSign !== undefined
+                  ? html`
+                      <div class="element_background d-flex align-items-center pt-2 pb-2 mt-3 accessibility-card">
+                        <div class="ml-3 flex-fill">
+                          <p class="fs-16 mt-1 fw-400">${t.vertical_road_signs[this.language]}</p>
+                          <p class="fs-14 color-black-400 mt-1">
+                            ${accessibility_data.VerticalRoadSign ? t.yes[this.language] : t.no[this.language]}
+                          </p>
+                        </div>
+                      </div>
+                    `
+                  : null}
+
+                <!-- Horizontal Road Signs -->
+                ${accessibility_data.HorizontalFloorRoadSign !== undefined
+                  ? html`
+                      <div class="element_background d-flex align-items-center pt-2 pb-2 mt-3 accessibility-card">
+                        <div class="ml-3 flex-fill">
+                          <p class="fs-16 mt-1 fw-400">${t.horizontal_road_signs[this.language]}</p>
+                          <p class="fs-14 color-black-400 mt-1">
+                            ${accessibility_data.HorizontalFloorRoadSign ? t.yes[this.language] : t.no[this.language]}
+                          </p>
+                        </div>
+                      </div>
+                    `
+                  : null}
+
+                <!-- Cable Length -->
+                ${accessibility_data.ChargingCableLength
+                  ? html`
+                      <div class="element_background d-flex align-items-center pt-2 pb-2 mt-3 accessibility-card">
+                        <div class="ml-3 flex-fill">
+                          <p class="fs-16 mt-1 fw-400">${t.charging_cable_length[this.language]}</p>
+                          <p class="fs-14 color-black-400 mt-1">
+                            ${accessibility_data.ChargingCableLength} ${t.cm[this.language]}
+                          </p>
+                        </div>
+                      </div>
+                    `
+                  : null}
+
+                <!-- Stepless Sidewalk Connection -->
+                ${accessibility_data.SteplessSidewalkConnection !== undefined
+                  ? html`
+                      <div class="element_background d-flex align-items-center pt-2 pb-2 mt-3 accessibility-card">
+                        <div class="ml-3 flex-fill">
+                          <p class="fs-16 mt-1 fw-400">${t.stepless_access[this.language]}</p>
+                          <p class="fs-14 color-black-400 mt-1">
+                            ${accessibility_data.SteplessSidewalkConnection
+                              ? t.yes[this.language]
+                              : t.no[this.language]}
+                          </p>
+                        </div>
+                      </div>
+                    `
+                  : null}
+
+                <!-- Pistol Height -->
+                ${accessibility_data.ChargingPistolOperationHeight
+                  ? html`
+                      <div class="element_background d-flex align-items-center pt-2 pb-2 mt-3 accessibility-card">
+                        <div class="ml-3 flex-fill">
+                          <p class="fs-16 mt-1 fw-400">${t.charging_pistol_height[this.language]}</p>
+                          <p class="fs-14 color-black-400 mt-1">
+                            ${accessibility_data.ChargingPistolOperationHeight} ${t.cm[this.language]}
+                          </p>
+                        </div>
+                      </div>
+                    `
+                  : null}
+
+                <!-- Barrier Free Access Space to Charging Point -->
+                ${accessibility_data.BarrierFreeAccessSpacetoChargingPoint !== undefined
+                  ? html`
+                      <div class="element_background d-flex align-items-center pt-2 pb-2 mt-3 accessibility-card">
+                        <div class="ml-3 flex-fill">
+                          <p class="fs-16 mt-1 fw-400">${t.parking_space[this.language]}</p>
+                          <p class="fs-14 color-black-400 mt-1">
+                            ${accessibility_data.BarrierFreeAccessSpacetoChargingPoint
+                              ? t.yes[this.language]
+                              : t.no[this.language]}
+                          </p>
+                        </div>
+                      </div>
+                    `
+                  : null}
+
+                <!-- Display Height -->
+                ${accessibility_data.DisplayOrCardReaderOperationHeight
+                  ? html`
+                      <div class="element_background d-flex align-items-center pt-2 pb-2 mt-3 accessibility-card">
+                        <div class="ml-3 flex-fill">
+                          <p class="fs-16 mt-1 fw-400">${t.display_height[this.language]}</p>
+                          <p class="fs-14 color-black-400 mt-1">
+                            ${accessibility_data.DisplayOrCardReaderOperationHeight} ${t.cm[this.language]}
+                          </p>
+                        </div>
+                      </div>
+                    `
+                  : null}
+
+                <!-- Image -->
+                ${accessibility_image
+                  ? html`
+                      <div
+                        class="element_background d-flex align-items-center flex-column pt-2 pb-2 mt-3 accessibility-card"
+                      >
+                        <div class="ml-3 mr-3">
+                          <p class="fs-16 mt-1 fw-400 mb-2">${t.image[this.language]}</p>
+                          <img
+                            src="${accessibility_image}"
+                            alt="Charging station accessibility"
+                            style="max-width: 100%; border-radius: 4px;"
+                          />
+                        </div>
+                      </div>
+                    `
+                  : null}
+              `
+            : html`
+                <!-- No accessibility data available message -->
+                <div class="element_background d-flex pt-2 pb-2 mt-3">
+                  <div class="ml-3 flex-fill">
+                    <p class="fs-14 color-black-400 mt-1">${t.accessibility_info_not_available[this.language]}</p>
+                  </div>
+                </div>
+              `}
+
+          <!-- Feedback Button  -->
+          <div class="element_background d-flex pt-3 pb-3 mt-3">
+            <div class="ml-3 flex-fill">
+              <a
+                href="https://forms.microsoft.com/Pages/ResponsePage.aspx?id=MICROSOFT_FORM_ID"
+                target="_blank"
+                class="color-green fs-16 fw-300 color-green--hover d-block"
+              >
+                ${t.send_feedback[this.language]} →
+              </a>
+            </div>
+          </div>
+        </div>
+
         <!-- Payment detail box -->
         <div class="details_box__section mt-3 pb-3">
           <div class="col-12 d-flex align-items-center">
@@ -218,47 +430,50 @@ export function render__details_box() {
             </div>
           </div>
           <div class="col-12">
-            <a
-              href="${payment_link}"
-              class="color-green fs-16 fw-300 mt-2 color-green--hover d-block"
-              target="_blank"
-            >
+            <a href="${payment_link}" class="color-green fs-16 fw-300 mt-2 color-green--hover d-block" target="_blank">
               ${t.more_informations[this.language]} →
             </a>
           </div>
         </div>
-        ${operator !== 'UNKNOWN' ? html`
-        <!-- Operator detail box -->
-        <div class="details_box__section mt-3">
-          <div class="col-12 d-flex align-items-center">
-            <div>
-              <img class="w-16px mr-2 d-block" src="${icon__info}" alt="" />
-            </div>
-            <div>
-              <p class="mb-0 mt-0 fs-18 ff-sued fw-400">${t.operator[this.language]}</p>
-            </div>
-          </div>
-          <div class="col-12 pb-3">
-            <div class="element_background d-flex pt-2 pb-2 mt-3">
-              <div class="ml-3 flex-fill">
-                <p class="fs-16 mt-1">${operator}</p>
-                ${providerWebsites[operator] ? html`
-                  <a
-                    href="${providerWebsites[operator]}"
-                    class="color-green color-green--hover fs-16 fw-300 mt-2 mb-2 d-block"
-                    target="_blank"
-                  >
-                    ${t.website[this.language]} →
-                  </a>
-              ` : null}
+
+        ${operator !== 'UNKNOWN'
+          ? html`
+              <!-- Operator detail box -->
+              <div class="details_box__section mt-3">
+                <div class="col-12 d-flex align-items-center">
+                  <div>
+                    <img class="w-16px mr-2 d-block" src="${icon__info}" alt="" />
+                  </div>
+                  <div>
+                    <p class="mb-0 mt-0 fs-18 ff-sued fw-400">${t.operator[this.language]}</p>
+                  </div>
+                </div>
+                <div class="col-12 pb-3">
+                  <div class="element_background d-flex pt-2 pb-2 mt-3">
+                    <div class="ml-3 flex-fill">
+                      <p class="fs-16 mt-1">${operator}</p>
+                      ${providerWebsites[operator]
+                        ? html`
+                            <a
+                              href="${providerWebsites[operator]}"
+                              class="color-green color-green--hover fs-16 fw-300 mt-2 mb-2 d-block"
+                              target="_blank"
+                            >
+                              ${t.website[this.language]} →
+                            </a>
+                          `
+                        : null}
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        </div>
-      ` : null}
+            `
+          : null}
+
         <!-- Nearby Locations detail box -->
         <div class="details_box__section mt-3">
-          ${this.station_near_restaurants.length || this.station_near_accomodations.length
+          ${(this.station_near_restaurants && this.station_near_restaurants.length) ||
+          (this.station_near_accomodations && this.station_near_accomodations.length)
             ? html`
                 <div class="col-12 d-flex align-items-center">
                   <div>
@@ -269,70 +484,87 @@ export function render__details_box() {
                   </div>
                 </div>
               `
-            : null
-          }
+            : null}
           <div class="col-12">
-            ${this.station_near_restaurants.map(o => html`
-              <div class="element_background d-flex pt-2 pb-2 mt-3">
-                <div class="ml-3 mr-3 position-relative mt-2">
-                  <img class="w-24px d-block" src="${icon_restaurant_green}" alt="" />
-                </div>
-                <div class="flex-fill">
-                  <p class="fs-16 mt-1">${o.Detail[this.language] ? o.Detail[this.language].Title : '---'}</p>
-                  <p class="fs-12 color-black-400 mt-1 pr-2">
-                    ${o.Detail[this.language]
-                      ? utils_truncate(encodeXml(o.Detail[this.language].BaseText), 40)
-                      : 'No description'}
-                  </p>
-                  <a
-                    href="${`https://www.suedtirol.info/${this.language}/tripmapping/activity/${o.Id
-                      .replace('GASTRO', 'SMGPOI')
-                      .replace('_reduced', '')}`}"
-                    class="color-green color-green--hover fs-16 fw-300 mt-2 mb-2 d-block"
-                    target="_blank"
-                  >
-                    ${t.more_informations[this.language]} →
-                  </a>
-                  ${o.ContactInfos[this.language].Url ? html`
-                    <a
-                      href="${`${o.ContactInfos[this.language].Url}`}"
-                      class="color-green color-green--hover fs-16 fw-300 mt-2 mb-2 d-block"
-                      target="_blank"
-                    >
-                      ${t.website[this.language]} →
-                    </a>
-                  ` : ''}
-                </div>
-              </div>
-            `)}
-            ${this.station_near_accomodations.map(o => html`
-              <div class="element_background d-flex pt-2 pb-2 mt-3">
-                <div class="ml-3 mr-3 position-relative mt-2">
-                  <img class="w-24px d-block" src="${icon_hotel_green}" alt="" />
-                </div>
-                <div class="flex-fill">
-                  <p class="fs-16 mt-1">
-                    ${o.AccoDetail[this.language] ? o.AccoDetail[this.language].Name : '---'}
-                  </p>
-                  <a
-                    href="${`https://www.suedtirol.info/${this.language}/tripmapping/acco/${o.Id.replace('_REDUCED', '')}`}"
-                    class="color-green color-green--hover fs-16 fw-300 mt-2 mb-2 d-block"
-                    target="_blank"
-                  >
-                    ${t.more_informations[this.language]} →
-                  </a>
-                  ${o.AccoDetail[this.language].Website ? html`
-                    <a
-                      href="${`${o.AccoDetail[this.language].Website}`}"
-                      class="color-green color-green--hover fs-16 fw-300 mt-2 mb-2 d-block"
-                      target="_blank"
-                    >
-                      ${t.website[this.language]} →
-                    </a>
-                  ` : ''}
-                </div>
-              </div>
-            `)}
+            ${this.station_near_restaurants && this.station_near_restaurants.length
+              ? this.station_near_restaurants.map(
+                  o => html`
+                    <div class="element_background d-flex pt-2 pb-2 mt-3">
+                      <div class="ml-3 mr-3 position-relative mt-2">
+                        <img class="w-24px d-block" src="${icon_restaurant_green}" alt="" />
+                      </div>
+                      <div class="flex-fill">
+                        <p class="fs-16 mt-1">
+                          ${o.Detail && o.Detail[this.language] ? o.Detail[this.language].Title : '---'}
+                        </p>
+                        <p class="fs-12 color-black-400 mt-1 pr-2">
+                          ${o.Detail && o.Detail[this.language]
+                            ? utils_truncate(encodeXml(o.Detail[this.language].BaseText), 40)
+                            : 'No description'}
+                        </p>
+                        <a
+                          href="${`https://www.suedtirol.info/${this.language}/tripmapping/activity/${o.Id.replace(
+                            'GASTRO',
+                            'SMGPOI'
+                          ).replace('_reduced', '')}`}"
+                          class="color-green color-green--hover fs-16 fw-300 mt-2 mb-2 d-block"
+                          target="_blank"
+                        >
+                          ${t.more_informations[this.language]} →
+                        </a>
+                        ${o.ContactInfos && o.ContactInfos[this.language] && o.ContactInfos[this.language].Url
+                          ? html`
+                              <a
+                                href="${`${o.ContactInfos[this.language].Url}`}"
+                                class="color-green color-green--hover fs-16 fw-300 mt-2 mb-2 d-block"
+                                target="_blank"
+                              >
+                                ${t.website[this.language]} →
+                              </a>
+                            `
+                          : ''}
+                      </div>
+                    </div>
+                  `
+                )
+              : null}
+            ${this.station_near_accomodations && this.station_near_accomodations.length
+              ? this.station_near_accomodations.map(
+                  o => html`
+                    <div class="element_background d-flex pt-2 pb-2 mt-3">
+                      <div class="ml-3 mr-3 position-relative mt-2">
+                        <img class="w-24px d-block" src="${icon_hotel_green}" alt="" />
+                      </div>
+                      <div class="flex-fill">
+                        <p class="fs-16 mt-1">
+                          ${o.AccoDetail && o.AccoDetail[this.language] ? o.AccoDetail[this.language].Name : '---'}
+                        </p>
+                        <a
+                          href="${`https://www.suedtirol.info/${this.language}/tripmapping/acco/${o.Id.replace(
+                            '_REDUCED',
+                            ''
+                          )}`}"
+                          class="color-green color-green--hover fs-16 fw-300 mt-2 mb-2 d-block"
+                          target="_blank"
+                        >
+                          ${t.more_informations[this.language]} →
+                        </a>
+                        ${o.AccoDetail && o.AccoDetail[this.language] && o.AccoDetail[this.language].Website
+                          ? html`
+                              <a
+                                href="${`${o.AccoDetail[this.language].Website}`}"
+                                class="color-green color-green--hover fs-16 fw-300 mt-2 mb-2 d-block"
+                                target="_blank"
+                              >
+                                ${t.website[this.language]} →
+                              </a>
+                            `
+                          : ''}
+                      </div>
+                    </div>
+                  `
+                )
+              : null}
           </div>
         </div>
       </div>

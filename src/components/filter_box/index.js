@@ -52,6 +52,20 @@ export function render__filter_box() {
     }
   }
 
+  const handle__accessibility = e => {
+    if (e.target.checked) {
+      this.filters = {
+        ...this.filters,
+        accessibility: true
+      };
+    } else {
+      this.filters = {
+        ...this.filters,
+        accessibility: false
+      };
+    }
+  };
+
   const handle__plug_type = e => {
     if (e.target.checked) {
       this.filters = {
@@ -108,6 +122,7 @@ export function render__filter_box() {
       maxPower: 0,
       availability: false,
       realtime: false,
+      accessibility: false,
       plug_type: [],
       provider: []
     };
@@ -170,6 +185,17 @@ export function render__filter_box() {
             ${t.realtime_description[this.language]}
           </label>
         </div>
+        <div class="custom-checkbox mt-3">
+              <label class="fs-16">
+                <input
+                  type="checkbox"
+                  id="accessibility"
+                  @change="${e => handle__accessibility(e)}"
+                />
+                <span class="custom-checkbox-checkbox mr-2"></span>
+                ${t.accessible_stations[this.language]}
+              </label>
+            </div>
         </div>
           <div class="col-12 p-0 mt-2 d-none d-lg-block">
             <div style="border-bottom: 2px solid #f0f1f1;"></div>

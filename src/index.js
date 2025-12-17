@@ -7,10 +7,10 @@ import leaflet_mrkcls from 'leaflet.markercluster';
 import style__markercluster from 'leaflet.markercluster/dist/MarkerCluster.css';
 import style__leaflet from 'leaflet/dist/leaflet.css';
 import { html, css, unsafeCSS } from 'lit-element';
+import { styleMap } from 'lit-html/directives/style-map.js';
 import { BaseClass } from './components/baseClass';
 import { render__map_controls } from './components/map_controls';
 import { map_tag } from './components/map_tag';
-// import { map_tag_closed } from './components/map_tag_closed';
 import image_logo from './icons/logo.png';
 import { observed_properties } from './observed_properties';
 import style__buttons from './scss/buttons.scss';
@@ -21,7 +21,6 @@ import { getLatLongFromStationDetail, get_user_platform, stationStatusMapper } f
 import { get_provider_list } from './utils/get_provider_list';
 import { request__stations_plugs } from './api/mobility';
 import { t } from './translations';
-import {styleMap} from 'lit-html/directives/style-map.js';
 
 class EMobilityMap extends BaseClass {
   static get properties() {
@@ -29,7 +28,6 @@ class EMobilityMap extends BaseClass {
   }
 
   async initializeMap() {
-    // closed or opens map on mobile depending on mobileFullScreen
     const map = this.shadowRoot.getElementById('map');
     console.log(this.mobileFullScreen);
     if (this.mobileFullScreen == undefined) {
@@ -38,12 +36,10 @@ class EMobilityMap extends BaseClass {
       e_mobility_map.classList.toggle('closed');
       map.classList.toggle('closed');
     }
-    this.map = L.map(map, { zoomControl: false }).setView(
-      [this.current_location.lat, this.current_location.lng],
-      13
-    );
+    this.map = L.map(map, { zoomControl: false }).setView([this.current_location.lat, this.current_location.lng], 13);
     L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-      attribution: '<a target="_blank" href="https://opendatahub.com">OpenDataHub.com</a> | &copy; <a target="_blank" href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> | &copy; <a target="_blank" href="https://carto.com/attribution">Carto</a>'
+      attribution:
+        '<a target="_blank" href="https://opendatahub.com">OpenDataHub.com</a> | &copy; <a target="_blank" href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> | &copy; <a target="_blank" href="https://carto.com/attribution">Carto</a>'
     }).addTo(this.map);
   }
 
@@ -81,11 +77,31 @@ class EMobilityMap extends BaseClass {
     });
 
     filtered_stations_details = filtered_stations_details.filter(o => {
-      // console.log(o);
-
       const station_plugs = this.all_plugs_details.filter(plug => {
         return plug.pcode === o.scode;
       });
+
+      const station = o;
+      station.accessibility = station_plugs.find(plug => plug.accessibility);
+
+      /**
+       * accessibility filter
+       */
+      let condition_accessibility = true;
+
+      if (this.filters.accessibility) {
+        const accessibility_data =
+          o &&
+          o.accessibility &&
+          o.accessibility.accessibility &&
+          o.accessibility.accessibility.AdditionalProperties &&
+          o.accessibility.accessibility.AdditionalProperties.EchargingDataProperties;
+
+        condition_accessibility =
+          accessibility_data &&
+          accessibility_data.ChargingStationAccessible === true &&
+          accessibility_data.SurveyType != null;
+      }
 
       /**
        *  plug_type
@@ -94,28 +110,25 @@ class EMobilityMap extends BaseClass {
       if (this.filters.plug_type.length) {
         filtered__station_plugs = station_plugs.filter(plug => {
           let condition = false;
-      // Check for outlets
-      if (plug.smetadata.outlets) {
-        plug.smetadata.outlets.forEach(outlet => {
-          if (!condition) {
-            condition = this.filters.plug_type.includes(outlet.outletTypeCode);
+          if (plug.smetadata.outlets) {
+            plug.smetadata.outlets.forEach(outlet => {
+              if (!condition) {
+                condition = this.filters.plug_type.includes(outlet.outletTypeCode);
+              }
+            });
+          } else if (plug.smetadata.connectors) {
+            plug.smetadata.connectors.forEach(connector => {
+              if (!condition) {
+                condition = this.filters.plug_type.includes(connector.standard);
+              }
+            });
           }
-        });
-      }
-      // Check for connectors
-      else if (plug.smetadata.connectors) {
-        plug.smetadata.connectors.forEach(connector => {
-          if (!condition) {
-            condition = this.filters.plug_type.includes(connector.standard);
-          }
+
+          return condition;
         });
       }
 
-      return condition;
-    });
-  }
-
-  const condition_plug_type = this.filters.plug_type.length ? filtered__station_plugs.length : true;
+      const condition_plug_type = this.filters.plug_type.length ? filtered__station_plugs.length : true;
 
       /**
        * provider
@@ -126,7 +139,6 @@ class EMobilityMap extends BaseClass {
 
       let condition_maxPower = true;
       if (this.filters.maxPower) {
-        // station_plugs;
         const outlets = station_plugs.map(plug => plug.smetadata.outlets);
         const maxPowers = outlets.flat().map(outlet => parseInt(outlet.maxPower, 10));
         if (!maxPowers.some(m => m >= this.filters.maxPower)) {
@@ -138,19 +150,20 @@ class EMobilityMap extends BaseClass {
       const condition_realtime = this.filters.realtime ? o.mvalue >= 0 : true;
 
       /* Merge conditions */
-      return condition_provider
-        && Boolean(condition_plug_type)
-        && condition_maxPower
-        && condition_availability
-        && condition_realtime;
+      return (
+        condition_provider &&
+        Boolean(condition_plug_type) &&
+        condition_maxPower &&
+        condition_availability &&
+        condition_realtime &&
+        condition_accessibility
+      );
     });
 
     /* PRINT filtered stations on map */
     filtered_stations_details.map(o => {
       const { smetadata, mvalue } = o;
       const marker_position = getLatLongFromStationDetail(o.scoordinate);
-      // stations_status_types
-      /** Creating the icon */
       const station_icon = L.icon({
         iconUrl: stationStatusMapper(smetadata, mvalue),
         iconSize: [36, 36]
@@ -166,7 +179,7 @@ class EMobilityMap extends BaseClass {
         await this.request__near_restaurants(marker_position.lat, marker_position.lng);
         await this.request__near_accomodations(marker_position.lat, marker_position.lng);
 
-        this.current_station = { ...o, station_plugs };
+        this.current_station = { ...o, station_plugs: station_plugs || [] };
         this.showFilters = false;
         this.is_loading = false;
       };
@@ -193,9 +206,7 @@ class EMobilityMap extends BaseClass {
         });
       }
     });
-    /** Add maker layer in the cluster group */
     this.layer_columns.addLayer(columns_layer);
-    /** Add the cluster group to the map */
     this.map.addLayer(this.layer_columns);
 
     /** Handle zoom */
@@ -259,8 +270,6 @@ class EMobilityMap extends BaseClass {
   }
 
   static get styles() {
-    // console.log(style__markercluster);
-
     return css`
       ${unsafeCSS(style__markercluster)}
       ${unsafeCSS(style__leaflet.toString())}
@@ -272,14 +281,12 @@ class EMobilityMap extends BaseClass {
   }
 
   handleToggleShowFilters() {
-    /** Closing details box */
     const user_actions_container__details = this.shadowRoot.getElementById('user_actions_container__details');
     if (user_actions_container__details) {
       user_actions_container__details.classList.remove('open');
     }
     this.current_station = {};
 
-    /** Closing the places results box */
     if (this.searched_places.length && !this.showFilters) {
       this.searched_places = [];
     }
@@ -302,7 +309,6 @@ class EMobilityMap extends BaseClass {
           try {
             document.body.cancelFullScreen();
           } catch (e_moz) {
-            /* continue regardless of error */
           }
         }
       }
@@ -327,34 +333,12 @@ class EMobilityMap extends BaseClass {
   }
 
   render() {
-    // console.log(this.map_desktop_height, this.language);
-    // console.log('rerender');
-
-    /* <style>
-        ${style__markercluster}
-        ${getStyle(style__leaflet)}
-        ${getStyle(style)}
-        ${getStyle(utilities)}
-        ${getStyle(style__typography)}
-        ${getStyle(style__buttons)}
-      </style> */
-
-    // console.log(style.toString());
-
-    // <style>
-    //   ${style__markercluster}
-    //   ${style__leaflet.toString()}
-    //   ${style.toString()}
-    //   ${utilities.toString()}
-    //   ${style__typography.toString()}
-    //   ${style__buttons.toString()}
-    // </style>
-    let styles = {
-      'font-family': this.fontFamily ? this.fontFamily :  "Suedtirol",
-      '--w-c-font-family': this.fontFamily ? this.fontFamily :  "Suedtirol",
+    const styles = {
+      'font-family': this.fontFamily ? this.fontFamily : 'Suedtirol',
+      '--w-c-font-family': this.fontFamily ? this.fontFamily : 'Suedtirol'
     };
     return html`
-       <div id=${'e_mobility_map'} class="e_mobility_map platform_${get_user_platform()}" style=${styleMap(styles)}>
+      <div id=${'e_mobility_map'} class="e_mobility_map platform_${get_user_platform()}" style=${styleMap(styles)}>
         ${this.render__loading_overlay()} ${this.render__message_overlay()} ${this.render__search_box_underlay()}
         <div style="z-index: 1003" class="user_actions_container__search_box">
           ${this.render__search_box()}

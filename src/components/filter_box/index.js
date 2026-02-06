@@ -276,7 +276,7 @@ export function render__filter_box() {
         <!-- maxPower box -->
         <div class="details_box__section mt-3 mb-3">
           <div class="col-12">
-            <p class="fs-14 mb-3 color-black-400">${t.minPower[this.language].toUpperCase()}</p>
+            <p class="fs-14 mb-3 color-black-400">${t.maxPower[this.language].toUpperCase()}</p>
             <div class="d-flex align-items-center">
               <input min="0"
                 id="maxPowerInput"

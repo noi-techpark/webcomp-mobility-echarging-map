@@ -188,10 +188,10 @@ export const t = {
     de: 'Anbieter',
     it: 'Fornitore'
   },
-  minPower: {
-    en: 'Min power',
-    de: 'Minimale Leistung',
-    it: 'Minima potenza erogata'
+  maxPower: {
+    en: 'Max power',
+    de: 'Maximale Leistung',
+    it: 'Massima potenza erogata'
   },
   accessible_stations: {
     en: 'Accessible stations',

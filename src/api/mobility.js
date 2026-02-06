@@ -30,7 +30,7 @@ export async function request__plug_types() {
           return 'UNKNOWN';
         })
       )
-    ).filter(v => v !== 'UNKNOWN'); // Filter out 'UNKNOWN' values
+    ).filter(v => v !== 'UNKNOWN' && v !== '700 bar small vehicles'); // Filter out 'UNKNOWN' values
 
     // Map the unique values to the desired format
     this.plug_types = unique.map((o, i) => {
@@ -133,6 +133,7 @@ export async function request__get_stations_details() {
  */
 export async function request__get_stations_plugs_details() {
   this.is_loading = true;
+
   const request = await fetch(
     `${NINJA_BASE_PATH}/flat/EChargingPlug?limit=-1&offset=0&shownull=false&distinct=true&where=sactive.eq.true&origin=${fetch_origin}`,
     fetch_options

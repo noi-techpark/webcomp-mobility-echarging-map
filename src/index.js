@@ -139,10 +139,34 @@ class EMobilityMap extends BaseClass {
 
       let condition_maxPower = true;
       if (this.filters.maxPower) {
-        const outlets = station_plugs.map(plug => plug.smetadata.outlets);
-        const maxPowers = outlets.flat().map(outlet => parseInt(outlet.maxPower, 10));
-        if (!maxPowers.some(m => m >= this.filters.maxPower)) {
-          condition_maxPower = false;
+        const maxPowers = station_plugs
+          .flatMap(function(plug) {
+            if (plug && plug.smetadata && Array.isArray(plug.smetadata.outlets)) {
+              return plug.smetadata.outlets;
+            }
+            return [];
+          })
+          .map(function(outlet) {
+            if (outlet && outlet.maxPower != null) {
+              const p = Number(outlet.maxPower);
+              return Number.isFinite(p) ? p : null;
+            }
+            return null;
+          })
+          .filter(function(p) {
+            return Number.isFinite(p);
+          });
+
+        if (maxPowers.length > 0) {
+          var hasEnoughPower = maxPowers.some(
+            function(p) {
+              return p >= this.filters.maxPower;
+            }.bind(this)
+          );
+
+          if (!hasEnoughPower) {
+            condition_maxPower = false;
+          }
         }
       }
 

@@ -36,7 +36,7 @@ export function render__filter_box() {
         availability: false
       };
     }
-  }
+  };
 
   const handle__realtime = e => {
     if (e.target.checked) {
@@ -50,7 +50,7 @@ export function render__filter_box() {
         realtime: false
       };
     }
-  }
+  };
 
   const handle__accessibility = e => {
     if (e.target.checked) {
@@ -158,152 +158,152 @@ export function render__filter_box() {
             </div>
           </div>
           <div class="col-12 p-0 mt-2 d-none d-lg-block">
-          <div style="border-bottom: 2px solid #f0f1f1;"></div>
-        </div>
-        <div class="col-12 mt-3 mb-3">
-          <p class="fs-14 color-black-400">${t.availability[this.language]}</p>
-          <div class="custom-checkbox mt-3">
-          <label class="fs-16">
-            <input
-              value="sss"
-              type="checkbox"
-              id="availability"
-              @change="${e => handle__availability(e)}"
-            />
-            <span class="custom-checkbox-checkbox mr-2"></span>
-            ${t.availability_description[this.language]}
-          </label>
-          <div class="custom-checkbox mt-3">
-          <label class="fs-16">
-            <input
-              value="sss"
-              type="checkbox"
-              id="realtime"
-              @change="${e => handle__realtime(e)}"
-            />
-            <span class="custom-checkbox-checkbox mr-2"></span>
-            ${t.realtime_description[this.language]}
-          </label>
-        </div>
-        <div class="custom-checkbox mt-3">
-              <label class="fs-16">
-                <input
-                  type="checkbox"
-                  id="accessibility"
-                  @change="${e => handle__accessibility(e)}"
-                />
-                <span class="custom-checkbox-checkbox mr-2"></span>
-                ${t.accessible_stations[this.language]}
-              </label>
-            </div>
-        </div>
-          <div class="col-12 p-0 mt-2 d-none d-lg-block">
             <div style="border-bottom: 2px solid #f0f1f1;"></div>
           </div>
           <div class="col-12 mt-3 mb-3">
-            <p class="fs-14 color-black-400">${t.research_range[this.language].toUpperCase()}</p>
-            <select @change="${e => handle__radius(e)}" name="" id="input_filter_radius" class="mt-2" style="">
-              <option value="0">${t.no_one[this.language]}</option>
-              <option value="5">5km</option>
-              <option value="10">10km</option>
-              <option value="15">15km</option>
-            </select>
-          </div>
-        </div>
-        <!-- Detail box -->
-        <div class="details_box__section mt-3 d-none">
-          <div class="col-12">
-            <p class="fs-14 color-black-400">${t.column_state[this.language].toUpperCase()}</p>
+            <p class="fs-14 color-black-400">${t.availability[this.language]}</p>
             <div class="custom-checkbox mt-3">
-              <label htmlFor="state-1" class="fs-16">
-                <input type="checkbox" id="state-1" @change="${e => handle__state(e)}" />
+              <label class="fs-16">
+                <input value="sss" type="checkbox" id="availability" @change="${e => handle__availability(e)}" />
                 <span class="custom-checkbox-checkbox mr-2"></span>
-                ${t.completely_free[this.language]}
+                ${t.availability_description[this.language]}
               </label>
+              <div class="custom-checkbox mt-3">
+                <label class="fs-16">
+                  <input value="sss" type="checkbox" id="realtime" @change="${e => handle__realtime(e)}" />
+                  <span class="custom-checkbox-checkbox mr-2"></span>
+                  ${t.realtime_description[this.language]}
+                </label>
+              </div>
+              <div class="custom-checkbox mt-3">
+                <label class="fs-16">
+                  <input type="checkbox" id="accessibility" @change="${e => handle__accessibility(e)}" />
+                  <span class="custom-checkbox-checkbox mr-2"></span>
+                  ${t.accessible_stations[this.language]}
+                </label>
+              </div>
+              <div class="custom-checkbox mt-3">
+                <label class="fs-16">
+                  <input type="checkbox" id="conditional_accessible" @change="${e => handle__accessibility(e)}" />
+                  <span class="custom-checkbox-checkbox mr-2"></span>
+                  ${t.conditional_accessible[this.language]}
+                </label>
+              </div>
             </div>
-            <hr />
-            <div class="custom-checkbox mt-2">
-              <label htmlFor="state-2" class="fs-16">
-                <input type="checkbox" id="state-2" @change="${e => handle__state(e)}" />
-                <span class="custom-checkbox-checkbox mr-2"></span>
-                ${t.at_least_one_free_column[this.language]}
-              </label>
+            <div class="col-12 p-0 mt-2 d-none d-lg-block">
+              <div style="border-bottom: 2px solid #f0f1f1;"></div>
+            </div>
+            <div class="col-12 mt-3 mb-3">
+              <p class="fs-14 color-black-400">${t.research_range[this.language].toUpperCase()}</p>
+              <select @change="${e => handle__radius(e)}" name="" id="input_filter_radius" class="mt-2" style="">
+                <option value="0">${t.no_one[this.language]}</option>
+                <option value="5">5km</option>
+                <option value="10">10km</option>
+                <option value="15">15km</option>
+              </select>
             </div>
           </div>
-        </div>
-        <!-- Detail box -->
-        <div class="details_box__section mt-3">
-          <div class="col-12">
-            <p class="fs-14 color-black-400">${t.plug_type[this.language].toUpperCase()}</p>
-            <!-- "700 bar small vehicles" "UNKNOWN" -->
+          <!-- Detail box -->
+          <div class="details_box__section mt-3 d-none">
+            <div class="col-12">
+              <p class="fs-14 color-black-400">${t.column_state[this.language].toUpperCase()}</p>
+              <div class="custom-checkbox mt-3">
+                <label htmlFor="state-1" class="fs-16">
+                  <input type="checkbox" id="state-1" @change="${e => handle__state(e)}" />
+                  <span class="custom-checkbox-checkbox mr-2"></span>
+                  ${t.completely_free[this.language]}
+                </label>
+              </div>
+              <hr />
+              <div class="custom-checkbox mt-2">
+                <label htmlFor="state-2" class="fs-16">
+                  <input type="checkbox" id="state-2" @change="${e => handle__state(e)}" />
+                  <span class="custom-checkbox-checkbox mr-2"></span>
+                  ${t.at_least_one_free_column[this.language]}
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- Detail box -->
+          <div class="details_box__section mt-3">
+            <div class="col-12">
+              <p class="fs-14 color-black-400">${t.plug_type[this.language].toUpperCase()}</p>
+              <!-- "700 bar small vehicles" "UNKNOWN" -->
 
-            ${this.plug_types.map((o, i) => {
-    return html`
-                <div class="custom-checkbox ${i === 0 ? 'mt-3' : ''}">
-                  <label htmlFor="plug-1" class="fs-16">
-                    <input type="checkbox" id="plug-${o[0]}" value="${o[1]}" @change="${e => handle__plug_type(e)}" />
-                    <span class="custom-checkbox-checkbox mr-2"></span>
-                    ${o[2]}
-                  </label>
-                </div>
-                ${i !== this.plug_types.length - 1
-        ? html`
-                      <hr />
-                    `
-        : null}
-              `;
-  })}
+              ${this.plug_types.map((o, i) => {
+                return html`
+                  <div class="custom-checkbox ${i === 0 ? 'mt-3' : ''}">
+                    <label htmlFor="plug-1" class="fs-16">
+                      <input type="checkbox" id="plug-${o[0]}" value="${o[1]}" @change="${e => handle__plug_type(e)}" />
+                      <span class="custom-checkbox-checkbox mr-2"></span>
+                      ${o[2]}
+                    </label>
+                  </div>
+                  ${i !== this.plug_types.length - 1
+                    ? html`
+                        <hr />
+                      `
+                    : null}
+                `;
+              })}
+            </div>
           </div>
-        </div>
-        <!-- Detail box -->
-        <div class="details_box__section mt-3 mb-3">
-          <div class="col-12">
-            <p class="fs-14 mb-3 color-black-400">${t.provider[this.language].toUpperCase()}</p>
-            ${this.provider_list.map((o, i) => {
-    return html`
-                <div class="custom-checkbox mt-2">
-                  <label htmlFor=${`provider-${i + 1}`} class="fs-16">
-                    <input type="checkbox" id=${`provider-${i + 1}`} value=${o} @change="${e => handle__provider(e)}" />
-                    <span class="custom-checkbox-checkbox mr-2"></span>
-                    ${o}
-                  </label>
-                </div>
-                <hr />
-              `;
-  })}
+          <!-- Detail box -->
+          <div class="details_box__section mt-3 mb-3">
+            <div class="col-12">
+              <p class="fs-14 mb-3 color-black-400">${t.provider[this.language].toUpperCase()}</p>
+              ${this.provider_list.map((o, i) => {
+                return html`
+                  <div class="custom-checkbox mt-2">
+                    <label htmlFor=${`provider-${i + 1}`} class="fs-16">
+                      <input
+                        type="checkbox"
+                        id=${`provider-${i + 1}`}
+                        value=${o}
+                        @change="${e => handle__provider(e)}"
+                      />
+                      <span class="custom-checkbox-checkbox mr-2"></span>
+                      ${o}
+                    </label>
+                  </div>
+                  <hr />
+                `;
+              })}
+            </div>
           </div>
-        </div>
-        <!-- maxPower box -->
-        <div class="details_box__section mt-3 mb-3">
-          <div class="col-12">
-            <p class="fs-14 mb-3 color-black-400">${t.maxPower[this.language].toUpperCase()}</p>
-            <div class="d-flex align-items-center">
-              <input min="0"
-                id="maxPowerInput"
-                type="number"
-                @input=${e => {
-      handle__maxPower(e);
-    }}
-              />
-              <label class="ml-1 mb-0" htmlFor="maxPowerInput">kW</label>
+          <!-- maxPower box -->
+          <div class="details_box__section mt-3 mb-3">
+            <div class="col-12">
+              <p class="fs-14 mb-3 color-black-400">${t.maxPower[this.language].toUpperCase()}</p>
+              <div class="d-flex align-items-center">
+                <input
+                  min="0"
+                  id="maxPowerInput"
+                  type="number"
+                  @input=${e => {
+                    handle__maxPower(e);
+                  }}
+                />
+                <label class="ml-1 mb-0" htmlFor="maxPowerInput">kW</label>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <!-- </div> -->
-      <div class="filter_box__footer d-flex pr-3 pl-3">
-        <button
-          class="flex-fill filter_box_footer__button secondary mr-2"
-          @click="${() => {
-      this.showFilters = false;
-      handle__reset_filters();
-    }}"
-        >
-          ${t.cancel_filters[this.language]}
-        </button>
-        <button class="flex-fill filter_box_footer__button primary ml-2" @click="${() => repaint_map()}">
-          ${t.apply_filters[this.language]}
-        </button>
+        <!-- </div> -->
+        <div class="filter_box__footer d-flex pr-3 pl-3">
+          <button
+            class="flex-fill filter_box_footer__button secondary mr-2"
+            @click="${() => {
+              this.showFilters = false;
+              handle__reset_filters();
+            }}"
+          >
+            ${t.cancel_filters[this.language]}
+          </button>
+          <button class="flex-fill filter_box_footer__button primary ml-2" @click="${() => repaint_map()}">
+            ${t.apply_filters[this.language]}
+          </button>
+        </div>
       </div>
     </div>
   `;

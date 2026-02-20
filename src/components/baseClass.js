@@ -33,7 +33,9 @@ export class BaseClass extends LitElement {
       plug_type: [],
       state: [],
       provider: [],
-      maxPower: 0
+      maxPower: 0,
+      accessibility: false,
+      conditional_accessible: false
     };
     this.visibleStations = 0;
     this.searched_places = [];

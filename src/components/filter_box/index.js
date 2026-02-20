@@ -53,15 +53,17 @@ export function render__filter_box() {
   };
 
   const handle__accessibility = e => {
+    const filterKey = e.target.id === 'accessibility' ? 'accessibility' : 'conditional_accessible';
+
     if (e.target.checked) {
       this.filters = {
         ...this.filters,
-        accessibility: true
+        [filterKey]: true
       };
     } else {
       this.filters = {
         ...this.filters,
-        accessibility: false
+        [filterKey]: false
       };
     }
   };
@@ -123,6 +125,7 @@ export function render__filter_box() {
       availability: false,
       realtime: false,
       accessibility: false,
+      conditional_accessible: false,
       plug_type: [],
       provider: []
     };

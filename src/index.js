@@ -89,7 +89,7 @@ class EMobilityMap extends BaseClass {
        */
       let condition_accessibility = true;
 
-      if (this.filters.accessibility) {
+      if (this.filters.accessibility || this.filters.conditional_accessible) {
         const accessibility_data =
           o &&
           o.accessibility &&
@@ -97,10 +97,20 @@ class EMobilityMap extends BaseClass {
           o.accessibility.accessibility.AdditionalProperties &&
           o.accessibility.accessibility.AdditionalProperties.EchargingDataProperties;
 
-        condition_accessibility =
-          accessibility_data &&
-          accessibility_data.ChargingStationAccessible === true &&
-          accessibility_data.SurveyType != null;
+        const surveyType = accessibility_data && accessibility_data.SurveyType;
+        const barrierfree = accessibility_data && accessibility_data.Barrierfree;
+
+        condition_accessibility = false;
+
+        if (!(surveyType === null || surveyType === undefined || surveyType === false)) {
+          if (this.filters.accessibility && barrierfree === 'Accessible') {
+            condition_accessibility = true;
+          }
+
+          if (this.filters.conditional_accessible && barrierfree === 'ConditionalAccessibility') {
+            condition_accessibility = true;
+          }
+        }
       }
 
       /**

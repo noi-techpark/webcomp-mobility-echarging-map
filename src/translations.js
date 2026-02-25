@@ -195,8 +195,13 @@ export const t = {
   },
   accessible_stations: {
     en: 'Accessible stations',
-    de: 'Zugängliche Stationen',
+    de: 'Zugängliche stationen',
     it: 'Stazioni accessibili'
+  },
+  conditional_accessible: {
+    en: 'Conditional accessible stations',
+    de: 'Bedingt zugängliche stationen',
+    it: 'Stazione limitatamente accessibile'
   },
   accessibility_info: {
     en: 'Accessibility Information',

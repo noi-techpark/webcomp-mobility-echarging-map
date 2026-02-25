@@ -154,6 +154,7 @@ export async function request__get_stations_plugs_details() {
       accessibility
     };
   });
+
   this.all_plugs_details = plugs;
   this.is_loading = false;
 }

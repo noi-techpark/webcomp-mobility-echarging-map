@@ -201,7 +201,27 @@ export const t = {
   conditional_accessible: {
     en: 'Conditional accessible stations',
     de: 'Bedingt zugängliche stationen',
-    it: 'Stazione limitatamente accessibile'
+    it: 'Stazioni limitatamente accessibili'
+  },
+  singular_accessible: {
+    en: 'Accessible',
+    de: 'Zugängliche',
+    it: 'Accessibile'
+  },
+  singular_conditional_accessible: {
+    en: 'Conditionally accessible',
+    de: 'Bedingt zugängliche',
+    it: 'Limitatamente accessibile'
+  },
+  singular_not_accessible: {
+    en: 'Not accessible',
+    de: 'Nicht zugänglich',
+    it: 'Non accessibile'
+  },
+  singular_not_surveyed: {
+    en: 'Not surveyed',
+    de: 'Nicht erhoben',
+    it: 'Non censito'
   },
   accessibility_info: {
     en: 'Accessibility Information',

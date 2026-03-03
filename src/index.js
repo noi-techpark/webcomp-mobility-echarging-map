@@ -168,7 +168,7 @@ class EMobilityMap extends BaseClass {
           });
 
         if (maxPowers.length > 0) {
-          var hasEnoughPower = maxPowers.some(
+          const hasEnoughPower = maxPowers.some(
             function(p) {
               return p >= this.filters.maxPower;
             }.bind(this)
@@ -342,8 +342,7 @@ class EMobilityMap extends BaseClass {
         } catch (e_webkit) {
           try {
             document.body.cancelFullScreen();
-          } catch (e_moz) {
-          }
+          } catch (e_moz) {}
         }
       }
     } else {

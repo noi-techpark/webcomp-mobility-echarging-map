@@ -32,7 +32,8 @@ export function render__details_box() {
   const { smetadata, sname, scoordinate, accessInfo, mvalue, scode } = this.current_station;
   const { sorigin } = this.current_station;
 
-  let accessibility_data, accessibility_image;
+  let accessibility_data;
+  let accessibility_image;
 
   if (
     this.current_station &&
@@ -252,14 +253,20 @@ export function render__details_box() {
             </div>
           </div>
 
-          ${accessibility_data
+          ${accessibility_data && accessibility_data.Barrierfree
             ? html`
                 <!-- Accessibility Status -->
                 <div class="element_background d-flex align-items-center pt-2 pb-2 mt-3 accessibility-card">
                   <div class="ml-3 flex-fill">
                     <p class="fs-16 mt-1 fw-400">${t.accessibility[this.language]}</p>
                     <p class="fs-14 color-black-400 mt-1">
-                      ${accessibility_data.ChargingStationAccessible ? t.yes[this.language] : t.no[this.language]}
+                      ${accessibility_data.Barrierfree === 'Accessible'
+                        ? t.singular_accessible[this.language]
+                        : accessibility_data.Barrierfree === 'ConditionalAccessibility'
+                        ? t.singular_conditional_accessible[this.language]
+                        : accessibility_data.Barrierfree === 'NotAccessible'
+                        ? t.singular_not_accessible[this.language]
+                        : t.singular_not_surveyed[this.language]}
                     </p>
                   </div>
                 </div>

@@ -5,6 +5,7 @@
 export const observed_properties = {
   all_stations_details: { type: Array },
   all_plugs_details: { type: Array },
+  accessibility_data: { type: Object },
   is_loading: { type: Boolean },
   message: { type: String },
   current_station: { type: Object },

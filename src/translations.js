@@ -100,7 +100,7 @@ export const t = {
   },
   write_feedback: {
     en: 'Write feedback',
-    de: 'Schreibe Feedback',
+    de: 'Dein Feedback',
     it: 'Scrivi feedback'
   },
   directions: {
@@ -195,22 +195,22 @@ export const t = {
   },
   accessible_stations: {
     en: 'Accessible stations',
-    de: 'Zugängliche stationen',
+    de: 'Barrierefreie Stationen',
     it: 'Stazioni accessibili'
   },
   conditional_accessible: {
     en: 'Conditional accessible stations',
-    de: 'Bedingt zugängliche stationen',
+    de: 'Bedingt barrierefreie Stationen',
     it: 'Stazioni limitatamente accessibili'
   },
   singular_accessible: {
     en: 'Accessible',
-    de: 'Zugängliche',
+    de: 'Barrierefrei',
     it: 'Accessibile'
   },
   singular_conditional_accessible: {
     en: 'Conditionally accessible',
-    de: 'Bedingt zugängliche',
+    de: 'Bedingt barrierefrei',
     it: 'Limitatamente accessibile'
   },
   singular_not_accessible: {

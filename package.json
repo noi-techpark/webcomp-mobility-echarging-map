@@ -7,11 +7,13 @@
     "start": "webpack-dev-server --open --config webpack.dev.js"
   },
   "dependencies": {
+    "@maplibre/maplibre-gl-leaflet": "^0.1.4",
     "dotenv-webpack": "^8.0.1",
     "leaflet": "^1.8.0",
     "leaflet.markercluster": "^1.5.3",
     "lit-element": "^2.1.0",
-    "lodash": "^4.17.15"
+    "lodash": "^4.17.15",
+    "maplibre-gl": "^4.7.1"
   },
   "devDependencies": {
     "css-loader": "^2.1.1",

@@ -4,8 +4,10 @@
 
 import L from 'leaflet';
 import leaflet_mrkcls from 'leaflet.markercluster';
+import '@maplibre/maplibre-gl-leaflet';
 import style__markercluster from 'leaflet.markercluster/dist/MarkerCluster.css';
 import style__leaflet from 'leaflet/dist/leaflet.css';
+import style__maplibre from 'maplibre-gl/dist/maplibre-gl.css';
 import { html, css, unsafeCSS } from 'lit-element';
 import { styleMap } from 'lit-html/directives/style-map.js';
 import { BaseClass } from './components/baseClass';
@@ -36,10 +38,19 @@ class EMobilityMap extends BaseClass {
       e_mobility_map.classList.toggle('closed');
       map.classList.toggle('closed');
     }
-    this.map = L.map(map, { zoomControl: false }).setView([this.current_location.lat, this.current_location.lng], 13);
-    L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-      attribution:
-        '<a target="_blank" href="https://opendatahub.com">OpenDataHub.com</a> | &copy; <a target="_blank" href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> | &copy; <a target="_blank" href="https://carto.com/attribution">Carto</a>'
+    this.map = L.map(map, { 
+      zoomControl: false,
+       minZoom: 0,
+       maxZoom: 19
+    }
+    ).setView([this.current_location.lat, this.current_location.lng], 13);
+  L.maplibreGL({
+  style: 'https://tiles.openfreemap.org/styles/positron',
+  attribution:
+    '<a target="_blank" href="https://opendatahub.com">OpenDataHub.com</a> | ' +
+    '&copy; <a target="_blank" href="https://openfreemap.org">OpenFreeMap</a> ' +
+    '&copy; <a target="_blank" href="https://www.openmaptiles.org/">OpenMapTiles</a> ' +
+    '&copy; <a target="_blank" href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(this.map);
   }
 
@@ -307,6 +318,7 @@ class EMobilityMap extends BaseClass {
     return css`
       ${unsafeCSS(style__markercluster)}
       ${unsafeCSS(style__leaflet.toString())}
+      ${unsafeCSS(style__maplibre.toString())}
       ${unsafeCSS(style.toString())}
       ${unsafeCSS(utilities.toString())}
       ${unsafeCSS(style__typography.toString())}

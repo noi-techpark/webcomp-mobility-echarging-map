@@ -12,29 +12,41 @@ module.exports = {
     path: path.resolve(__dirname, './dist'),
     filename: 'map_widget.min.js'
   },
-  module: {
-    rules: [
-      {
-        test: /\.(s*)css$/,
-        use: [{ loader: 'css-loader' }, { loader: 'sass-loader' }]
-      },
-      {
-        test: /\.(png|jpg|gif|ttf)$/i,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 10000
-            }
-          }
-        ]
-      },
-      {
-        test: /\.svg$/,
-        loader: 'svg-inline-loader'
-      }
-    ]
+   resolve: {
+    alias: {
+      '@maplibre/maplibre-gl-leaflet$': path.resolve(
+        __dirname,
+        'node_modules/@maplibre/maplibre-gl-leaflet/leaflet-maplibre-gl.js'
+      )
+    }
   },
+  module: {
+  rules: [
+    {
+      test: /\.scss$/,
+      use: [{ loader: 'css-loader' }, { loader: 'sass-loader' }]
+    },
+    {
+      test: /\.css$/,
+      use: [{ loader: 'css-loader' }]
+    },
+    {
+      test: /\.(png|jpg|gif|ttf)$/i,
+      use: [
+        {
+          loader: 'url-loader',
+          options: {
+            limit: 10000
+          }
+        }
+      ]
+    },
+    {
+      test: /\.svg$/,
+      loader: 'svg-inline-loader'
+    }
+  ]
+},
   plugins: [
     new Dotenv()
   ]
